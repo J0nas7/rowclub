@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8" />
     <title>Protokolsystem for Københavns Roklub</title>
@@ -8,11 +8,32 @@
 <body>
     <div class="Header">
         <nav class="menu">
-            <a href="/welcome">Startside</a>
+            <a href="/welcome" class="active">Start</a>
             <a href="/booking">Booking</a>
-            <a href="/register">Tilmelding</a>
+            <a href="/register">+ New member</a>
             <a href="/admin">Administration</a>
         </nav>
+        <div style="clear: both;"></div>
+    </div>
+
+    <div class="Container">
+        <div class="Content">
+            <table width="100%" cellspacing="0" cellpadding="0">
+                <thead>
+                    <th>
+                        <td>#</td>
+                        <td>Båd på vandet</td>
+                        <td>Antal i båden</td>
+                        <td>Handlinger</td>
+                    </th>
+                </thead>
+                <tbody>
+                    <tr th:each="booking : ${bookingAttr}">
+                        <td colspan="4">Lorem ipsum</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </body>
 </html>
