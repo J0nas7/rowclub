@@ -11,6 +11,7 @@ import java.util.List;
 @Controller
 public class ProtocolController {
 
+    //DatabaseController DBconn = new DatabaseController();
     List<Booking> BookingList = new ArrayList<>();
     public ProtocolController() {
         BookingList.add(new Booking(BookingList.size(), true, 5, 1));

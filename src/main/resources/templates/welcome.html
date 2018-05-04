@@ -18,24 +18,26 @@
 
     <div class="Container">
         <div class="Content">
+            <a class="btn greenBtn w20 fltLft" href="#">Nyt medlem</a>
+            <a class="btn greenBtn w20 fltLft" href="#">Ny tur</a>
             <table width="100%" cellspacing="0" cellpadding="0">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Båd på vandet</th>
-                        <th>Antal i båden</th>
+                        <th>Booking nummer</th>
+                        <th>Er båden på vandet?</th>
+                        <th>Antal personer i båden</th>
                         <th>Handlinger</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="booking : ${bookingAttr}">
-                        <td th:text="${booking.booking_id+'.'}"></td>
+                        <td th:text="${booking.booking_id}"></td>
                         <td th:text="${booking.booking_on_water}"></td>
                         <td th:text="${booking.booking_count_passengers}"></td>
                         <td>
-                            <a th:href="${'/read_student?studID=' + booking.booking_id}" class="blueLink btn btn-details">Details</a>
-                            <a th:href="${'/update_student?studID=' + booking.booking_id}" class="blueLink btn btn-ed">Edit</a>
-                            <a th:href="${'/delete_student?studID=' + booking.booking_id}" class="blueLink btn btn-del">Delete</a>
+                            <a th:href="${'/read_student?studID=' + booking.booking_id}" class="btn blueBtn w20 fltLft">Details</a>
+                            <a th:href="${'/update_student?studID=' + booking.booking_id}" class="btn blackBtn w20 fltLft">Edit</a>
+                            <a th:href="${'/delete_student?studID=' + booking.booking_id}" class="btn redBtn w20 fltLft">Delete</a>
                         </td>
                     </tr>
                 </tbody>

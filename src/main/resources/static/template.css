@@ -14,13 +14,37 @@ body {
     background: #f5f5f5;
 }
 
-a.blueLink {
-    color: #0747A6;
+a { text-decoration: none; }
+
+.fltLft { float: left; }
+.fltRght { float: right; }
+.clrBth { clear: both; }
+
+.blueLink { color: #0747A6; }
+.blueLink:hover { text-decoration: underline; }
+
+.btn {
+    border: none;
+    color: white;
+    padding: 7px 10px;
+    text-align: center;
     text-decoration: none;
+    display: block;
+    font-size: 12px;
+    border-radius: 5px; /* https://www.w3schools.com/css/css3_borders.asp */
+    box-shadow: 1px 1px 1px #888888;
+    -webkit-transition-duration: 0.1s; /* Safari */
+    transition-duration: 0.1s;
 }
-a.blueLink:hover {
-    text-decoration: underline;
-}
+.btn.fltLft { margin-right: 15px; }
+.btn.fltRght { margin-left: 15px; }
+
+.greenBtn { background-color: #4CAF50; }
+.blueBtn { background-color: #008CBA; }
+.blackBtn { background-color: #666; }
+.redBtn { background-color: #f44336; }
+
+.w20 { width: 20%; }
 
 .Header {
     width: 100%;
@@ -65,6 +89,11 @@ a.blueLink:hover {
     width: 1200px;
     margin: 0 auto;
     margin-top: 25px;
+}
+
+table {
+    margin: 20px 0;
+    float: left;
 }
 
 table thead th {
