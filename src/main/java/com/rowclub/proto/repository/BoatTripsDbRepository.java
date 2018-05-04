@@ -1,11 +1,15 @@
 package com.rowclub.proto.repository;
 
+import com.rowclub.proto.controller.DatabaseController;
 import com.rowclub.proto.model.BoatTrip;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
 @Repository
 public class BoatTripsDbRepository implements IBoatTripRepository {
@@ -13,7 +17,9 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
 
     public BoatTripsDbRepository () {
         BoatTripList = new ArrayList<>();
-
+        String BoatTripSql = "SELECT * FROM ProductLines WHERE productLine='Ships'";
+        DBconn.dbQuery(BoatTripSql);
+        //;
     }
 
     @Override

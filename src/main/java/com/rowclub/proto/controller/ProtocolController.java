@@ -13,7 +13,7 @@ import java.util.List;
 @Controller
 public class ProtocolController {
 
-    DatabaseController DBconn = new DatabaseController();
+    public static DatabaseController DBconn = new DatabaseController();
     List<BoatTrip> BoatTripList = new ArrayList<>();
 
     // Dependence injection
