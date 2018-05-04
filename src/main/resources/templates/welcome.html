@@ -30,15 +30,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="booking : ${bookingAttr}">
-                        <td th:text="${booking.booking_id}"></td>
-                        <td th:text="${booking.booking_on_water}"></td>
+                    <tr th:each="BoatTrip : ${boattripAttr}">
+                        <!--<td th:text="${BoatTrip.BoatTripID}"></td>
+                        <td th:text="${BoatTrip.BoatTrip}"></td>
                         <td th:text="${booking.booking_count_passengers}"></td>
                         <td>
                             <a th:href="${'/read_student?studID=' + booking.booking_id}" class="btn blueBtn w20 fltLft">Details</a>
                             <a th:href="${'/update_student?studID=' + booking.booking_id}" class="btn blackBtn w20 fltLft">Edit</a>
                             <a th:href="${'/delete_student?studID=' + booking.booking_id}" class="btn redBtn w20 fltLft">Delete</a>
-                        </td>
+                        </td>-->
+                        <td colspan="4">Lorem ipsum</td>
                     </tr>
                 </tbody>
             </table>

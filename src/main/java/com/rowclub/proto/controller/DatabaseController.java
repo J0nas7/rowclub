@@ -10,8 +10,8 @@ public class DatabaseController {
 
     private static String DriverName = "com.mysql.jdbc.Driver";
     private static String DBurl = "jdbc:mysql://mysql12.unoeuro.com:3306/dotweb_nu_db2?autoReconnect=true&useSSL=false&characterEncoding=utf8";
-    private static String DBuser = "INSERT USER";
-    private static String DBpassword = "INSERT PASSWORD";
+    private static String DBuser = "dotweb_nu";
+    private static String DBpassword = "Header01Body02Footer93";
 
     // Database configuration start
     public DatabaseController() {
