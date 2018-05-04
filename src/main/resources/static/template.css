@@ -14,6 +14,14 @@ body {
     background: #f5f5f5;
 }
 
+a.blueLink {
+    color: #0747A6;
+    text-decoration: none;
+}
+a.blueLink:hover {
+    text-decoration: underline;
+}
+
 .Header {
     width: 100%;
     height: 40px;
@@ -37,7 +45,7 @@ body {
 .Header nav a:hover {
     color: #fff;
     text-decoration: underline;
-    background: #444;
+    /*background: #444;*/
 }
 
 .Header nav a.active {
@@ -59,10 +67,20 @@ body {
     margin-top: 25px;
 }
 
-table thead td {
+table thead th {
     text-align: center;
     font-size: 15px;
     font-weight: normal;
     color: #888;
     padding-bottom: 10px;
+    border-bottom: 1px #bbb solid;
+}
+
+table tbody tr td {
+    padding: 10px 0;
+    text-align: center;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #eee;
 }

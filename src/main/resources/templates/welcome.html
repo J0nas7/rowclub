@@ -20,16 +20,23 @@
         <div class="Content">
             <table width="100%" cellspacing="0" cellpadding="0">
                 <thead>
-                    <th>
-                        <td>#</td>
-                        <td>Båd på vandet</td>
-                        <td>Antal i båden</td>
-                        <td>Handlinger</td>
-                    </th>
+                    <tr>
+                        <th>#</th>
+                        <th>Båd på vandet</th>
+                        <th>Antal i båden</th>
+                        <th>Handlinger</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr th:each="booking : ${bookingAttr}">
-                        <td colspan="4">Lorem ipsum</td>
+                        <td th:text="${booking.booking_id+'.'}"></td>
+                        <td th:text="${booking.booking_on_water}"></td>
+                        <td th:text="${booking.booking_count_passengers}"></td>
+                        <td>
+                            <a th:href="${'/read_student?studID=' + booking.booking_id}" class="blueLink btn btn-details">Details</a>
+                            <a th:href="${'/update_student?studID=' + booking.booking_id}" class="blueLink btn btn-ed">Edit</a>
+                            <a th:href="${'/delete_student?studID=' + booking.booking_id}" class="blueLink btn btn-del">Delete</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>
