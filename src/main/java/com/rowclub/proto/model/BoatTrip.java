@@ -1,6 +1,6 @@
 package com.rowclub.proto.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class BoatTrip {
     private int BoatTripID;
@@ -8,21 +8,24 @@ public class BoatTrip {
     private double Distance;
     private String EstDuration;
     private String Location;
-    private LocalDate Datestamp;
+    private Date Datestamp;
     private int SeasonID;
     private String CompletionTime;
-    private String Timestamp;
+    private int Timestamp;
 
-    public BoatTrip(int boatTripID, int boatID, double distance, String estDuration, String location, LocalDate datestamp, int seasonID, String completionTime, String timestamp) {
+    public BoatTrip(int boatTripID, int boatID, double distance, String estDuration, String location, int seasonID, String completionTime, int timestamp) {
         BoatTripID = boatTripID;
         BoatID = boatID;
         Distance = distance;
         EstDuration = estDuration;
         Location = location;
-        Datestamp = datestamp;
         SeasonID = seasonID;
         CompletionTime = completionTime;
         Timestamp = timestamp;
+    }
+
+    public BoatTrip(int boatTripID) {
+
     }
 
     public int getBoatTripID() {
@@ -65,11 +68,11 @@ public class BoatTrip {
         Location = location;
     }
 
-    public LocalDate getDatestamp() {
+    public Date getDatestamp() {
         return Datestamp;
     }
 
-    public void setDatestamp(LocalDate datestamp) {
+    public void setDatestamp(Date datestamp) {
         Datestamp = datestamp;
     }
 
@@ -89,11 +92,11 @@ public class BoatTrip {
         CompletionTime = completionTime;
     }
 
-    public String getTimestamp() {
+    public int getTimestamp() {
         return Timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(int timestamp) {
         Timestamp = timestamp;
     }
 }

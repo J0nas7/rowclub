@@ -12,7 +12,7 @@ public class DatabaseController {
     private static String DBurl = "jdbc:mysql://mysql12.unoeuro.com:3306/dotweb_nu_db2?autoReconnect=true&useSSL=false&characterEncoding=utf8";
     private static String DBuser = "dotweb_nu";
     private static String DBpassword = "Header01Body02Footer93";
-    public static String DBprefix = "protocol_";
+    public static String DBprefix = "Protocol_";
 
     // Database configuration start
     public DatabaseController() {

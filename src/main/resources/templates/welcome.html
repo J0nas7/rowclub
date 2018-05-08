@@ -20,6 +20,7 @@
         <div class="Content">
             <a class="btn greenBtn w20 fltLft" href="#">Nyt medlem</a>
             <a class="btn greenBtn w20 fltLft" href="#">Ny tur</a>
+            <strong th:text="${le}"></strong>
             <table width="100%" cellspacing="0" cellpadding="0">
                 <thead>
                     <tr>
@@ -31,15 +32,14 @@
                 </thead>
                 <tbody>
                     <tr th:each="BoatTrip : ${boattripAttr}">
-                        <!--<td th:text="${BoatTrip.BoatTripID}"></td>
-                        <td th:text="${BoatTrip.BoatTrip}"></td>
-                        <td th:text="${booking.booking_count_passengers}"></td>
+                        <td th:text="${BoatTrip.BoatTripID}"></td>
+                        <td th:text="${BoatTrip.BoatID}"></td>
+                        <td th:text="${BoatTrip.Distance}"></td>
                         <td>
-                            <a th:href="${'/read_student?studID=' + booking.booking_id}" class="btn blueBtn w20 fltLft">Details</a>
-                            <a th:href="${'/update_student?studID=' + booking.booking_id}" class="btn blackBtn w20 fltLft">Edit</a>
-                            <a th:href="${'/delete_student?studID=' + booking.booking_id}" class="btn redBtn w20 fltLft">Delete</a>
-                        </td>-->
-                        <td colspan="4">Lorem ipsum</td>
+                            <a th:href="${'/read_student?studID=' + BoatTrip.BoatTripID}" class="btn blueBtn w20 fltLft">Details</a>
+                            <a th:href="${'/update_student?studID=' + BoatTrip.BoatTripID}" class="btn blackBtn w20 fltLft">Edit</a>
+                            <a th:href="${'/delete_student?studID=' + BoatTrip.BoatTripID}" class="btn redBtn w20 fltLft">Delete</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

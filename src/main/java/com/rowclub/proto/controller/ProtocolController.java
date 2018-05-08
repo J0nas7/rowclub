@@ -14,8 +14,6 @@ import java.util.List;
 public class ProtocolController {
 
     public static DatabaseController DBconn = new DatabaseController();
-    List<BoatTrip> BoatTripList = new ArrayList<>();
-
     // Dependence injection
     // Design pattern: Strategy pattern
     @Autowired
@@ -23,7 +21,8 @@ public class ProtocolController {
 
     @GetMapping("/welcome")
     public String welcome(Model model) {
-        model.addAttribute("boattripAttr", BoatTripList);
+        model.addAttribute("boattripAttr", boatTripRepository.readAllBoatTrips());
+        model.addAttribute("le", boatTripRepository.getBoatTripsCount());
         return "welcome";
     }
 }
