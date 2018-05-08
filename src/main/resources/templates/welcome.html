@@ -9,13 +9,16 @@
 </head>
 <body>
     <div class="Header">
-        <nav class="menu">
-            <a href="/welcome" class="active">Start</a>
-            <a href="/boattrips">Bådture</a>
-            <a href="/boats">Bådtyper</a>
-            <a href="/admin">Administration</a>
-        </nav>
-        <div style="clear: both;"></div>
+        <div class="HeaderContent">
+            <nav class="menu">
+                <a href="/welcome" class="active fltLft item">Start</a>
+                <a href="/boattrips" class="fltLft item">Bådture</a>
+                <a href="/boats" class="fltLft item">Bådtyper</a>
+                <a href="/admin" class="fltLft item">Administration</a>
+            </nav>
+            <small class="fltRght item" th:text="${ProtocolPageTimestamp}"></small>
+            <div style="clear: both;"></div>
+        </div>
     </div>
 
     <div class="Container">
@@ -25,7 +28,7 @@
             <a class="btn greenBtn w20 fltLft" href="#">Ny tur</a>
             <span class="TextBar InformationBar fltLft w20 padding6">
                 Der er
-                <strong th:text="${le + (le > 1 ? ' både' : ' båd')}"></strong>
+                <strong th:text="${boattripOut + (boattripOut > 1 ? ' både' : ' båd')}"></strong>
                  på vandet lige nu
             </span>
             <table width="100%" cellspacing="0" cellpadding="0">
@@ -38,7 +41,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="BoatTrip : ${boattripAttr}">
+                    <tr th:each="BoatTrip : ${boattripList}">
                         <td th:text="${BoatTrip.BoatTripID}"></td>
                         <td th:text="${BoatTrip.BoatID}"></td>
                         <td th:text="${BoatTrip.Distance}"></td>

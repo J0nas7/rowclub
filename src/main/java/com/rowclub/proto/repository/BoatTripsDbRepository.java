@@ -33,14 +33,13 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
                     BoatTripQuery.getString("BoatTrip_Location"),
                     //BoatTripQuery.getDate("BoatTrip_Datestamp"),
                     BoatTripQuery.getInt("BoatTrip_SeasonID"),
-                    BoatTripQuery.getString("BoatTrip_CompletionTime"),
+                    BoatTripQuery.getInt("BoatTrip_CompletionTime"),
                     BoatTripQuery.getInt("BoatTrip_Timestamp")
             ));
-            if (Integer.parseInt(BoatTripQuery.getString("BoatTrip_CompletionTime")) == 0) {
+            if (BoatTripQuery.getInt("BoatTrip_CompletionTime") == 0) {
                 BoatTripOnWaterCount++;
             }
         }
-        BoatTripList.add(new BoatTrip(2, 2, 2.3, "le", "el", 34, "torsk", 46));
     }
 
     public int getBoatTripListSize() { return BoatTripList.size(); }

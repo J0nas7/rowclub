@@ -10,10 +10,10 @@ public class BoatTrip {
     private String Location;
     private Date Datestamp;
     private int SeasonID;
-    private String CompletionTime;
+    private int CompletionTime;
     private int Timestamp;
 
-    public BoatTrip(int boatTripID, int boatID, double distance, String estDuration, String location, int seasonID, String completionTime, int timestamp) {
+    public BoatTrip(int boatTripID, int boatID, double distance, String estDuration, String location, int seasonID, int completionTime, int timestamp) {
         BoatTripID = boatTripID;
         BoatID = boatID;
         Distance = distance;
@@ -84,11 +84,11 @@ public class BoatTrip {
         SeasonID = seasonID;
     }
 
-    public String getCompletionTime() {
+    public int getCompletionTime() {
         return CompletionTime;
     }
 
-    public void setCompletionTime(String completionTime) {
+    public void setCompletionTime(int completionTime) {
         CompletionTime = completionTime;
     }
 
