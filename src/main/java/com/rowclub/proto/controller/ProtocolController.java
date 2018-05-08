@@ -16,12 +16,16 @@ import java.util.List;
 public class ProtocolController {
 
     public static DatabaseController DBconn = new DatabaseController();
-    public static String ProtocolPageTimestamp;
+    public static String ProtocolPageDatestamp;
+
+    public static String[] MonthsShortName = {"", "Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"};
 
     public static void MainConfig() {
-        ProtocolPageTimestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        int MonthKey = Integer.parseInt(new SimpleDateFormat("M").format(Calendar.getInstance().getTime()));
+        ProtocolPageDatestamp = new SimpleDateFormat("dd ").format(Calendar.getInstance().getTime());
+        ProtocolPageDatestamp += MonthsShortName[MonthKey];
+        ProtocolPageDatestamp += new SimpleDateFormat(" yy HH:mm:ss").format(Calendar.getInstance().getTime());
     }
-
 
     // Dependence injection
     // Design pattern: Strategy pattern
@@ -30,10 +34,10 @@ public class ProtocolController {
 
     @GetMapping("/welcome")
     public String welcome(Model model) {
+        ProtocolController.MainConfig();
         model.addAttribute("boattripList", boatTripRepository.readAllBoatTrips());
         model.addAttribute("boattripOut", boatTripRepository.getBoatTripOnWaterCount());
-        model.addAttribute("ProtocolPageTimestamp", ProtocolPageTimestamp);
-        ProtocolController.MainConfig();
+        model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
         return "welcome";
     }
 }
