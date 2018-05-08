@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <title>Protokolsystem for Københavns Roklub</title>
     <link rel="stylesheet" href="template.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet" />
 </head>
 <body>
     <div class="Header">
         <nav class="menu">
             <a href="/welcome" class="active">Start</a>
-            <a href="/booking">Booking</a>
-            <a href="/register">+ New member</a>
+            <a href="/boattrips">Bådture</a>
+            <a href="/boats">Bådtyper</a>
             <a href="/admin">Administration</a>
         </nav>
         <div style="clear: both;"></div>
@@ -18,13 +20,18 @@
 
     <div class="Container">
         <div class="Content">
+            <h2 class="ContentTitle">Oversigt over aktuelle bådture</h2>
             <a class="btn greenBtn w20 fltLft" href="#">Nyt medlem</a>
             <a class="btn greenBtn w20 fltLft" href="#">Ny tur</a>
-            <strong th:text="${le}"></strong>
+            <span class="TextBar InformationBar fltLft w20 padding6">
+                Der er
+                <strong th:text="${le + (le > 1 ? ' både' : ' båd')}"></strong>
+                 på vandet lige nu
+            </span>
             <table width="100%" cellspacing="0" cellpadding="0">
                 <thead>
                     <tr>
-                        <th>Booking nummer</th>
+                        <th>Tur nummer</th>
                         <th>Er båden på vandet?</th>
                         <th>Antal personer i båden</th>
                         <th>Handlinger</th>
@@ -43,6 +50,7 @@
                     </tr>
                 </tbody>
             </table>
+            <div class="clrBth"></div>
         </div>
     </div>
 </body>

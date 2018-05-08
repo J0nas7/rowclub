@@ -10,7 +10,9 @@ public interface IBoatTripRepository {
     // CRUD methods + readAll
     List<BoatTrip> readAllBoatTrips();
 
-    int getBoatTripsCount();
+    int getBoatTripListSize();
+
+    int getBoatTripOnWaterCount();
 
     void createBoatTrip(BoatTrip boattrip);
 

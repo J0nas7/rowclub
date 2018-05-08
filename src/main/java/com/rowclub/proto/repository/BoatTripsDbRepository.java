@@ -18,6 +18,7 @@ import static com.rowclub.proto.controller.ProtocolController.DBconn;
 public class BoatTripsDbRepository implements IBoatTripRepository {
     private List<BoatTrip> BoatTripList;
     private ResultSet BoatTripQuery;
+    private int BoatTripOnWaterCount = 0;
 
     public BoatTripsDbRepository () throws SQLException {
         BoatTripList = new ArrayList<>();
@@ -35,11 +36,16 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
                     BoatTripQuery.getString("BoatTrip_CompletionTime"),
                     BoatTripQuery.getInt("BoatTrip_Timestamp")
             ));
+            if (Integer.parseInt(BoatTripQuery.getString("BoatTrip_CompletionTime")) == 0) {
+                BoatTripOnWaterCount++;
+            }
         }
-        //BoatTripList.add(new BoatTrip(2, 2, 2.3, "le", "el", 34, "torsk", 46));
+        BoatTripList.add(new BoatTrip(2, 2, 2.3, "le", "el", 34, "torsk", 46));
     }
 
-    public int getBoatTripsCount() { return BoatTripList.size(); }
+    public int getBoatTripListSize() { return BoatTripList.size(); }
+
+    public int getBoatTripOnWaterCount() { return BoatTripOnWaterCount; }
 
     @Override
     public List<BoatTrip> readAllBoatTrips() { return BoatTripList; }

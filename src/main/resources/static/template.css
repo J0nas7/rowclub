@@ -11,7 +11,7 @@
 }
 
 body {
-    background: #f5f5f5;
+    background: url("images/brickBackground.png") #f5f5f5;
 }
 
 a { text-decoration: none; }
@@ -20,8 +20,20 @@ a { text-decoration: none; }
 .fltRght { float: right; }
 .clrBth { clear: both; }
 
+.color888 { color: #888; }
 .blueLink { color: #0747A6; }
 .blueLink:hover { text-decoration: underline; }
+
+.TextBar {
+    border-width: 1px 0px 1px 0px;
+    border-style: solid;
+}
+
+.InformationBar {
+    color: #333333;
+    background: #FEF2B8;
+    border-color: #D1CC81;
+}
 
 .btn {
     border: none;
@@ -43,8 +55,12 @@ a { text-decoration: none; }
 .blueBtn { background-color: #008CBA; }
 .blackBtn { background-color: #666; }
 .redBtn { background-color: #f44336; }
+.bgf5 { background-color: #f5f5f5; }
+.bgfff { background-color: #fff; }
 
 .w20 { width: 20%; }
+.padding6 { padding: 6px; }
+.padding7 { padding: 7px; }
 
 .Header {
     width: 100%;
@@ -89,6 +105,16 @@ a { text-decoration: none; }
     width: 1200px;
     margin: 0 auto;
     margin-top: 25px;
+    padding: 10px;
+    box-sizing: border-box;
+    background: #f5f5f5;
+}
+
+.ContentTitle {
+    font-family: 'Asap', sans-serif;
+    font-size: 40px;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 table {

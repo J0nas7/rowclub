@@ -22,7 +22,7 @@ public class ProtocolController {
     @GetMapping("/welcome")
     public String welcome(Model model) {
         model.addAttribute("boattripAttr", boatTripRepository.readAllBoatTrips());
-        model.addAttribute("le", boatTripRepository.getBoatTripsCount());
+        model.addAttribute("le", boatTripRepository.getBoatTripOnWaterCount());
         return "welcome";
     }
 }
