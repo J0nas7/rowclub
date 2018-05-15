@@ -9,7 +9,7 @@
         <div class="Content">
             <h2 class="ContentTitle">Oversigt over aktuelle bådture</h2>
             <a class="btn greenBtn w20 fltLft" href="#">Nyt medlem</a>
-            <a class="btn greenBtn w20 fltLft" href="/new_boattrip">Ny tur</a>
+            <span th:replace="fragments/subnavigation.html :: boattrip_subnav (boattripnavExt=${'no'})"></span>
             <span class="TextBar InformationBar fltLft w20 padding6">
                 Der er
                 <strong th:text="${boattripOut + (boattripOut > 1 ? ' både' : ' båd')}"></strong>

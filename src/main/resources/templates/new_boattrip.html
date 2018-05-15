@@ -3,11 +3,20 @@
 <head th:replace="fragments/template :: Template">
 </head>
 <body>
-    <div class="Header" th:replace="fragments/header :: Header (activeMenuItem=${'boattrip'})"></div>
+    <div class="Header" th:replace="fragments/header :: Header (activeMenuItem=${'boattrips'})"></div>
 
     <div class="Container">
         <div class="Content">
-            Lorem ipsum dolor sit amet, prosectetur
+            <h2 class="ContentTitle">Oplysninger om ny bådtur</h2>
+            <span th:replace="fragments/subnavigation.html :: boattrip_subnav (boattripnavExt=${'yes'})"></span>
+            <div class="clrBth fltLft margintop15">
+                <table>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="clrBth"></div>
         </div>
     </div>
 </body>

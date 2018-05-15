@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+    <div th:fragment="boattrip_subnav">
+        <a th:class="${boattripnavExt == 'yes' ? '' : 'dspN'} + ' btn greenBtn w20 fltLft'" href="/boattrips">≡ Se oversigt over bådture</a>
+        <a class="btn greenBtn w20 fltLft" href="/new_boattrip">Ny tur</a>
+    </div>
+
+    <!--
+        add more subnavs here
+    -->
+</body>
+</html>
