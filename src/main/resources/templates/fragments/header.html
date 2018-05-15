@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+    <div class="Header" th:fragment="Header (activeMenuItem)">
+        <div class="HeaderContent">
+            <nav class="menu">
+                <a href="/welcome" th:class="${activeMenuItem == 'welcome' ? 'active' : ''} + ' fltLft item'">Start</a>
+                <a href="/boattrip" th:class="${activeMenuItem == 'boattrip' ? 'active' : ''} + ' fltLft item'">Bådture</a>
+                <a href="/boats" class="fltLft item">Bådtyper</a>
+                <a href="/admin" class="fltLft item">Administration</a>
+            </nav>
+            <small class="fltRght item" th:text="${ProtocolPageDatestamp}"></small>
+            <div style="clear: both;"></div>
+        </div>
+    </div>
+</body>
+</html>

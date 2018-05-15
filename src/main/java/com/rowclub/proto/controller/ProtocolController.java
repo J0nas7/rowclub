@@ -16,10 +16,9 @@ import java.util.List;
 public class ProtocolController {
 
     public static DatabaseController DBconn = new DatabaseController();
+
     public static String ProtocolPageDatestamp;
-
     public static String[] MonthsShortName = {"", "Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"};
-
     public static void MainConfig() {
         int MonthKey = Integer.parseInt(new SimpleDateFormat("M").format(Calendar.getInstance().getTime()));
         ProtocolPageDatestamp = new SimpleDateFormat("dd ").format(Calendar.getInstance().getTime());
@@ -39,5 +38,12 @@ public class ProtocolController {
         model.addAttribute("boattripOut", boatTripRepository.getBoatTripOnWaterCount());
         model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
         return "welcome";
+    }
+
+    @GetMapping("/new_boattrip")
+    public String new_boattrip(Model model) {
+        ProtocolController.MainConfig();
+        model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
+        return "new_boattrip";
     }
 }

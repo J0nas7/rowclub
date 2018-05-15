@@ -1,31 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8" />
-    <title>Protokolsystem for Københavns Roklub</title>
-    <link rel="stylesheet" href="template.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css?family=Asap" rel="stylesheet" />
+<head th:replace="fragments/template :: Template">
 </head>
 <body>
-    <div class="Header">
-        <div class="HeaderContent">
-            <nav class="menu">
-                <a href="/welcome" class="active fltLft item">Start</a>
-                <a href="/boattrips" class="fltLft item">Bådture</a>
-                <a href="/boats" class="fltLft item">Bådtyper</a>
-                <a href="/admin" class="fltLft item">Administration</a>
-            </nav>
-            <small class="fltRght item" th:text="${ProtocolPageDatestamp}"></small>
-            <div style="clear: both;"></div>
-        </div>
-    </div>
+    <div class="Header" th:replace="fragments/header :: Header (activeMenuItem=${'welcome'})"></div>
 
     <div class="Container">
         <div class="Content">
             <h2 class="ContentTitle">Oversigt over aktuelle bådture</h2>
             <a class="btn greenBtn w20 fltLft" href="#">Nyt medlem</a>
-            <a class="btn greenBtn w20 fltLft" href="#">Ny tur</a>
+            <a class="btn greenBtn w20 fltLft" href="/new_boattrip">Ny tur</a>
             <span class="TextBar InformationBar fltLft w20 padding6">
                 Der er
                 <strong th:text="${boattripOut + (boattripOut > 1 ? ' både' : ' båd')}"></strong>
