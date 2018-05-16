@@ -1,21 +1,22 @@
 package com.rowclub.proto.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Member {
 
     private int memberID;
     private String firstName;
     private String lastName;
-    private LocalDate doB;
-    private LocalDate regDate;
+    private Date doB;
+    private Date regDate;
     private String phone;
     private boolean admin;
     private boolean mate;
     private String type;
     private String photoRef;
 
-    public Member(int memberID, String firstName, String lastName, LocalDate doB, LocalDate regDate, String phone, boolean admin, boolean mate, String type, String photoRef) {
+    public Member(int memberID, String firstName, String lastName, Date doB, Date regDate, String phone, boolean admin, boolean mate, String type, String photoRef) {
         this.memberID = memberID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -52,19 +53,19 @@ public class Member {
         this.lastName = lastName;
     }
 
-    public LocalDate getDoB() {
+    public Date getDoB() {
         return doB;
     }
 
-    public void setDoB(LocalDate doB) {
+    public void setDoB(Date doB) {
         this.doB = doB;
     }
 
-    public LocalDate getRegDate() {
+    public Date getRegDate() {
         return regDate;
     }
 
-    public void setRegDate(LocalDate regDate) {
+    public void setRegDate(Date regDate) {
         this.regDate = regDate;
     }
 
