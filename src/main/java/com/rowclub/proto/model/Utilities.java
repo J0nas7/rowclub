@@ -9,6 +9,8 @@ import java.util.List;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
+import static com.rowclub.proto.repository.MemberDbRepository.MemberList;
+
 public class Utilities {
     //denne klasse skal indeholde metoder til udregning af data
 
@@ -33,6 +35,16 @@ public class Utilities {
                     MemberQuery.getString("PhotoRef"));
         }
         return member;
+    }
+
+    public List<Member> findAllMateys() {
+        List<Member> MateyList = new ArrayList<>();
+        for (Member matey: MemberList){
+            if (matey.isMate()) {
+                MateyList.add(matey);
+            }
+        }
+        return MateyList;
     }
 
     public static List<BoatTrip> seasonTrips(int memberId, int seasonId) throws SQLException {

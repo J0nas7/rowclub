@@ -1,6 +1,8 @@
 package com.rowclub.proto.controller;
 
 import com.rowclub.proto.model.BoatTrip;
+import com.rowclub.proto.model.Member;
+import com.rowclub.proto.model.Utilities;
 import com.rowclub.proto.repository.IBoatTripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,7 @@ import java.util.List;
 public class ProtocolController {
 
     public static DatabaseController DBconn = new DatabaseController();
+    public static Utilities Utilities = new Utilities();
 
     public static String ProtocolPageDatestamp;
     public static String[] MonthsShortName = {"", "Jan", "Feb", "Mar", "Apr", "Maj", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec"};
@@ -44,6 +47,8 @@ public class ProtocolController {
     public String new_boattrip(Model model) {
         ProtocolController.MainConfig();
         model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
+        model.addAttribute("Mateys", Utilities.findAllMateys());
+        model.addAttribute("MateysNum", Utilities.findAllMateys().size());
         return "new_boattrip";
     }
 }

@@ -14,11 +14,10 @@ import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
 @Repository
 public class MemberDbRepository implements IMemberRepository {
-    private List<Member> MemberList;
     private ResultSet MemberQuery;
+    public static List<Member> MemberList = new ArrayList<>();
 
     public MemberDbRepository () throws SQLException {
-        MemberList = new ArrayList<>();
         String MemberSql = "SELECT * FROM "+DatabaseController.DBprefix+"Member";
         MemberQuery = DBconn.dbQuery(MemberSql);
         while (MemberQuery.next()) {
@@ -50,7 +49,7 @@ public class MemberDbRepository implements IMemberRepository {
     }
 
     @Override
-    public List<Member> readAllMembers() { return Member; }
+    public List<Member> readAllMembers() { return MemberList; }
 
     @Override
     public void createMember(Member member) {

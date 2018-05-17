@@ -13,31 +13,52 @@
                 <table width="100%">
                     <tr>
                         <td>
-                            <label for="firstName">First Name</label><br>
-                            <input type="text" name="student_firstname" id="firstName" value="" placeholder="Students firstname" />
+                            <label for="boattrip_matey">Vælg matros</label><br>
+                            <select size="1" id="boattrip_matey" name="boattrip_matey">
+                                <option value="">Matroser</option>
+                                <option th:each="matey : ${Mateys}" th:value="${matey.memberID}">
+                                    <span th:text="${matey.firstName + ' ' + matey.lastName + ' (' + matey.memberID + ')'}"></span>
+                                </option>
+                            </select>
+                        </td>
+                    </r>
+                    <tr>
+                        <td>
+                            <label for="boattrip_distance">Turens længde</label><br>
+                            <input type="text" name="boattrip_distance" id="boattrip_distance" value="" placeholder="Hvor lang er turen?" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="lastName">Last Name</label><br>
-                            <input type="text" name="student_lastname" id="lastName" value="" placeholder="Students lastname"
+                            <label for="boattrip_estduration">Cirka tidsforbrug i minutter</label><br>
+                            <input type="text" name="boattrip_estduration" id="boattrip_estduration" value="" placeholder="Hvor længe varer turen?" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="enrollmentDate">Enrollment Date</label><br>
-                            <input type="date" name="student_enrollmentDate" id="enrollmentDate" value="" placeholder="Students enrollment date" />
+                            <label for="boattrip_location">Turens destination</label><br>
+                            <input type="text" name="boattrip_location" id="boattrip_location" value="" placeholder="Hvor går turen hen?" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <label for="cpr">Person number</label><br>
-                            <input type="text" name="student_cpr" id="cpr" value="" placeholder="Student personnumber" />
+                            <label for="boattrip_datestamp">Turens startdato</label>
+                            <input type="date" name="boattrip_datestamp" id="boattrip_datestamp" value="" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="submit" class="btn w" value="Create Student" />
+                            <label for="boattrip_guests">Gæster på turen</label>
+                            <input type="text" name="boattrip_guests[]" id="boattrip_guests" value="" placeholder="Indtast navn på en gæst mere..."  />
+                            <span class="moreGuests"><input type="text" name="boattrip_guests[]" value="" placeholder="Indtast navn på en gæst mere..."  /></span>
+                            <style type="text/css">
+                                .moreGuests input { display: none !important; }
+                            </style>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" class="btn w" value="Opret tur" />
                         </td>
                     </tr>
                 </table>
