@@ -52,13 +52,13 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
             id = (rs.getInt(1));
         }
 
-        PreDetTrips preDetTrips = new PreDetTrips(id,name,type,status,seats);
+        /*PreDetTrips preDetTrips = new PreDetTrips(id,name,type,status,seats);
         System.out.println(id);
         preDetTrips.setPreDetTripsID(PreDetTripsList.size()+1);
-        PreDetTripsList.add(preDetTrips);
+        PreDetTripsList.add(preDetTrips);*/
     }
 
-    @Override
+    /*@Override
     public PreDetTrips readPreDetTrips(int preDetTripsID) {
         return PreDetTripsList.get(preDetTripsID-1);
     }
@@ -102,5 +102,5 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
     public void deletePreDetTrips(int preDetTripsID) {
         PreDetTripsList.remove(preDetTripsID-1);
         DBconn.dbUpdate("DELETE FROM "+DatabaseController.DBprefix+"PredeterminedTrips WHERE preID ="+PredeterminedTrips);
-    }
+    }*/
 }
