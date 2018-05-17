@@ -3,11 +3,14 @@ package com.rowclub.proto.repository;
 import com.rowclub.proto.controller.DatabaseController;
 import com.rowclub.proto.model.BoatTrip;
 import com.rowclub.proto.model.Member;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
@@ -16,6 +19,7 @@ import static com.rowclub.proto.controller.ProtocolController.DBconn;
 public class MemberDbRepository implements IMemberRepository {
     private List<Member> Member;
     private ResultSet MemberQuery;
+
 
     public MemberDbRepository () throws SQLException {
         Member = new ArrayList<>();
@@ -41,22 +45,32 @@ public class MemberDbRepository implements IMemberRepository {
     public int getMemberListSize() { return Member.size(); }
 
     @Override
-    public int getMemberId(int memberId) {
-        return memberId;
-    }
-
-    @Override
-    public String getFirstName(String firstName) {
-        return firstName;
-    }
-
-    @Override
     public List<Member> readAllMembers() { return Member; }
 
     @Override
-    public void createMember(Member member) {
-        member.setMemberID(Member.size()+1);
-        Member.add(member);
+    public void createMember(String FirstName, String LastName, Date DoB, Date RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) {
+
+        String memberValues =
+                "'default" + "','"
+                +FirstName +"','"
+                +LastName  +"','"
+                +DoB  +"','"
+                +RegDate +"','"
+                +Phone +"','"
+                +Admin +"','"
+                +Matey +"','"
+                +Type +"','"
+                +PhotoRef + "'";
+
+
+        String insertMember = "INSERT INTO " + DatabaseController.DBprefix + "Member" + " VALUES " + (memberValues);
+
+        System.out.println(insertMember);
+
+        //String insertMemberToDb = ""+DatabaseController.DBprefix+insertMember;
+        //System.out.println(insertMemberToDb);
+        DBconn.dbUpdate(memberValues);
+
     }
 
     @Override
