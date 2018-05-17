@@ -2,7 +2,9 @@ package com.rowclub.proto.repository;
 
 import com.rowclub.proto.model.BoatTrip;
 import com.rowclub.proto.model.Member;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import java.util.Date;
 import java.util.List;
 
 public interface IMemberRepository {
@@ -12,11 +14,7 @@ public interface IMemberRepository {
 
     int getMemberListSize();
 
-    int getMemberId(int memberId);
-
-    String getFirstName(String firstName);
-
-    void createMember(Member member);
+    void createMember(String FirstName, String LastName, Date DoB, Date RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef);
 
     Member readMembers(int memberId);
 
