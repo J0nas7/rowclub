@@ -5,6 +5,7 @@ import com.rowclub.proto.controller.DatabaseController;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
@@ -33,6 +34,52 @@ public class Utilities {
                     MemberQuery.getString("PhotoRef"));
         }
         return member;
+    }
+
+    public static void updateMember(int memberID, String firstName, String lastName, Date doB, Date regDate,
+    String phone, boolean admin, boolean mate, String type, String photoRef) throws SQLException {
+
+        int newAdmin;
+        int newMate;
+
+        if (firstName == null) {
+            firstName = Utilities.findMember(memberID).getFirstName(); }
+
+        if (lastName == null) {
+            lastName = Utilities.findMember(memberID).getLastName(); }
+
+        if (doB == null) {
+            doB = Utilities.findMember(memberID).getDoB(); }
+
+        if (regDate == null) {
+            regDate = Utilities.findMember(memberID).getRegDate(); }
+
+        if (phone == null) {
+            phone = Utilities.findMember(memberID).getPhone(); }
+
+        if (admin == true) {newAdmin = 1;} else {newAdmin = 0;}
+
+        if (mate == true) {newMate = 1;} else {newMate = 0;}
+
+        if (type == null) {
+            type = Utilities.findMember(memberID).getType(); }
+
+        if (photoRef == null) {
+            photoRef = Utilities.findMember(memberID).getPhotoRef(); }
+
+        String statement = "UPDATE " + DatabaseController.DBprefix + "Member SET "
+                + "FirstName = '" + firstName + "', "
+                + "LastName = '" + lastName + "', "
+                + "DoB = '" + doB + "', "
+                + "RegDate = '" + regDate + "', "
+                + "Phone = '" + phone + "', "
+                + "Admin = '" + newAdmin + "', "
+                + "Matey = '" + newMate + "', "
+                + "Type = '" + type + "', "
+                + "PhotoRef = '" + photoRef
+                + "' WHERE MemberID = " + memberID;
+
+        DBconn.dbUpdate(statement);
     }
 
     public static List<BoatTrip> seasonTrips(int memberId, int seasonId) throws SQLException {
