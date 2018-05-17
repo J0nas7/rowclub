@@ -22,7 +22,6 @@ public class MemberDbRepository implements IMemberRepository {
 
 
     public MemberDbRepository() throws SQLException {
-        Member = new ArrayList<>();
         String MemberSql = "SELECT * FROM " + DatabaseController.DBprefix + "Member";
         MemberQuery = DBconn.dbQuery(MemberSql);
         while (MemberQuery.next()) {
@@ -71,31 +70,21 @@ public class MemberDbRepository implements IMemberRepository {
 
         System.out.println(insertMember);
 
-        @Override
-        public List<Member> readAllMembers () {
-            return Member;
-        }
+    }
 
-        @Override
-        public void createMember (Member member){
-            member.setMemberID(MemberList.size() + 1);
-            MemberList.add(member);
-        }
+    @Override
+    public Member readMembers(int memberId) {
+        return null;
+    }
 
-        @Override
-        public Member readMembers (int memberId){
-            return Member.get(memberId - 1);
-        }
+    @Override
+    public void updateMember(Member member) {
 
-        @Override
-        public void updateMember (Member member){
-            MemberList.set(member.getMemberID() - 1, member);
-        }
+    }
 
-        @Override
-        public void deleteMember (int memberId){
-            Member.remove(memberId - 1);
-        }
+    @Override
+    public void deleteMember(int memberId) {
+
     }
 }
 
