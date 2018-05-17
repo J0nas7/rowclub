@@ -6,19 +6,20 @@ public class BoatTrip {
     private int BoatTripID;
     private int BoatID;
     private double Distance;
-    private String EstDuration;
+    private int EstDuration;
     private String Location;
     private Date Datestamp;
     private int SeasonID;
     private int CompletionTime;
     private int Timestamp;
 
-    public BoatTrip(int boatTripID, int boatID, double distance, String estDuration, String location, int seasonID, int completionTime, int timestamp) {
+    public BoatTrip(int boatTripID, int boatID, double distance, int estDuration, String location, Date datestamp, int seasonID, int completionTime, int timestamp) {
         BoatTripID = boatTripID;
         BoatID = boatID;
         Distance = distance;
         EstDuration = estDuration;
         Location = location;
+        Datestamp = datestamp;
         SeasonID = seasonID;
         CompletionTime = completionTime;
         Timestamp = timestamp;
@@ -52,11 +53,11 @@ public class BoatTrip {
         Distance = distance;
     }
 
-    public String getEstDuration() {
+    public int getEstDuration() {
         return EstDuration;
     }
 
-    public void setEstDuration(String estDuration) {
+    public void setEstDuration(int estDuration) {
         EstDuration = estDuration;
     }
 

@@ -29,9 +29,9 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
                     BoatTripQuery.getInt("BoatTrip_ID"),
                     BoatTripQuery.getInt("Boat_ID"),
                     BoatTripQuery.getDouble("BoatTrip_Distance"),
-                    BoatTripQuery.getString("BoatTrip_EstDuration"),
+                    BoatTripQuery.getInt("BoatTrip_EstDuration"),
                     BoatTripQuery.getString("BoatTrip_Location"),
-                    //BoatTripQuery.getDate("BoatTrip_Datestamp"),
+                    BoatTripQuery.getDate("BoatTrip_Datestamp"),
                     BoatTripQuery.getInt("BoatTrip_SeasonID"),
                     BoatTripQuery.getInt("BoatTrip_CompletionTime"),
                     BoatTripQuery.getInt("BoatTrip_Timestamp")
