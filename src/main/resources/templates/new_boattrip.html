@@ -10,7 +10,7 @@
             <h2 class="ContentTitle">Oplysninger om ny bådtur</h2>
             <span th:replace="fragments/subnavigation.html :: boattrip_subnav (boattripnavExt=${'yes'})"></span>
             <form action="/create_student" method="POST" class="clrBth fltLft margintop15 w100">
-                <table width="100%">
+                <table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
                         <td>
                             <label for="boattrip_matey">Vælg matros</label><br>
@@ -21,43 +21,68 @@
                                 </option>
                             </select>
                         </td>
-                    </r>
-                    <tr>
-                        <td>
-                            <label for="boattrip_distance">Turens længde</label><br>
-                            <input type="text" name="boattrip_distance" id="boattrip_distance" value="" placeholder="Hvor lang er turen?" />
-                        </td>
                     </tr>
                     <tr>
-                        <td>
-                            <label for="boattrip_estduration">Cirka tidsforbrug i minutter</label><br>
-                            <input type="text" name="boattrip_estduration" id="boattrip_estduration" value="" placeholder="Hvor længe varer turen?" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label for="boattrip_location">Turens destination</label><br>
-                            <input type="text" name="boattrip_location" id="boattrip_location" value="" placeholder="Hvor går turen hen?" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                        <td class="margintop15 dspB">
                             <label for="boattrip_datestamp">Turens startdato</label>
                             <input type="date" name="boattrip_datestamp" id="boattrip_datestamp" value="" />
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td class="margintop15 dspB">
                             <label for="boattrip_guests">Gæster på turen</label>
                             <input type="text" name="boattrip_guests[]" id="boattrip_guests" value="" placeholder="Indtast navn på en gæst mere..."  />
-                            <span class="moreGuests"><input type="text" name="boattrip_guests[]" value="" placeholder="Indtast navn på en gæst mere..."  /></span>
+                            <span class="moreGuests">
+                                <span class="cta">+ tilføj en gæst mere</span>
+                                <input type="text" name="boattrip_guests[]" value="" placeholder="Indtast navn på en gæst mere..."  />
+                            </span>
                             <style type="text/css">
                                 .moreGuests input { display: none !important; }
+                                .moreGuests .cta {
+                                    border: 2px #aaa dashed;
+                                    padding: 10px;
+                                    display: block;
+                                    width: 20%;
+                                    margin-top: 5px;
+                                }
+
+                                .moreGuests .cta:hover {
+                                    cursor: pointer;
+                                    border-color: #666;
+                                    color: #666;
+                                }
                             </style>
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td class="bgEEE margintop15 padding10tb dspB bordertop bordercolorAAA">
+                            <strong>Indtast detaljer om turen ...</strong>
+                            <label for="boattrip_distance" class="dspB clrBth padding10t">Turens længde</label>
+                            <input type="text" name="boattrip_distance" id="boattrip_distance" value="" placeholder="Hvor lang er turen?" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bgEEE padding10tb dspB">
+                            <label for="boattrip_estduration">Cirka tidsforbrug i minutter</label>
+                            <input type="text" name="boattrip_estduration" id="boattrip_estduration" value="" placeholder="Hvor længe varer turen?" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bgEEE padding10tb dspB">
+                            <label for="boattrip_location">Turens destination</label>
+                            <input type="text" name="boattrip_location" id="boattrip_location" value="" placeholder="Hvor går turen hen?" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="bgEEE padding10tb dspB borderbottom bordercolorAAA">
+                            <label for="boattrip_predetermined"><strong>... eller vælg en allerede defineret tur</strong></label>
+                            <select size="1" name="boattrip_predetermined" id="boattrip_predetermined" class="dspB margintop15">
+                                <option>Skabelon-ture</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="margintop15 dspB">
                             <input type="submit" class="btn w" value="Opret tur" />
                         </td>
                     </tr>

@@ -48,7 +48,6 @@ public class ProtocolController {
         ProtocolController.MainConfig();
         model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
         model.addAttribute("Mateys", Utilities.findAllMateys());
-        model.addAttribute("MateysNum", Utilities.findAllMateys().size());
         return "new_boattrip";
     }
 }

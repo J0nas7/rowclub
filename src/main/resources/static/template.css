@@ -21,6 +21,7 @@ small { font-size: 10px; }
 .fltRght { float: right; }
 .clrBth { clear: both; }
 .dspN { display: none !important; }
+.dspB { display: block; }
 
 .color888 { color: #888; }
 .blueLink { color: #0747A6; }
@@ -59,13 +60,26 @@ small { font-size: 10px; }
 .redBtn { background-color: #f44336; }
 .bgf5 { background-color: #f5f5f5; }
 .bgfff { background-color: #fff; }
+.bgEEE { background-color: #eee; }
 
 .w20 { width: 20%; }
 .w100 { width: 100%; }
 .margintop15 { margin-top: 15px; }
+.padding10t { padding-top: 10px; }
+.padding10tb { padding: 10px 0; }
 .padding6 { padding: 6px; }
 .padding7 { padding: 7px; }
 .divcenter { margin: 0 auto; }
+
+.bordertop {
+    border-width: 1px 0 0 0;
+    border-style: solid;
+}
+.borderbottom {
+    border-width: 0 0 1px 0;
+    border-style: solid;
+}
+.bordercolorAAA { border-color: #aaa; }
 
 .Header {
     width: 100%;
