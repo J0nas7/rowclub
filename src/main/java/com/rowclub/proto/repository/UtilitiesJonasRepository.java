@@ -14,7 +14,6 @@ import java.util.List;
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 import static com.rowclub.proto.repository.MemberDbRepository.MemberList;
 
-@Repository
 public class UtilitiesJonasRepository implements IUtilitiesRepository {
 
         //denne klasse skal indeholde metoder til udregning af data
