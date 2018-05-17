@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,5 +58,17 @@ public class ProtocolController {
         model.addAttribute("Mateys", UtilitiesRepository.findAllMateys());
         model.addAttribute("PreDetTrips", PreDetTripsRepository.readAllPreDetTripss());
         return "new_boattrip";
+    }
+
+    @PostMapping("/form_boattrip")
+    public String form_boattrip(@RequestParam("submit") String whattodo) {
+        //boatTripRepository.createBoatTrip(boattrip);
+        String redirectTo = "";
+        if (whattodo.equalsIgnoreCase("Opret tur og luk")) {
+            redirectTo = "redirect:/welcome?go=l";
+        } else if (whattodo.equalsIgnoreCase("Opret tur, check ind og luk")) {
+            redirectTo = "redirect:/welcome?go=c";
+        }
+        return redirectTo;
     }
 }
