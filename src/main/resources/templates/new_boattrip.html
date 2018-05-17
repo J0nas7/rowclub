@@ -31,11 +31,13 @@
                     <tr>
                         <td class="margintop15 dspB">
                             <label for="boattrip_guests">Gæster på turen</label>
-                            <input type="text" name="boattrip_guests[]" id="boattrip_guests" value="" placeholder="Indtast navn på en gæst mere..."  />
                             <span class="moreGuests">
                                 <span class="cta">+ tilføj en gæst mere</span>
                                 <input type="text" name="boattrip_guests[]" value="" placeholder="Indtast navn på en gæst mere..."  />
                             </span>
+                            <div class="theGuests">
+                                <input type="text" name="boattrip_guests[]" id="boattrip_guests" value="" placeholder="Indtast navn på en gæst mere..."  />
+                            </div>
                             <style type="text/css">
                                 .moreGuests input { display: none !important; }
                                 .moreGuests .cta {
@@ -43,7 +45,7 @@
                                     padding: 10px;
                                     display: block;
                                     width: 20%;
-                                    margin-top: 5px;
+                                    margin-bottom: 5px;
                                 }
 
                                 .moreGuests .cta:hover {
