@@ -16,7 +16,7 @@ public interface IBoatRepository {
 
     Boat readBoat(int tripID);
 
-    void updateBoat(Boat boat);
+    void updateBoat(int boatID,String name,String type, String status, int seats);
 
     void deleteBoat(int boatID);
 }

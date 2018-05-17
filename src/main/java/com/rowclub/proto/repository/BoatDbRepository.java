@@ -66,7 +66,39 @@ public class BoatDbRepository implements IBoatRepository {
     }
 
     @Override
-    public void updateBoat(Boat boat) { BoatList.set(boat.getBoatID()-1, boat); }
+    public void updateBoat(int boatID,String name,String type, String status, int seats) {
+
+        String statement = "UPDATE "+DatabaseController.DBprefix+"Boat SET ";
+
+        Boat boat = BoatList.get(boatID-1);
+
+        if(name != ""){
+            boat.setName(name);
+            statement = statement + "Name = '"+name+"',";
+
+        }
+        if(type != ""){
+            boat.setType(type);
+            statement = statement + "Type = '"+type+"',";
+        }
+        if(status!= ""){
+            boat.setStatus(status);
+            statement = statement + "Status = '"+status+"',";
+        }
+        if(seats!= 0){
+            boat.setSeats(seats);
+            statement = statement + "Seats = '"+seats+"',";
+        }
+
+        statement = statement.substring(0,statement.length()-1);
+
+        statement = statement + " WHERE boatID = " + boatID;
+
+        DBconn.dbUpdate(statement);
+
+        BoatList.set(boat.getBoatID()-1, boat);
+
+    }
 
     @Override
     public void deleteBoat(int tripID) {
