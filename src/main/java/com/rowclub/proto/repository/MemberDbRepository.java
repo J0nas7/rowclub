@@ -28,7 +28,6 @@ public class MemberDbRepository implements IMemberRepository {
                     MemberQuery.getString("LastName"),
                     MemberQuery.getDate("DoB"),
                     MemberQuery.getDate("RegDate"),
-                    //BoatTripQuery.getDate("BoatTrip_Datestamp"),
                     MemberQuery.getString("Phone"),
                     MemberQuery.getBoolean("Admin"),
                     MemberQuery.getBoolean("Matey"),

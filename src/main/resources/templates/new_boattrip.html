@@ -9,13 +9,39 @@
         <div class="Content">
             <h2 class="ContentTitle">Oplysninger om ny bådtur</h2>
             <span th:replace="fragments/subnavigation.html :: boattrip_subnav (boattripnavExt=${'yes'})"></span>
-            <div class="clrBth fltLft margintop15">
-                <table>
+            <form action="/create_student" method="POST" class="clrBth fltLft margintop15 w100">
+                <table width="100%">
                     <tr>
-                        <td></td>
+                        <td>
+                            <label for="firstName">First Name</label><br>
+                            <input type="text" name="student_firstname" id="firstName" value="" placeholder="Students firstname" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="lastName">Last Name</label><br>
+                            <input type="text" name="student_lastname" id="lastName" value="" placeholder="Students lastname"
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="enrollmentDate">Enrollment Date</label><br>
+                            <input type="date" name="student_enrollmentDate" id="enrollmentDate" value="" placeholder="Students enrollment date" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="cpr">Person number</label><br>
+                            <input type="text" name="student_cpr" id="cpr" value="" placeholder="Student personnumber" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" class="btn w" value="Create Student" />
+                        </td>
                     </tr>
                 </table>
-            </div>
+            </form>
             <div class="clrBth"></div>
         </div>
     </div>
