@@ -48,9 +48,11 @@ public class BoatDbRepository implements IBoatRepository {
         String boatStatement = "insert into "+DatabaseController.DBprefix+"Boat values ("+statement+");";
         DBconn.dbUpdate(boatStatement);
 
-        //rs = DBconn.dbQuery("SELECT Max(boatID) FROM "+DatabaseController.DBprefix+"Boat;");
+        rs = DBconn.dbQuery("SELECT Max(boatID) FROM "+DatabaseController.DBprefix+"Boat;");
 
-
+        if (rs.next()){
+            id = (rs.getInt(1));
+        }
 
         Boat boat = new Boat(id,name,type,status,seats);
         System.out.println(id);
