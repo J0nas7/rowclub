@@ -33,6 +33,7 @@ public class ProtocolController {
     // Design pattern: Strategy pattern
     @Autowired
     private IBoatTripRepository boatTripRepository;
+    @Autowired
     private IUtilitiesRepository UtilitiesRepository;
 
     @GetMapping("/welcome")
