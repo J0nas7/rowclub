@@ -13,11 +13,12 @@ import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
 @Repository
 public class PreDetTripsDbRepository implements IPreDetTripsRepository {
-    private List<PreDetTrips> PreDetTripsList;
+    public static List<PreDetTrips> PreDetTripsList = new ArrayList<>();
     private ResultSet PreDetTripsQuery;
 
+
     public PreDetTripsDbRepository() throws SQLException {
-        PreDetTripsList = new ArrayList<>();
+
         String PreDetTripsSql = "SELECT * FROM "+DatabaseController.DBprefix+"PredeterminedTrips";
         PreDetTripsQuery = DBconn.dbQuery(PreDetTripsSql);
         while (PreDetTripsQuery.next()) {
@@ -40,13 +41,13 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
         int id = 0;
         ResultSet rs;
         String statement = "default"+",'"+
-                location+"','"+
-                distance+"','"+
+                location+"',"+
+                distance+","+
                 preEstDuration;
-        String preDetTripsStatement = "insert into "+DatabaseController.DBprefix+"PreDetTrips values ("+statement+");";
+        String preDetTripsStatement = "insert into "+DatabaseController.DBprefix+"PredeterminedTrips values ("+statement+");";
         DBconn.dbUpdate(preDetTripsStatement);
 
-        rs = DBconn.dbQuery("SELECT Max(preDetTripsID) FROM "+DatabaseController.DBprefix+"PreDetTrips;");
+        rs = DBconn.dbQuery("SELECT Max(preID) FROM "+DatabaseController.DBprefix+"PredeterminedTrips;");
 
         if (rs.next()){
             id = (rs.getInt(1));
@@ -57,18 +58,18 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
         preDetTrips.setPreID(PreDetTripsList.size()+1);
         PreDetTripsList.add(preDetTrips);
     }
-/*
+
     @Override
-    public PreDetTrips readPreDetTrips(int preDetTripsID) {
-        return PreDetTripsList.get(preDetTripsID-1);
+    public PreDetTrips readPreDetTrips(int preID) {
+        return PreDetTripsList.get(preID-1);
     }
 
     @Override
-    public void updatePreDetTrips(int preDetTripsID,String location,Double distance, String status, int seats) {
+    public void updatePreDetTrips(int preID,String location,Double distance, int preEstDuration, int seats) {
 
-        String statement = "UPDATE "+DatabaseController.DBprefix+"PreDetTrips SET ";
+        String statement = "UPDATE "+DatabaseController.DBprefix+"PredeterminedTrips SET ";
 
-        PreDetTrips preDetTrips = PreDetTripsList.get(preDetTripsID-1);
+        PreDetTrips preDetTrips = PreDetTripsList.get(preID-1);
 
         if(location != ""){
             preDetTrips.setLocation(location);
@@ -79,24 +80,24 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
             preDetTrips.setDistance(distance);
             statement = statement + "Type = '"+distance+"',";
         }
-        if(status!= ""){
-            preDetTrips.setStatus(status);
-            statement = statement + "Status = '"+status+"',";
+        if(preEstDuration != 0){
+            preDetTrips.setPreEstDuration(preEstDuration);
+            statement = statement + "Status = '"+preEstDuration+"',";
         }
 
         statement = statement.substring(0,statement.length()-1);
 
-        statement = statement + " WHERE preDetTripsID = " + preDetTripsID;
+        statement = statement + " WHERE preID = " + preID;
 
         DBconn.dbUpdate(statement);
 
-        PreDetTripsList.set(preDetTrips.getPreDetTripsID()-1, preDetTrips);
+        PreDetTripsList.set(preDetTrips.getPreID()-1, preDetTrips);
 
     }
 
     @Override
-    public void deletePreDetTrips(int preDetTripsID) {
-        PreDetTripsList.remove(preDetTripsID-1);
-        DBconn.dbUpdate("DELETE FROM "+DatabaseController.DBprefix+"PredeterminedTrips WHERE preID ="+PredeterminedTrips);
-    }*/
+    public void deletePreDetTrips(int preID) {
+        PreDetTripsList.remove(preID-1);
+        DBconn.dbUpdate("DELETE FROM "+DatabaseController.DBprefix+"PredeterminedTrips WHERE preID ="+preID);
+    }
 }
