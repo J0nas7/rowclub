@@ -21,6 +21,7 @@ small { font-size: 10px; }
 .fltRght { float: right; }
 .clrBth { clear: both; }
 .dspN { display: none !important; }
+.dspB { display: block; }
 
 .color888 { color: #888; }
 .blueLink { color: #0747A6; }
@@ -59,11 +60,26 @@ small { font-size: 10px; }
 .redBtn { background-color: #f44336; }
 .bgf5 { background-color: #f5f5f5; }
 .bgfff { background-color: #fff; }
+.bgEEE { background-color: #eee; }
 
 .w20 { width: 20%; }
+.w100 { width: 100%; }
 .margintop15 { margin-top: 15px; }
+.padding10t { padding-top: 10px; }
+.padding10tb { padding: 10px 0; }
 .padding6 { padding: 6px; }
 .padding7 { padding: 7px; }
+.divcenter { margin: 0 auto; }
+
+.bordertop {
+    border-width: 1px 0 0 0;
+    border-style: solid;
+}
+.borderbottom {
+    border-width: 0 0 1px 0;
+    border-style: solid;
+}
+.bordercolorAAA { border-color: #aaa; }
 
 .Header {
     width: 100%;
@@ -124,12 +140,12 @@ small { font-size: 10px; }
     margin-bottom: 20px;
 }
 
-table {
+table.list {
     margin: 20px 0;
     float: left;
 }
 
-table thead th {
+table.list thead th {
     text-align: center;
     font-size: 15px;
     font-weight: normal;
@@ -138,11 +154,26 @@ table thead th {
     border-bottom: 1px #bbb solid;
 }
 
-table tbody tr td {
+table.list tbody tr td {
     padding: 10px 0;
     text-align: center;
 }
 
-table tbody tr:nth-child(even) {
+table.list tbody tr:nth-child(even) {
     background-color: #eee;
+}
+
+form table input[type=text], form table input[type=date], form table input[type=password], form table select {
+    display: block;
+    width: 50%;
+    padding: .5rem .75rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #495057;
+    background-color: #fff;
+    background-image: none;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+    outline: none;
 }

@@ -14,21 +14,19 @@ import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
 @Repository
 public class MemberDbRepository implements IMemberRepository {
-    private List<Member> Member;
     private ResultSet MemberQuery;
+    public static List<Member> MemberList = new ArrayList<>();
 
     public MemberDbRepository () throws SQLException {
-        Member = new ArrayList<>();
         String MemberSql = "SELECT * FROM "+DatabaseController.DBprefix+"Member";
         MemberQuery = DBconn.dbQuery(MemberSql);
         while (MemberQuery.next()) {
-            Member.add(new Member(
+            MemberList.add(new Member(
                     MemberQuery.getInt("MemberID"),
                     MemberQuery.getString("FirstName"),
                     MemberQuery.getString("LastName"),
                     MemberQuery.getDate("DoB"),
                     MemberQuery.getDate("RegDate"),
-                    //BoatTripQuery.getDate("BoatTrip_Datestamp"),
                     MemberQuery.getString("Phone"),
                     MemberQuery.getBoolean("Admin"),
                     MemberQuery.getBoolean("Matey"),
@@ -38,7 +36,7 @@ public class MemberDbRepository implements IMemberRepository {
             }
         }
 
-    public int getMemberListSize() { return Member.size(); }
+    public int getMemberListSize() { return MemberList.size(); }
 
     @Override
     public int getMemberId(int memberId) {
@@ -51,25 +49,25 @@ public class MemberDbRepository implements IMemberRepository {
     }
 
     @Override
-    public List<Member> readAllMembers() { return Member; }
+    public List<Member> readAllMembers() { return MemberList; }
 
     @Override
     public void createMember(Member member) {
-        member.setMemberID(Member.size()+1);
-        Member.add(member);
+        member.setMemberID(MemberList.size()+1);
+        MemberList.add(member);
     }
 
     @Override
     public Member readMembers(int memberId) {
-        return Member.get(memberId-1);
+        return MemberList.get(memberId-1);
     }
 
     @Override
-    public void updateMember(Member member) { Member.set(member.getMemberID()-1, member); }
+    public void updateMember(Member member) { MemberList.set(member.getMemberID()-1, member); }
 
     @Override
     public void deleteMember(int memberId) {
-        Member.remove(memberId-1);
+        MemberList.remove(memberId-1);
     }
 }
 

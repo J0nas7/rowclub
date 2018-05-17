@@ -3,11 +3,11 @@ package com.rowclub.proto.model;
 public class Boat {
     int boatID;
     String name;
-    int type;
+    String type;
     String status;
     int seats;
 
-    public Boat(int boatID, String name, int type, String status, int seats) {
+    public Boat(int boatID, String name, String type, String status, int seats) {
         this.boatID = boatID;
         this.name = name;
         this.type = type;
@@ -31,11 +31,11 @@ public class Boat {
         this.name = name;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
