@@ -4,6 +4,7 @@ import com.rowclub.proto.controller.DatabaseController;
 import com.rowclub.proto.model.PreDetTrips;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.transform.Result;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -65,7 +66,11 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
     }
 
     @Override
-    public void updatePreDetTrips(int preID,String location,Double distance, int preEstDuration, int seats) {
+    public void updatePreDetTrips(int preID,String location,Double distance, int preEstDuration) throws SQLException {
+
+        int index = 0;
+        ResultSet rs;
+
 
         String statement = "UPDATE "+DatabaseController.DBprefix+"PredeterminedTrips SET ";
 
@@ -73,26 +78,29 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
 
         if(location != ""){
             preDetTrips.setLocation(location);
-            statement = statement + "Name = '"+location+"',";
+            statement = statement + "Location = '"+location+"',";
 
         }
         if(distance != 0){
             preDetTrips.setDistance(distance);
-            statement = statement + "Type = '"+distance+"',";
+            statement = statement + "Distance = '"+distance+"',";
         }
         if(preEstDuration != 0){
             preDetTrips.setPreEstDuration(preEstDuration);
-            statement = statement + "Status = '"+preEstDuration+"',";
+            statement = statement + "PreEstDuration = '"+preEstDuration+"',";
         }
 
         statement = statement.substring(0,statement.length()-1);
-
         statement = statement + " WHERE preID = " + preID;
-
         DBconn.dbUpdate(statement);
 
-        PreDetTripsList.set(preDetTrips.getPreID()-1, preDetTrips);
 
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "PredeterminedTrips WHERE PreID <" + preID + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
+        }
+
+        PreDetTripsList.set(index,preDetTrips);
     }
 
     @Override

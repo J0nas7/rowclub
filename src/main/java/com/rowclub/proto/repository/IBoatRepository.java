@@ -16,7 +16,7 @@ public interface IBoatRepository {
 
     Boat readBoat(int tripID);
 
-    void updateBoat(int boatID,String name,String type, String status, int seats);
+    void updateBoat(int boatID,String name,String type, String status, int seats) throws SQLException;
 
     void deleteBoat(int boatID);
 }
