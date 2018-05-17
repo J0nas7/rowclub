@@ -101,7 +101,8 @@ public class BoatDbRepository implements IBoatRepository {
     }
 
     @Override
-    public void deleteBoat(int tripID) {
-        BoatList.remove(tripID-1);
+    public void deleteBoat(int boatID) {
+        BoatList.remove(boatID-1);
+        DBconn.dbUpdate("DELETE FROM "+DatabaseController.DBprefix+"Boat WHERE boatID ="+boatID);
     }
 }
