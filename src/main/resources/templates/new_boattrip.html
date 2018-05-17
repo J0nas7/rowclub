@@ -81,6 +81,12 @@
                             <select size="1" name="boattrip_predetermined" id="boattrip_predetermined" class="dspB margintop15">
                                 <option>Skabelon-ture</option>
                             </select>
+                            <select size="1" id="boattrip_matey" name="boattrip_matey">
+                                <option value="">Matroser</option>
+                                <option th:each="matey : ${Mateys}" th:value="${matey.memberID}">
+                                    <span th:text="${matey.firstName + ' ' + matey.lastName + ' (' + matey.memberID + ')'}"></span>
+                                </option>
+                            </select>
                         </td>
                     </tr>
                     <tr>

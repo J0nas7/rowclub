@@ -3,6 +3,7 @@ package com.rowclub.proto.controller;
 import com.rowclub.proto.model.BoatTrip;
 import com.rowclub.proto.model.Member;
 import com.rowclub.proto.repository.IBoatTripRepository;
+import com.rowclub.proto.repository.IPreDetTripsRepository;
 import com.rowclub.proto.repository.IUtilitiesRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class ProtocolController {
     private IBoatTripRepository boatTripRepository;
     @Autowired
     private IUtilitiesRepository UtilitiesRepository;
+    @Autowired
+    private IPreDetTripsRepository PreDetTripsRepository;
 
     @GetMapping("/welcome")
     public String welcome(Model model) {
@@ -50,6 +53,7 @@ public class ProtocolController {
         ProtocolController.MainConfig();
         model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
         model.addAttribute("Mateys", UtilitiesRepository.findAllMateys());
+        model.addAttribute("PreDetTrips", PreDetTripsRepository.readAllPreDetTripss());
         return "new_boattrip";
     }
 }
