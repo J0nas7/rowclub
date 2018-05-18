@@ -119,7 +119,7 @@ public class UtilitiesJonasRepository implements IUtilitiesRepository {
             ResultSet BoatTripQuery;
 
             BoatTripList = new ArrayList<>();
-            String BoatTripSql = "SELECT * FROM "+DatabaseController.DBprefix+"BoatTripLink" + " INNER JOIN Protocol_Member ON fkMemberID = MemberID" +
+            /*String BoatTripSql = "SELECT * FROM "+DatabaseController.DBprefix+"BoatTripLink" + " INNER JOIN Protocol_Member ON fkMemberID = MemberID" +
                     " INNER JOIN Protocol_BoatTrips ON fkBoatTripID = BoatTrip_ID" + " WHERE MemberID = " + memberId
                     + " && BoatTrip_SeasonID = " + seasonId;
             BoatTripQuery = DBconn.dbQuery(BoatTripSql);
@@ -135,7 +135,7 @@ public class UtilitiesJonasRepository implements IUtilitiesRepository {
                         BoatTripQuery.getInt("BoatTrip_CompletionTime"),
                         BoatTripQuery.getInt("BoatTrip_Timestamp")
                 ));
-            }
+            }*/
             return BoatTripList;
         }
 

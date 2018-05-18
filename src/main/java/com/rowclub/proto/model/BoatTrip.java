@@ -1,5 +1,6 @@
 package com.rowclub.proto.model;
 
+import java.text.DateFormat;
 import java.util.Date;
 
 public class BoatTrip {
@@ -8,12 +9,12 @@ public class BoatTrip {
     private double Distance;
     private int EstDuration;
     private String Location;
-    private Date Datestamp;
+    private DateFormat Datestamp;
     private int SeasonID;
     private int CompletionTime;
     private int Timestamp;
 
-    public BoatTrip(int boatTripID, int boatID, double distance, int estDuration, String location, Date datestamp, int seasonID, int completionTime, int timestamp) {
+    public BoatTrip(int boatTripID, int boatID, double distance, int estDuration, String location, DateFormat datestamp, int seasonID, int completionTime, int timestamp) {
         BoatTripID = boatTripID;
         BoatID = boatID;
         Distance = distance;
@@ -69,11 +70,11 @@ public class BoatTrip {
         Location = location;
     }
 
-    public Date getDatestamp() {
+    public DateFormat getDatestamp() {
         return Datestamp;
     }
 
-    public void setDatestamp(Date datestamp) {
+    public void setDatestamp(DateFormat datestamp) {
         Datestamp = datestamp;
     }
 
