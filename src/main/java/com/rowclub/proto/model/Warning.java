@@ -7,10 +7,10 @@ public class Warning {
     private int warningId;
     private String info;
     private int boatTripId;
-    private Date DateStamp;
+    private String DateStamp;
     private int TimeStamp;
 
-    public Warning(int warningId, String info, int boatTripId, Date dateStamp, int timeStamp) {
+    public Warning(int warningId, String info, int boatTripId, String dateStamp, int timeStamp) {
         this.warningId = warningId;
         this.info = info;
         this.boatTripId = boatTripId;
@@ -42,11 +42,11 @@ public class Warning {
         this.boatTripId = boatTripId;
     }
 
-    public Date getDateStamp() {
+    public String getDateStamp() {
         return DateStamp;
     }
 
-    public void setDateStamp(Date dateStamp) {
+    public void setDateStamp(String dateStamp) {
         DateStamp = dateStamp;
     }
 
