@@ -14,10 +14,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
+import static java.sql.Types.NULL;
 
 @Controller
 public class ProtocolController {
@@ -61,14 +66,14 @@ public class ProtocolController {
     }
 
     @PostMapping("/form_boattrip")
-    public String form_boattrip(@RequestParam("submit") String whattodo) {
-        //boatTripRepository.createBoatTrip(boattrip);
-        String redirectTo = "";
-        if (whattodo.equalsIgnoreCase("Opret tur og luk")) {
-            redirectTo = "redirect:/welcome?go=l";
-        } else if (whattodo.equalsIgnoreCase("Opret tur, check ind og luk")) {
-            redirectTo = "redirect:/welcome?go=c";
-        }
-        return redirectTo;
+    public String form_boattrip(@RequestParam("boattrip_distance") String distance,
+                                @RequestParam("boattrip_estduration") String estDuration,
+                                @RequestParam("boattrip_location") String location,
+                                @RequestParam("boattrip_datestamp") String datestamp,
+                                @RequestParam("submit") String whattodo
+    ) throws ParseException {
+        int seasonID = 2;
+        String redirect = boatTripRepository.createBoatTrip(boatTripRepository.getBoatTripListSize(), 1, distance, estDuration, location, datestamp, seasonID, NULL, Instant.now().getEpochSecond());
+        return "redirect:"+redirect;
     }
 }

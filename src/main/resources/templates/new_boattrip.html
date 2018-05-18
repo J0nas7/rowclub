@@ -79,7 +79,7 @@
                         <td class="bgEEE padding10tb dspB borderbottom bordercolorAAA">
                             <label for="boattrip_predetermined"><strong>... eller vælg en allerede defineret tur</strong></label>
                             <select size="1" name="boattrip_predetermined" id="boattrip_predetermined" class="dspB margintop15 boattrip_predetermined">
-                                <option>Skabelon-ture</option>
+                                <option>Forudbestemte ture</option>
                                 <option th:each="predet : ${PreDetTrips}" th:value="${predet.preID}" th:location="${predet.location}" th:distance="${predet.distance}" th:duration="${predet.preEstDuration}" th:text="${predet.location+ ': ca. ' + predet.distance + 'km (' + predet.preEstDuration + ')'}">
                                 </option>
                             </select>
