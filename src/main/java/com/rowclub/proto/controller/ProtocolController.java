@@ -70,10 +70,10 @@ public class ProtocolController {
                                 @RequestParam("boattrip_estduration") String estDuration,
                                 @RequestParam("boattrip_location") String location,
                                 @RequestParam("boattrip_datestamp") String datestamp,
-                                @RequestParam("submit") String whattodo
+                                @RequestParam("submit") String whattodo,
+                                @RequestParam("boattrip_guests[]") String[] guests
     ) throws ParseException {
-        int seasonID = 2;
-        boatTripRepository.createBoatTrip(boatTripRepository.getBoatTripListSize(), 1, distance, estDuration, location, datestamp, seasonID, NULL, Instant.now().getEpochSecond(), whattodo);
+        boatTripRepository.createBoatTrip(boatTripRepository.getBoatTripListSize(), 1, distance, estDuration, location, datestamp, NULL, Instant.now().getEpochSecond(), whattodo, guests);
         return "redirect:/welcome";
     }
 }

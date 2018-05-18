@@ -3,6 +3,7 @@ package com.rowclub.proto.repository;
 import com.rowclub.proto.controller.DatabaseController;
 import com.rowclub.proto.controller.ProtocolController;
 import com.rowclub.proto.model.BoatTrip;
+import javafx.beans.property.SimpleListProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
@@ -39,11 +40,13 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
                     BoatTripQuery.getDouble("BoatTrip_Distance"),
                     BoatTripQuery.getInt("BoatTrip_EstDuration"),
                     BoatTripQuery.getString("BoatTrip_Location"),
+                    BoatTripQuery.getString("BoatTrip_Datestamp"),
                     BoatTripQuery.getDate("BoatTrip_Datestamp"),
                     BoatTripQuery.getInt("BoatTrip_SeasonID"),
                     BoatTripQuery.getBoolean("BoatTrip_OnWater"),
                     BoatTripQuery.getInt("BoatTrip_CompletionTime"),
-                    BoatTripQuery.getInt("BoatTrip_Timestamp")
+                    BoatTripQuery.getInt("BoatTrip_Timestamp"),
+                    BoatTripQuery.getInt("BoatTrip_Passengers")
             ));
             if (BoatTripQuery.getBoolean("BoatTrip_OnWater")) {
                 BoatTripOnWaterCount++;
@@ -59,11 +62,14 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
     public List<BoatTrip> readAllBoatTrips() { return BoatTripList; }
 
     @Override
-    public void createBoatTrip(int boatTripID, int boatID, String distance, String estDuration, String location, String datestamp, int seasonID, int completionTime, long timestamp, String whattodo) throws ParseException {
-        DateFormat date = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
+    public void createBoatTrip(int boatTripID, int boatID, String distance, String estDuration, String location, String datestamp, int completionTime, long timestamp, String whattodo, String[] guests) throws ParseException {
+        Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(datestamp);
+
         double Ddistance = Double.parseDouble(distance);
         int IestDuration = Integer.parseInt(estDuration);
         int Itimestamp = Math.toIntExact(timestamp);
+
+        int seasonID = 2;
 
         boolean OnWater = false;
         if (whattodo.equalsIgnoreCase("Opret tur og luk")) {
@@ -73,9 +79,16 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
             BoatTripOnWaterCount++;
         }
 
-        //BoatTripList.add(new BoatTrip(this.getBoatTripListSize()+1, boatID, Ddistance, IestDuration, location, date, seasonID, OnWater, completionTime, Itimestamp));
-        String createBoatTripSql =  "INSERT INTO "+DatabaseController.DBprefix+"BoatTrips (Boat_ID, BoatTrip_Distance, BoatTrip_EstDuration, BoatTrip_Location, BoatTrip_Datestamp, BoatTrip_SeasonID, BoatTrip_OnWater, BoatTrip_CompletionTime, BoatTrip_Timestamp) " +
-                                    "VALUES ('"+boatID+"', '"+Ddistance+"', '"+IestDuration+"', '"+location+"', '"+datestamp+"', '"+seasonID+"', "+OnWater+", 0, '"+Itimestamp+"');";
+        int Passengers = 1;
+        for (int i = 0; i < guests.length; i++) {
+            if (!guests[i].trim().isEmpty()) {
+                Passengers++;
+            }
+        }
+
+        BoatTripList.add(new BoatTrip(this.getBoatTripListSize()+1, boatID, Ddistance, IestDuration, location, datestamp, date, seasonID, OnWater, completionTime, Itimestamp, Passengers));
+        String createBoatTripSql =  "INSERT INTO "+DatabaseController.DBprefix+"BoatTrips (Boat_ID, BoatTrip_Distance, BoatTrip_EstDuration, BoatTrip_Location, BoatTrip_Datestamp, BoatTrip_SeasonID, BoatTrip_OnWater, BoatTrip_CompletionTime, BoatTrip_Timestamp, BoatTrip_Passengers) " +
+                                    "VALUES ('"+boatID+"', '"+Ddistance+"', '"+IestDuration+"', '"+location+"', '"+datestamp+"', '"+seasonID+"', "+OnWater+", 0, '"+Itimestamp+"', '"+Passengers+"');";
         DBconn.dbUpdate(createBoatTripSql);
     }
 

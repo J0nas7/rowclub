@@ -163,6 +163,8 @@ table.list tbody tr:nth-child(even) {
     background-color: #eee;
 }
 
+table.list tr.OnWater td { font-weight: bold; }
+
 form table input[type=text], form table input[type=date], form table input[type=password], form table select {
     display: block;
     width: 50%;

@@ -20,8 +20,9 @@
                     <tr>
                         <th>Tur nummer</th>
                         <th>Er båden på vandet?</th>
+                        <th>Antal pers. i båden</th>
                         <th>Destination</th>
-                        <th>Rutens længde</th>
+                        <th>Turens længde</th>
                         <th>Dato</th>
                         <!--<th>Handlinger</th>-->
                     </tr>
@@ -30,7 +31,8 @@
                     <tr th:each="BoatTrip : ${boattripList}" th:class="${(BoatTrip.OnWater ? 'OnWater' : 'NotOnWater')}">
                         <td th:text="${BoatTrip.BoatTripID}"></td>
                         <td th:text="${(BoatTrip.OnWater ? 'Ja' : 'Nej')}"></td>
-                        <td th:text="${BoatTrip.Destination}"></td>
+                        <td th:text="${BoatTrip.Passengers}"></td>
+                        <td th:text="${BoatTrip.Location}"></td>
                         <td th:text="${BoatTrip.Distance}"></td>
                         <td th:text="${BoatTrip.Datestamp}"></td>
                         <!--<td>

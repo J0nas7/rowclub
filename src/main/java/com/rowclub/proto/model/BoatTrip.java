@@ -9,23 +9,27 @@ public class BoatTrip {
     private double Distance;
     private int EstDuration;
     private String Location;
-    private Date Datestamp;
+    private String Datestamp;
+    private Date Date;
     private int SeasonID;
     private boolean OnWater;
     private int CompletionTime;
     private int Timestamp;
+    private int Passengers;
 
-    public BoatTrip(int boatTripID, int boatID, double distance, int estDuration, String location, Date datestamp, int seasonID, boolean OnWater, int completionTime, int timestamp) {
+    public BoatTrip(int boatTripID, int boatID, double distance, int estDuration, String location, String datestamp, java.util.Date date, int seasonID, boolean onWater, int completionTime, int timestamp, int passengers) {
         BoatTripID = boatTripID;
         BoatID = boatID;
         Distance = distance;
         EstDuration = estDuration;
         Location = location;
         Datestamp = datestamp;
+        Date = date;
         SeasonID = seasonID;
-        this.OnWater = OnWater;
+        OnWater = onWater;
         CompletionTime = completionTime;
         Timestamp = timestamp;
+        Passengers = passengers;
     }
 
     public int getBoatTripID() {
@@ -68,12 +72,20 @@ public class BoatTrip {
         Location = location;
     }
 
-    public Date getDatestamp() {
+    public String getDatestamp() {
         return Datestamp;
     }
 
-    public void setDatestamp(Date datestamp) {
+    public void setDatestamp(String datestamp) {
         Datestamp = datestamp;
+    }
+
+    public java.util.Date getDate() {
+        return Date;
+    }
+
+    public void setDate(java.util.Date date) {
+        Date = date;
     }
 
     public int getSeasonID() {
@@ -106,5 +118,13 @@ public class BoatTrip {
 
     public void setTimestamp(int timestamp) {
         Timestamp = timestamp;
+    }
+
+    public int getPassengers() {
+        return Passengers;
+    }
+
+    public void setPassengers(int passengers) {
+        Passengers = passengers;
     }
 }
