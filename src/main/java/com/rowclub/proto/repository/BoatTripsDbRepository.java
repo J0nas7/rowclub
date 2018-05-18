@@ -31,13 +31,14 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
         String BoatTripSql = "SELECT * FROM "+DatabaseController.DBprefix+"BoatTrips";
         BoatTripQuery = DBconn.dbQuery(BoatTripSql);
         while (BoatTripQuery.next()) {
+
             BoatTripList.add(new BoatTrip(
                     BoatTripQuery.getInt("BoatTrip_ID"),
                     BoatTripQuery.getInt("Boat_ID"),
                     BoatTripQuery.getDouble("BoatTrip_Distance"),
                     BoatTripQuery.getInt("BoatTrip_EstDuration"),
                     BoatTripQuery.getString("BoatTrip_Location"),
-                    BoatTripQuery.getDate("BoatTrip_Datestamp"),
+                    new SimpleDateFormat("dd-mm-yyyy"),//BoatTripQuery.getDate("BoatTrip_Datestamp"),
                     BoatTripQuery.getInt("BoatTrip_SeasonID"),
                     BoatTripQuery.getInt("BoatTrip_CompletionTime"),
                     BoatTripQuery.getInt("BoatTrip_Timestamp")
@@ -58,8 +59,7 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
     @Override
     public String createBoatTrip(int boatTripID, int boatID, String distance, String estDuration, String location, String datestamp, int seasonID, int completionTime, long timestamp) throws ParseException {
         // (int boatTripID, int boatID, double distance, int estDuration, String location, Date datestamp, int seasonID, int completionTime, int timestamp)
-        DateFormat format = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
-        Date date = format.parse(datestamp);
+        DateFormat date = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
         double Ddistance = Double.parseDouble(distance);
         int IestDuration = Integer.parseInt(estDuration);
         int Itimestamp = Math.toIntExact(timestamp);
@@ -67,7 +67,11 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
 
         String createBoatTripSql =  "INSERT INTO "+DatabaseController.DBprefix+"BoatTrips (Boat_ID, BoatTrip_Distance, BoatTrip_EstDuration, BoatTrip_Location, BoatTrip_Datestamp, BoatTrip_SeasonID, BoatTrip_CompletionTime, BoatTrip_Timestamp) " +
                                     " VALUES ('"+boatID+"', '"+Ddistance+"', '"+IestDuration+"', '"+location+"', '"+date+"', '"+seasonID+"', '"+completionTime+"', '"+Itimestamp+"');";
-        DBconn.dbQuery(createBoatTripSql);
+        /*
+        String boatStatement = "insert into "+DatabaseController.DBprefix+"Boat values ("+statement+");";
+        DBconn.dbUpdate(boatStatement);
+        */
+        DBconn.dbUpdate(createBoatTripSql);
 
         return "/welcome?query="+createBoatTripSql;
     }
