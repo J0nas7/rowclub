@@ -15,15 +15,11 @@ public interface IBoatTripRepository {
 
     int getBoatTripOnWaterCount();
 
-    void createBoatTrip(BoatTrip boattrip);
-
-    void createBoatTrip(BoatTrip boattrip, String PostParam);
+    String createBoatTrip(int boatTripID, int boatID, String distance, String estDuration, String location, String datestamp, int seasonID, int completionTime, long timestamp) throws ParseException;
 
     BoatTrip readBoatTrip(int tripID);
 
     void updateBoatTrip(BoatTrip boattrip);
 
     void deleteBoatTrip(int tripID);
-
-    String createBoatTrip(int boatTripListSize, int i, String distance, String estDuration, String location, String datestamp, int seasonID, int aNull, long epochSecond) throws ParseException;
 }
