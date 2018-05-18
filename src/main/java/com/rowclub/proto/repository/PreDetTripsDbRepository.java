@@ -55,7 +55,6 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
         }
 
         PreDetTrips preDetTrips = new PreDetTrips(id,location,distance,preEstDuration);
-        System.out.println(id);
         preDetTrips.setPreID(PreDetTripsList.size()+1);
         PreDetTripsList.add(preDetTrips);
     }

@@ -55,7 +55,6 @@ public class BoatDbRepository implements IBoatRepository {
         }
 
         Boat boat = new Boat(id,name,type,status,seats);
-        System.out.println(id);
         boat.setBoatID(BoatList.size()+1);
         BoatList.add(boat);
     }
