@@ -66,7 +66,10 @@ public class BoatDbRepository implements IBoatRepository {
     }
 
     @Override
-    public void updateBoat(int boatID,String name,String type, String status, int seats) {
+    public void updateBoat(int boatID,String name,String type, String status, int seats) throws SQLException {
+
+        int index = 0;
+        ResultSet rs;
 
         String statement = "UPDATE "+DatabaseController.DBprefix+"Boat SET ";
 
@@ -96,7 +99,12 @@ public class BoatDbRepository implements IBoatRepository {
 
         DBconn.dbUpdate(statement);
 
-        BoatList.set(boat.getBoatID()-1, boat);
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "PredeterminedTrips WHERE BoatID <" + boatID + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
+        }
+
+        BoatList.set(index,boat);
 
     }
 

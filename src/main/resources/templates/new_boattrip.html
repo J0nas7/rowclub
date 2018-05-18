@@ -9,7 +9,7 @@
         <div class="Content">
             <h2 class="ContentTitle">Oplysninger om ny bådtur</h2>
             <span th:replace="fragments/subnavigation.html :: boattrip_subnav (boattripnavExt=${'yes'})"></span>
-            <form action="/create_student" method="POST" class="clrBth fltLft margintop15 w100">
+            <form action="/form_boattrip" method="POST" class="clrBth fltLft margintop15 w100 boattrip_form">
                 <table width="100%" cellpadding="0" cellspacing="0">
                     <tr>
                         <td>
@@ -78,14 +78,17 @@
                     <tr>
                         <td class="bgEEE padding10tb dspB borderbottom bordercolorAAA">
                             <label for="boattrip_predetermined"><strong>... eller vælg en allerede defineret tur</strong></label>
-                            <select size="1" name="boattrip_predetermined" id="boattrip_predetermined" class="dspB margintop15">
+                            <select size="1" name="boattrip_predetermined" id="boattrip_predetermined" class="dspB margintop15 boattrip_predetermined">
                                 <option>Skabelon-ture</option>
+                                <option th:each="predet : ${PreDetTrips}" th:value="${predet.preID}" th:location="${predet.location}" th:distance="${predet.distance}" th:duration="${predet.preEstDuration}" th:text="${predet.location+ ': ca. ' + predet.distance + 'km (' + predet.preEstDuration + ')'}">
+                                </option>
                             </select>
                         </td>
                     </tr>
                     <tr>
                         <td class="margintop15 dspB">
-                            <input type="submit" class="btn w blueBtn" value="Opret tur" />
+                            <input type="submit" name="submit" class="btn w blueBtn fltLft" value="Opret tur og luk" />
+                            <input type="submit" name="submit" class="btn w greenBtn" value="Opret tur, check ind og luk" />
                         </td>
                     </tr>
                 </table>

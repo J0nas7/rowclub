@@ -17,7 +17,7 @@ public interface IPreDetTripsRepository {
 
         PreDetTrips readPreDetTrips(int preID);
 
-        void updatePreDetTrips(int preDetTripsID,String location,Double distance, int preEstDuration, int seats);
+        void updatePreDetTrips(int preDetTripsID,String location,Double distance, int preEstDuration) throws SQLException;
 
         void deletePreDetTrips(int preID);
     }

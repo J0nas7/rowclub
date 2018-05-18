@@ -51,6 +51,7 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
 
     @Override
     public void createBoatTrip(BoatTrip boattrip) {
+
         boattrip.setBoatTripID(BoatTripList.size()+1);
         BoatTripList.add(boattrip);
     }

@@ -18,7 +18,7 @@ public interface IMemberRepository {
 
     Member readMembers(int memberId);
 
-    void updateMember(Member member);
+    void updateMember(int memberId, String FirstName, String LastName, Date DoB, Date RegDate, String Phone,Boolean Admin, Boolean Matey, String Type, String PhotoRef);
 
     void deleteMember(int memberId);
 }
