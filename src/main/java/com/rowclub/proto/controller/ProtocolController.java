@@ -53,8 +53,6 @@ public class ProtocolController {
         model.addAttribute("boattripList", boatTripRepository.readAllBoatTrips());
         model.addAttribute("boattripOut", boatTripRepository.getBoatTripOnWaterCount());
         model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
-        String sql = "INSERT INTO Protocol_BoatTrips (Boat_ID, BoatTrip_Distance, BoatTrip_EstDuration, BoatTrip_Location, BoatTrip_Datestamp, BoatTrip_SeasonID, BoatTrip_CompletionTime, BoatTrip_Timestamp)  VALUES ('1', '2.0', '12', 'Igennem Christiansborg Kanal', '01-01-2018', '2', '0', '1526638136');";
-        DBconn.dbUpdate(sql);
         return "welcome";
     }
 
@@ -75,7 +73,7 @@ public class ProtocolController {
                                 @RequestParam("submit") String whattodo
     ) throws ParseException {
         int seasonID = 2;
-        String redirect = boatTripRepository.createBoatTrip(boatTripRepository.getBoatTripListSize(), 1, distance, estDuration, location, datestamp, seasonID, NULL, Instant.now().getEpochSecond());
-        return "redirect:"+redirect;
+        boatTripRepository.createBoatTrip(boatTripRepository.getBoatTripListSize(), 1, distance, estDuration, location, datestamp, seasonID, NULL, Instant.now().getEpochSecond(), whattodo);
+        return "redirect:/welcome";
     }
 }

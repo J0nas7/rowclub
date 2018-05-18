@@ -9,12 +9,13 @@ public class BoatTrip {
     private double Distance;
     private int EstDuration;
     private String Location;
-    private DateFormat Datestamp;
+    private Date Datestamp;
     private int SeasonID;
+    private boolean OnWater;
     private int CompletionTime;
     private int Timestamp;
 
-    public BoatTrip(int boatTripID, int boatID, double distance, int estDuration, String location, DateFormat datestamp, int seasonID, int completionTime, int timestamp) {
+    public BoatTrip(int boatTripID, int boatID, double distance, int estDuration, String location, Date datestamp, int seasonID, boolean OnWater, int completionTime, int timestamp) {
         BoatTripID = boatTripID;
         BoatID = boatID;
         Distance = distance;
@@ -22,12 +23,9 @@ public class BoatTrip {
         Location = location;
         Datestamp = datestamp;
         SeasonID = seasonID;
+        this.OnWater = OnWater;
         CompletionTime = completionTime;
         Timestamp = timestamp;
-    }
-
-    public BoatTrip(int boatTripID) {
-
     }
 
     public int getBoatTripID() {
@@ -70,11 +68,11 @@ public class BoatTrip {
         Location = location;
     }
 
-    public DateFormat getDatestamp() {
+    public Date getDatestamp() {
         return Datestamp;
     }
 
-    public void setDatestamp(DateFormat datestamp) {
+    public void setDatestamp(Date datestamp) {
         Datestamp = datestamp;
     }
 
@@ -84,6 +82,14 @@ public class BoatTrip {
 
     public void setSeasonID(int seasonID) {
         SeasonID = seasonID;
+    }
+
+    public boolean isOnWater() {
+        return OnWater;
+    }
+
+    public void setOnWater(boolean onWater) {
+        OnWater = onWater;
     }
 
     public int getCompletionTime() {

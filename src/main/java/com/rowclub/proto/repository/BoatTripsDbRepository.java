@@ -6,6 +6,7 @@ import com.rowclub.proto.model.BoatTrip;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -38,12 +39,13 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
                     BoatTripQuery.getDouble("BoatTrip_Distance"),
                     BoatTripQuery.getInt("BoatTrip_EstDuration"),
                     BoatTripQuery.getString("BoatTrip_Location"),
-                    new SimpleDateFormat("dd-mm-yyyy"),//BoatTripQuery.getDate("BoatTrip_Datestamp"),
+                    BoatTripQuery.getDate("BoatTrip_Datestamp"),
                     BoatTripQuery.getInt("BoatTrip_SeasonID"),
+                    BoatTripQuery.getBoolean("BoatTrip_OnWater"),
                     BoatTripQuery.getInt("BoatTrip_CompletionTime"),
                     BoatTripQuery.getInt("BoatTrip_Timestamp")
             ));
-            if (BoatTripQuery.getInt("BoatTrip_CompletionTime") == 0) {
+            if (BoatTripQuery.getBoolean("BoatTrip_OnWater")) {
                 BoatTripOnWaterCount++;
             }
         }
@@ -57,23 +59,24 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
     public List<BoatTrip> readAllBoatTrips() { return BoatTripList; }
 
     @Override
-    public String createBoatTrip(int boatTripID, int boatID, String distance, String estDuration, String location, String datestamp, int seasonID, int completionTime, long timestamp) throws ParseException {
-        // (int boatTripID, int boatID, double distance, int estDuration, String location, Date datestamp, int seasonID, int completionTime, int timestamp)
+    public void createBoatTrip(int boatTripID, int boatID, String distance, String estDuration, String location, String datestamp, int seasonID, int completionTime, long timestamp, String whattodo) throws ParseException {
         DateFormat date = new SimpleDateFormat("yyyy-mm-dd", Locale.ENGLISH);
         double Ddistance = Double.parseDouble(distance);
         int IestDuration = Integer.parseInt(estDuration);
         int Itimestamp = Math.toIntExact(timestamp);
-        BoatTripList.add(new BoatTrip(this.getBoatTripListSize()+1, boatID, Ddistance, IestDuration, location, date, seasonID, completionTime, Itimestamp));
 
-        String createBoatTripSql =  "INSERT INTO "+DatabaseController.DBprefix+"BoatTrips (Boat_ID, BoatTrip_Distance, BoatTrip_EstDuration, BoatTrip_Location, BoatTrip_Datestamp, BoatTrip_SeasonID, BoatTrip_CompletionTime, BoatTrip_Timestamp) " +
-                                    " VALUES ('"+boatID+"', '"+Ddistance+"', '"+IestDuration+"', '"+location+"', '"+date+"', '"+seasonID+"', '"+completionTime+"', '"+Itimestamp+"');";
-        /*
-        String boatStatement = "insert into "+DatabaseController.DBprefix+"Boat values ("+statement+");";
-        DBconn.dbUpdate(boatStatement);
-        */
+        boolean OnWater = false;
+        if (whattodo.equalsIgnoreCase("Opret tur og luk")) {
+            OnWater = false;
+        } else if (whattodo.equalsIgnoreCase("Opret tur, check ind og luk")) {
+            OnWater = true;
+            BoatTripOnWaterCount++;
+        }
+
+        //BoatTripList.add(new BoatTrip(this.getBoatTripListSize()+1, boatID, Ddistance, IestDuration, location, date, seasonID, OnWater, completionTime, Itimestamp));
+        String createBoatTripSql =  "INSERT INTO "+DatabaseController.DBprefix+"BoatTrips (Boat_ID, BoatTrip_Distance, BoatTrip_EstDuration, BoatTrip_Location, BoatTrip_Datestamp, BoatTrip_SeasonID, BoatTrip_OnWater, BoatTrip_CompletionTime, BoatTrip_Timestamp) " +
+                                    "VALUES ('"+boatID+"', '"+Ddistance+"', '"+IestDuration+"', '"+location+"', '"+datestamp+"', '"+seasonID+"', "+OnWater+", 0, '"+Itimestamp+"');";
         DBconn.dbUpdate(createBoatTripSql);
-
-        return "/welcome?query="+createBoatTripSql;
     }
 
     @Override

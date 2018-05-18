@@ -20,20 +20,24 @@
                     <tr>
                         <th>Tur nummer</th>
                         <th>Er båden på vandet?</th>
-                        <th>Antal personer i båden</th>
-                        <th>Handlinger</th>
+                        <th>Destination</th>
+                        <th>Rutens længde</th>
+                        <th>Dato</th>
+                        <!--<th>Handlinger</th>-->
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="BoatTrip : ${boattripList}">
+                    <tr th:each="BoatTrip : ${boattripList}" th:class="${(BoatTrip.OnWater ? 'OnWater' : 'NotOnWater')}">
                         <td th:text="${BoatTrip.BoatTripID}"></td>
-                        <td th:text="${BoatTrip.BoatID}"></td>
+                        <td th:text="${(BoatTrip.OnWater ? 'Ja' : 'Nej')}"></td>
+                        <td th:text="${BoatTrip.Destination}"></td>
                         <td th:text="${BoatTrip.Distance}"></td>
-                        <td>
+                        <td th:text="${BoatTrip.Datestamp}"></td>
+                        <!--<td>
                             <a th:href="${'/read_student?studID=' + BoatTrip.BoatTripID}" class="btn blueBtn w20 fltLft">Details</a>
                             <a th:href="${'/update_student?studID=' + BoatTrip.BoatTripID}" class="btn blackBtn w20 fltLft">Edit</a>
                             <a th:href="${'/delete_student?studID=' + BoatTrip.BoatTripID}" class="btn redBtn w20 fltLft">Delete</a>
-                        </td>
+                        </td>-->
                     </tr>
                 </tbody>
             </table>
