@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.rowclub.proto</OriginalElement>
+  <nodes>
+    <node x="248.0" y="458.0">com.rowclub.proto.repository.BoatTripsDbRepository</node>
+    <node x="189.33333333333326" y="-248.66666666666666">com.rowclub.proto.repository.UtilitiesJacobRepository</node>
+    <node x="-83.66666666666652" y="129.00000000000023">com.rowclub.proto.RowingclubApplicationTests</node>
+    <node x="189.33333333333326" y="-1.6666666666666288">com.rowclub.proto.repository.UtilitiesJonasRepository</node>
+    <node x="-113.0" y="261.0">com.rowclub.proto.repository.IBoatRepository</node>
+    <node x="-472.66666666666674" y="-0.6666666666666856">com.rowclub.proto.repository.IWarningRepository</node>
+    <node x="34.333333333333485" y="217.66666666666697">com.rowclub.proto.model</node>
+    <node x="-109.0" y="705.3333333333334">com.rowclub.proto.repository.IMemberRepository</node>
+    <node x="-99.99999999999989" y="187.66666666666674">com.rowclub.proto.controller</node>
+    <node x="-99.66666666666663" y="46.66666666666674">com.rowclub.proto.RowingclubApplication</node>
+    <node x="526.3333333333335" y="707.0">com.rowclub.proto.repository.IBoatTripLinkRepository</node>
+    <node x="-473.0" y="219.0">com.rowclub.proto.repository.WarningDbRepository</node>
+    <node x="-108.66666666666663" y="880.3333333333333">com.rowclub.proto.repository.MemberDbRepository</node>
+    <node x="-472.16666666666674" y="-246.33333333333334">com.rowclub.proto.repository.IUtilitiesRepository</node>
+    <node x="248.0" y="261.0">com.rowclub.proto.repository.IBoatTripRepository</node>
+    <node x="-113.0" y="457.0">com.rowclub.proto.repository.BoatDbRepository</node>
+    <node x="-474.66666666666663" y="682.3333333333334">com.rowclub.proto.repository.PreDetTripsDbRepository</node>
+    <node x="525.3333333333333" y="881.6666666666665">com.rowclub.proto.repository.BoatTripLinkDbRepository</node>
+    <node x="-474.0" y="505.0">com.rowclub.proto.repository.IPreDetTripsRepository</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.rowclub.proto.repository.BoatTripsDbRepository" target="com.rowclub.proto.repository.IBoatTripRepository">
+      <point x="0.0" y="-126.0" />
+      <point x="0.0" y="92.0" />
+    </edge>
+    <edge source="com.rowclub.proto.repository.BoatDbRepository" target="com.rowclub.proto.repository.IBoatRepository">
+      <point x="0.0" y="-115.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="com.rowclub.proto.repository.WarningDbRepository" target="com.rowclub.proto.repository.IWarningRepository">
+      <point x="0.0" y="-137.0" />
+      <point x="0.0" y="103.0" />
+    </edge>
+    <edge source="com.rowclub.proto.repository.MemberDbRepository" target="com.rowclub.proto.repository.IMemberRepository">
+      <point x="0.0" y="-115.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="com.rowclub.proto.repository.PreDetTripsDbRepository" target="com.rowclub.proto.repository.IPreDetTripsRepository">
+      <point x="0.0" y="-115.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+    <edge source="com.rowclub.proto.repository.UtilitiesJonasRepository" target="com.rowclub.proto.repository.IUtilitiesRepository">
+      <point x="0.0" y="-124.5" />
+      <point x="67.5" y="-24.0" />
+      <point x="36.75" y="-25.0" />
+      <point x="156.75" y="124.5" />
+    </edge>
+    <edge source="com.rowclub.proto.repository.UtilitiesJacobRepository" target="com.rowclub.proto.repository.IUtilitiesRepository">
+      <point x="0.0" y="-124.5" />
+      <point x="82.5" y="30.0" />
+      <point x="-22.75" y="21.0" />
+      <point x="-156.75" y="124.5" />
+    </edge>
+    <edge source="com.rowclub.proto.repository.BoatTripLinkDbRepository" target="com.rowclub.proto.repository.IBoatTripLinkRepository">
+      <point x="0.0" y="-115.0" />
+      <point x="0.0" y="81.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6000000000000001" x="157.11111111111097" y="444.1666666666665" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
