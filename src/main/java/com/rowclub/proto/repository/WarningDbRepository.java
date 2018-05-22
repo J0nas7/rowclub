@@ -19,6 +19,7 @@ public class WarningDbRepository implements IWarningRepository {
 
     public WarningDbRepository() throws SQLException {
         //warnings bliver sorteret efter dato, så den nyeste warning bliver pladseret forest i listen
+        WarningList.clear(); //Sikrer os at vorse arrayliste er tom før vi fylder den
         String WarningSql = "SELECT * FROM " + DatabaseController.DBprefix + "Warning ORDER BY DateStamp desc, TimeStamp desc";
         WarningQuery = DBconn.dbQuery(WarningSql);
         while (WarningQuery.next()) {
@@ -110,9 +111,6 @@ public class WarningDbRepository implements IWarningRepository {
 
     @Override
     public void updateWarning(int warningId, String info, int fkBoatTripID, String DateStamp, int TimeStamp) {
-
-        int index = 0;
-        ResultSet rs;
 
         String statement = "UPDATE "+DatabaseController.DBprefix+"Warning SET ";
 

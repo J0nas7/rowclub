@@ -31,8 +31,8 @@ public class UtilitiesJacobRepository implements IUtilitiesRepository {
             member = new Member(MemberQuery.getInt("MemberID"),
                     MemberQuery.getString("FirstName"),
                     MemberQuery.getString("LastName"),
-                    MemberQuery.getDate("DoB"),
-                    MemberQuery.getDate("RegDate"),
+                    MemberQuery.getString("DoB"),
+                    MemberQuery.getString("RegDate"),
                     MemberQuery.getString("Phone"),
                     MemberQuery.getBoolean("Admin"),
                     MemberQuery.getBoolean("Matey"),
@@ -42,7 +42,7 @@ public class UtilitiesJacobRepository implements IUtilitiesRepository {
         return member;
     }
 
-    public  void updateMember(int memberID, String firstName, String lastName, Date doB, Date regDate,
+    public  void updateMember(int memberID, String firstName, String lastName, String doB, String regDate,
                               String phone, boolean admin, boolean mate, String type, String photoRef) throws SQLException {
 
         int newAdmin;
@@ -165,8 +165,8 @@ public class UtilitiesJacobRepository implements IUtilitiesRepository {
                     MemberQuery.getInt("MemberID"),
                     MemberQuery.getString("FirstName"),
                     MemberQuery.getString("LastName"),
-                    MemberQuery.getDate("DoB"),
-                    MemberQuery.getDate("RegDate"),
+                    MemberQuery.getString("DoB"),
+                    MemberQuery.getString("RegDate"),
                     MemberQuery.getString("Phone"),
                     MemberQuery.getBoolean("Admin"),
                     MemberQuery.getBoolean("Matey"),

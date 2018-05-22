@@ -13,7 +13,7 @@ public interface IUtilitiesRepository {
 
     public  Member findMember(int memberId) throws SQLException;
 
-    public  void updateMember(int memberID, String firstName, String lastName, Date doB, Date regDate,
+    public  void updateMember(int memberID, String firstName, String lastName, String doB, String regDate,
                                     String phone, boolean admin, boolean mate, String type, String photoRef) throws SQLException;
 
     public List<Member> findAllMateys();

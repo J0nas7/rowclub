@@ -23,6 +23,7 @@ public class MemberDbRepository implements IMemberRepository {
 
 
     public MemberDbRepository() throws SQLException {
+        MemberList.clear(); //Sikrer os at vorse arrayliste er tom før vi fylder den
         String MemberSql = "SELECT * FROM " + DatabaseController.DBprefix + "Member";
         MemberQuery = DBconn.dbQuery(MemberSql);
         while (MemberQuery.next()) {
@@ -30,8 +31,8 @@ public class MemberDbRepository implements IMemberRepository {
                     MemberQuery.getInt("MemberID"),
                     MemberQuery.getString("FirstName"),
                     MemberQuery.getString("LastName"),
-                    MemberQuery.getDate("DoB"),
-                    MemberQuery.getDate("RegDate"),
+                    MemberQuery.getString("DoB"),
+                    MemberQuery.getString("RegDate"),
                     MemberQuery.getString("Phone"),
                     MemberQuery.getBoolean("Admin"),
                     MemberQuery.getBoolean("Matey"),
@@ -40,7 +41,6 @@ public class MemberDbRepository implements IMemberRepository {
             ));
         }
     }
-
 
     public int getMemberListSize() {
         return MemberList.size();
@@ -52,39 +52,88 @@ public class MemberDbRepository implements IMemberRepository {
     }
 
     @Override
-    public void createMember(String FirstName, String LastName, Date DoB, Date RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) {
+    public void createMember(String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException {
+        int id = 0;
+        ResultSet rs;
+
+        int AdminAdd;
+        if (Admin == true) {AdminAdd = 1;} else {AdminAdd = 0;}
+        int MateyAdd;
+        if (Matey == true) {MateyAdd = 1;} else {MateyAdd = 0;}
 
         String memberValues =
-                "'default" + "','"
+                "(default" + ",'"
                         + FirstName + "','"
                         + LastName + "','"
                         + DoB + "','"
                         + RegDate + "','"
                         + Phone + "','"
-                        + Admin + "','"
-                        + Matey + "','"
+                        + AdminAdd + "','"
+                        + MateyAdd + "','"
                         + Type + "','"
-                        + PhotoRef + "'";
+                        + PhotoRef + "')";
 
 
         String insertMember = "INSERT INTO " + DatabaseController.DBprefix + "Member" + " VALUES " + (memberValues);
+        //DBconn.dbUpdate(insertMember);
 
         System.out.println(insertMember);
 
+        rs = DBconn.dbQuery("SELECT Max(MemberID) FROM "+DatabaseController.DBprefix+"Member");
+
+        if (rs.next()){
+            id = (rs.getInt(1));
+        }
+
+        Member member = new Member(id,FirstName,LastName,DoB,RegDate,Phone,Admin,Matey,Type,PhotoRef);
+        System.out.println(MemberList.size());
+        //MemberList.add(MemberList.size()+1,member);
+
     }
 
     @Override
-    public Member readMembers(int memberId) {
+    public Member readMembers(int arrayId) {
 
-        return MemberList.get(memberId-1);
+        return MemberList.get(arrayId-1);
     }
 
     @Override
-    public void updateMember(int memberId, String FirstName, String LastName, Date DoB, Date RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) {
+    public Member searchMembers(int MemberId) {
+        //searches for a MemberId in the arraylist
+        int current = 0;
+
+        while (current != MemberList.size()) {
+
+            if (MemberList.get(current).getMemberID() == MemberId) {
+                return MemberList.get(current);
+            }
+            current+=1;
+        }
+        return null;
+    }
+
+    @Override
+    public int findMemberID(int MemberId) {
+        //finds the spot in the arraylist where the objects Memberid equals the parameter
+        int current = 0;
+
+        while (current != MemberList.size()) {
+
+            if (MemberList.get(current).getMemberID() == MemberId) {
+                return current;
+            }
+            current+=1;
+        }
+
+        return -1;
+    }
+
+    @Override
+    public void updateMember(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) {
 
         String updateMember = "UPDATE " + DatabaseController.DBprefix + "Member SET ";
 
-        Member member = MemberList.get(memberId-1);
+        Member member = searchMembers(memberId);
 
         if(FirstName != ""){
 
@@ -98,13 +147,13 @@ public class MemberDbRepository implements IMemberRepository {
             updateMember = updateMember + "LastName ='" +LastName+ "',";
         }
 
-        if(DoB != null){
+        if(DoB != ""){
 
             member.setDoB(DoB);
             updateMember = updateMember + "DoB ='" +DoB+ "',";
 
         }
-        if(RegDate != null){
+        if(RegDate != ""){
 
             member.setRegDate(RegDate);
             updateMember = updateMember + "RegDate ='" +RegDate+ "',";
@@ -143,18 +192,17 @@ public class MemberDbRepository implements IMemberRepository {
         }
 
         updateMember = updateMember.substring(0,updateMember.length()-1);
-
         updateMember = updateMember + " WHERE memberId = " + memberId;
 
         DBconn.dbUpdate(updateMember);
 
-        MemberList.set(member.getMemberID()-1, member);
+        MemberList.set(findMemberID(memberId), member);
     }
 
     @Override
     public void deleteMember(int memberId) {
 
-        MemberList.remove(memberId-1);
+        MemberList.remove(searchMembers(memberId));
         DBconn.dbUpdate("DELETE FROM " + DatabaseController.DBprefix + "Member WHERE memberId="+memberId);
     }
 }

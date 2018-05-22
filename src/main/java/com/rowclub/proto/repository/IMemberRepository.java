@@ -4,6 +4,7 @@ import com.rowclub.proto.model.BoatTrip;
 import com.rowclub.proto.model.Member;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -14,11 +15,15 @@ public interface IMemberRepository {
 
     int getMemberListSize();
 
-    void createMember(String FirstName, String LastName, Date DoB, Date RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef);
+    void createMember(String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException;
 
     Member readMembers(int memberId);
 
-    void updateMember(int memberId, String FirstName, String LastName, Date DoB, Date RegDate, String Phone,Boolean Admin, Boolean Matey, String Type, String PhotoRef);
+    Member searchMembers(int MemberId);
+
+    int findMemberID(int MemberId);
+
+    void updateMember(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone,Boolean Admin, Boolean Matey, String Type, String PhotoRef);
 
     void deleteMember(int memberId);
 }
