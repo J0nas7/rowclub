@@ -58,8 +58,8 @@ public class BoatTripLinkDbRepository implements IBoatTripLinkRepository {
         }
 
         @Override
-        public BoatTripLink readBoatTripLink(int boatTripLinkID) {
-            return BoatTripLinkList.get(boatTripLinkID-1);
+        public BoatTripLink readBoatTripLink(int arrayID) {
+            return BoatTripLinkList.get(arrayID-1);
         }
 
         @Override
@@ -68,9 +68,14 @@ public class BoatTripLinkDbRepository implements IBoatTripLinkRepository {
             int index = 0;
             ResultSet rs;
 
+            rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "BoatTripLink WHERE BoatTripLinkID <" + boatTripLinkID + ";");
+            if (rs.next()) {
+                index = (rs.getInt(1));
+            }
+
             String statement = "UPDATE "+DatabaseController.DBprefix+"BoatTripLink SET ";
 
-            BoatTripLink boat = BoatTripLinkList.get(boatTripLinkID-1);
+            BoatTripLink boat = BoatTripLinkList.get(index);
 
             if(fkMemberID != 0){
                 boat.setFkMemberID(fkMemberID);
@@ -88,18 +93,21 @@ public class BoatTripLinkDbRepository implements IBoatTripLinkRepository {
 
             DBconn.dbUpdate(statement);
 
-            rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "BoatTripLink WHERE BoatTripLinkID <" + boatTripLinkID + ";");
-            if (rs.next()) {
-                index = (rs.getInt(1));
-            }
-
             BoatTripLinkList.set(index,boat);
 
         }
 
         @Override
-        public void deleteBoatTripLink(int boatTripLinkID) {
-            BoatTripLinkList.remove(boatTripLinkID-1);
+        public void deleteBoatTripLink(int boatTripLinkID) throws SQLException {
+            int index = 1;
+            ResultSet rs;
+
+            rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "BoatTripLink WHERE BoatTripLinkID <" + boatTripLinkID + ";");
+            if (rs.next()) {
+                index = (rs.getInt(1));
+            }
+
+            BoatTripLinkList.remove(index);
             DBconn.dbUpdate("DELETE FROM "+DatabaseController.DBprefix+"BoatTripLink WHERE BoatTripLinkID ="+boatTripLinkID);
         }
     }

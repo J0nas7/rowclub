@@ -19,13 +19,9 @@ public interface IWarningRepository {
 
     Warning readWarning(int warningId);
 
-    Warning searchWarning(int warningId);
+    void updateWarning(int warningId, String info, int fkBoatTripID, String DateStamp, int TimeStamp) throws SQLException;
 
-    int findWarningID(int warningId);
-
-    void updateWarning(int warningId, String info, int fkBoatTripID, String DateStamp, int TimeStamp);
-
-    void deleteWarning(int warningId);
+    void deleteWarning(int warningId) throws SQLException;
 
 
 

@@ -70,10 +70,14 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
         int index = 0;
         ResultSet rs;
 
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "PredeterminedTrips WHERE PreID <" + preID + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
+        }
 
         String statement = "UPDATE "+DatabaseController.DBprefix+"PredeterminedTrips SET ";
 
-        PreDetTrips preDetTrips = PreDetTripsList.get(preID-1);
+        PreDetTrips preDetTrips = PreDetTripsList.get(index);
 
         if(location != ""){
             preDetTrips.setLocation(location);
@@ -93,18 +97,21 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
         statement = statement + " WHERE preID = " + preID;
         DBconn.dbUpdate(statement);
 
+        PreDetTripsList.set(index,preDetTrips);
+    }
+
+    @Override
+    public void deletePreDetTrips(int preID) throws SQLException {
+
+        int index = 0;
+        ResultSet rs;
 
         rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "PredeterminedTrips WHERE PreID <" + preID + ";");
         if (rs.next()) {
             index = (rs.getInt(1));
         }
 
-        PreDetTripsList.set(index,preDetTrips);
-    }
-
-    @Override
-    public void deletePreDetTrips(int preID) {
-        PreDetTripsList.remove(preID-1);
+        PreDetTripsList.remove(index);
         DBconn.dbUpdate("DELETE FROM "+DatabaseController.DBprefix+"PredeterminedTrips WHERE preID ="+preID);
     }
 }

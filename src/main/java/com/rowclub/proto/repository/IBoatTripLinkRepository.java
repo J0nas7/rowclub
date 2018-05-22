@@ -19,6 +19,6 @@ public interface IBoatTripLinkRepository {
 
         void updateBoatTripLink(int boatTripLinkID,int fkMemberID,int fkBoatTripid) throws SQLException;
 
-        void deleteBoatTripLink(int boatTripLinkID);
+        void deleteBoatTripLink(int boatTripLinkID) throws SQLException;
 
 }

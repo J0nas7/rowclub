@@ -70,9 +70,14 @@ public class BoatDbRepository implements IBoatRepository {
         int index = 0;
         ResultSet rs;
 
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Boat WHERE BoatID <" + boatID + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
+        }
+
         String statement = "UPDATE "+DatabaseController.DBprefix+"Boat SET ";
 
-        Boat boat = BoatList.get(boatID-1);
+        Boat boat = BoatList.get(index);
 
         if(name != ""){
             boat.setName(name);
@@ -98,18 +103,22 @@ public class BoatDbRepository implements IBoatRepository {
 
         DBconn.dbUpdate(statement);
 
-        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "PredeterminedTrips WHERE BoatID <" + boatID + ";");
-        if (rs.next()) {
-            index = (rs.getInt(1));
-        }
-
         BoatList.set(index,boat);
 
     }
 
     @Override
-    public void deleteBoat(int boatID) {
-        BoatList.remove(boatID-1);
+    public void deleteBoat(int boatID) throws SQLException {
+
+        int index = 0;
+        ResultSet rs;
+
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Boat WHERE BoatID <" + boatID + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
+        }
+
+        BoatList.remove(index);
         DBconn.dbUpdate("DELETE FROM "+DatabaseController.DBprefix+"Boat WHERE boatID ="+boatID);
     }
 }

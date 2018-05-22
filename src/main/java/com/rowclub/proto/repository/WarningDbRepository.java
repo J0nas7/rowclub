@@ -79,42 +79,19 @@ public class WarningDbRepository implements IWarningRepository {
     }
 
     @Override
-    public Warning searchWarning(int warningId) {
-        //searches for a warningId in the arraylist
-        int current = 0;
+    public void updateWarning(int warningId, String info, int fkBoatTripID, String DateStamp, int TimeStamp) throws SQLException {
 
-        while (current != WarningList.size()) {
+        int index = 0;
+        ResultSet rs;
 
-            if (WarningList.get(current).getWarningId() == warningId) {
-                return WarningList.get(current);
-            }
-            current+=1;
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Warning WHERE WarningID <" + warningId + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
         }
-        return null;
-    }
-
-    @Override
-    public int findWarningID(int warningId) {
-        //finds the spot in the arraylist where the objects warningid equals the parameter
-        int current = 0;
-
-        while (current != WarningList.size()) {
-
-            if (WarningList.get(current).getWarningId() == warningId) {
-                return current;
-            }
-            current+=1;
-        }
-
-        return -1;
-    }
-
-    @Override
-    public void updateWarning(int warningId, String info, int fkBoatTripID, String DateStamp, int TimeStamp) {
 
         String statement = "UPDATE "+DatabaseController.DBprefix+"Warning SET ";
 
-        Warning warning = searchWarning(warningId);
+        Warning warning = WarningList.get(index);
 
         if (info != "") {
             warning.setInfo(info);
@@ -138,12 +115,21 @@ public class WarningDbRepository implements IWarningRepository {
 
         DBconn.dbUpdate(statement);
 
-        WarningList.set(findWarningID(warningId),warning);
+        WarningList.set(index,warning);
     }
 
     @Override
-    public void deleteWarning(int warningId) {
-        WarningList.remove(searchWarning(warningId));
+    public void deleteWarning(int warningId) throws SQLException {
+
+        int index = 0;
+        ResultSet rs;
+
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Warning WHERE WarningID <" + warningId + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
+        }
+
+        WarningList.remove(index);
         DBconn.dbUpdate("DELETE FROM "+DatabaseController.DBprefix+"Warning WHERE WarningID ="+warningId);
     }
 

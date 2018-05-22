@@ -17,13 +17,9 @@ public interface IMemberRepository {
 
     void createMember(String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException;
 
-    Member readMembers(int memberId);
+    Member readMembers(int arrayId);
 
-    Member searchMembers(int MemberId);
+    void updateMember(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone,Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException;
 
-    int findMemberID(int MemberId);
-
-    void updateMember(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone,Boolean Admin, Boolean Matey, String Type, String PhotoRef);
-
-    void deleteMember(int memberId);
+    void deleteMember(int memberId) throws SQLException;
 }

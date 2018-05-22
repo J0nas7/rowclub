@@ -57,9 +57,9 @@ public class MemberDbRepository implements IMemberRepository {
         ResultSet rs;
 
         int AdminAdd;
-        if (Admin == true) {AdminAdd = 1;} else {AdminAdd = 0;}
+        if (Admin) {AdminAdd = 1;} else {AdminAdd = 0;}
         int MateyAdd;
-        if (Matey == true) {MateyAdd = 1;} else {MateyAdd = 0;}
+        if (Matey) {MateyAdd = 1;} else {MateyAdd = 0;}
 
         String memberValues =
                 "(default" + ",'"
@@ -75,7 +75,7 @@ public class MemberDbRepository implements IMemberRepository {
 
 
         String insertMember = "INSERT INTO " + DatabaseController.DBprefix + "Member" + " VALUES " + (memberValues);
-        //DBconn.dbUpdate(insertMember);
+        DBconn.dbUpdate(insertMember);
 
         System.out.println(insertMember);
 
@@ -86,8 +86,8 @@ public class MemberDbRepository implements IMemberRepository {
         }
 
         Member member = new Member(id,FirstName,LastName,DoB,RegDate,Phone,Admin,Matey,Type,PhotoRef);
-        System.out.println(MemberList.size());
-        //MemberList.add(MemberList.size()+1,member);
+        //System.out.println(MemberList.size());
+        MemberList.add(member);
 
     }
 
@@ -98,42 +98,24 @@ public class MemberDbRepository implements IMemberRepository {
     }
 
     @Override
-    public Member searchMembers(int MemberId) {
-        //searches for a MemberId in the arraylist
-        int current = 0;
+    public void updateMember(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException {
 
-        while (current != MemberList.size()) {
+        int index = 0;
+        ResultSet rs;
 
-            if (MemberList.get(current).getMemberID() == MemberId) {
-                return MemberList.get(current);
-            }
-            current+=1;
+        int AdminAdd;
+        if (Admin) {AdminAdd = 1;} else {AdminAdd = 0;}
+        int MateyAdd;
+        if (Matey) {MateyAdd = 1;} else {MateyAdd = 0;}
+
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Member WHERE MemberID <" + memberId + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
         }
-        return null;
-    }
-
-    @Override
-    public int findMemberID(int MemberId) {
-        //finds the spot in the arraylist where the objects Memberid equals the parameter
-        int current = 0;
-
-        while (current != MemberList.size()) {
-
-            if (MemberList.get(current).getMemberID() == MemberId) {
-                return current;
-            }
-            current+=1;
-        }
-
-        return -1;
-    }
-
-    @Override
-    public void updateMember(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) {
 
         String updateMember = "UPDATE " + DatabaseController.DBprefix + "Member SET ";
 
-        Member member = searchMembers(memberId);
+        Member member = MemberList.get(index);
 
         if(FirstName != ""){
 
@@ -169,13 +151,13 @@ public class MemberDbRepository implements IMemberRepository {
         if(Admin != null){
 
             member.setAdmin(Admin);
-            updateMember = updateMember + "Admin ='" +Admin+ "',";
+            updateMember = updateMember + "Admin ='" +AdminAdd+ "',";
 
         }
         if(Matey != null){
 
             member.setMate(Matey);
-            updateMember = updateMember + "Matey ='" +Matey+ "',";
+            updateMember = updateMember + "Matey ='" +MateyAdd+ "',";
 
         }
         if(Type != ""){
@@ -196,13 +178,21 @@ public class MemberDbRepository implements IMemberRepository {
 
         DBconn.dbUpdate(updateMember);
 
-        MemberList.set(findMemberID(memberId), member);
+        MemberList.set(index, member);
     }
 
     @Override
-    public void deleteMember(int memberId) {
+    public void deleteMember(int memberId) throws SQLException {
 
-        MemberList.remove(searchMembers(memberId));
+        int index = 0;
+        ResultSet rs;
+
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Member WHERE MemberID <" + memberId + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
+        }
+
+        MemberList.remove(index);
         DBconn.dbUpdate("DELETE FROM " + DatabaseController.DBprefix + "Member WHERE memberId="+memberId);
     }
 }
