@@ -15,7 +15,7 @@ import static com.rowclub.proto.controller.ProtocolController.DBconn;
 @Repository
 public class WarningDbRepository implements IWarningRepository {
     private ResultSet WarningQuery;
-    private static List<Warning> WarningList;
+    public static List<Warning> WarningList;
 
     public WarningDbRepository() throws SQLException {
         //warnings bliver sorteret efter dato, så den nyeste warning bliver pladseret forest i listen

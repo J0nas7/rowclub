@@ -19,7 +19,7 @@ import static com.rowclub.proto.controller.ProtocolController.DBconn;
 @Repository
 public class MemberDbRepository implements IMemberRepository {
     private ResultSet MemberQuery;
-    private static List<Member> MemberList;
+    public static List<Member> MemberList;
 
 
     public MemberDbRepository() throws SQLException {
