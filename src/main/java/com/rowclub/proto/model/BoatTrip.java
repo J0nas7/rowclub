@@ -9,7 +9,6 @@ public class BoatTrip {
     private double Distance;
     private int EstDuration;
     private String Location;
-    private String Datestamp;
     private Date Date;
     private int SeasonID;
     private boolean OnWater;
@@ -17,13 +16,12 @@ public class BoatTrip {
     private int Timestamp;
     private int Passengers;
 
-    public BoatTrip(int boatTripID, int boatID, double distance, int estDuration, String location, String datestamp, java.util.Date date, int seasonID, boolean onWater, int completionTime, int timestamp, int passengers) {
+    public BoatTrip(int boatTripID, int boatID, double distance, int estDuration, String location, java.util.Date date, int seasonID, boolean onWater, int completionTime, int timestamp, int passengers) {
         BoatTripID = boatTripID;
         BoatID = boatID;
         Distance = distance;
         EstDuration = estDuration;
         Location = location;
-        Datestamp = datestamp;
         Date = date;
         SeasonID = seasonID;
         OnWater = onWater;
@@ -70,14 +68,6 @@ public class BoatTrip {
 
     public void setLocation(String location) {
         Location = location;
-    }
-
-    public String getDatestamp() {
-        return Datestamp;
-    }
-
-    public void setDatestamp(String datestamp) {
-        Datestamp = datestamp;
     }
 
     public java.util.Date getDate() {

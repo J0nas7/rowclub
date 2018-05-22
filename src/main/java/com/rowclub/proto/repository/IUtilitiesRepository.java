@@ -11,11 +11,6 @@ public interface IUtilitiesRepository {
     // Interface == contract that other classes can sign and promise to fulfill
     // CRUD methods + readAll
 
-    public  Member findMember(int memberId) throws SQLException;
-
-    public  void updateMember(int memberID, String firstName, String lastName, String doB, String regDate,
-                                    String phone, boolean admin, boolean mate, String type, String photoRef) throws SQLException;
-
     public List<Member> findAllMateys();
 
     public  List<BoatTrip> seasonTrips(int memberId, int seasonId) throws SQLException;
