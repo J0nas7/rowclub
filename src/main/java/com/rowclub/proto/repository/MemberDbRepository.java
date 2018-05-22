@@ -193,7 +193,7 @@ public class MemberDbRepository implements IMemberRepository {
         }
 
         MemberList.remove(index);
-        DBconn.dbUpdate("DELETE FROM " + DatabaseController.DBprefix + "Member WHERE memberId="+memberId);
+        DBconn.dbUpdate("DELETE FROM " + DatabaseController.DBprefix + "Member WHERE MemberID="+memberId);
     }
 }
 
