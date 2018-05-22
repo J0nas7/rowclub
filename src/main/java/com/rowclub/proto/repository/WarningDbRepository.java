@@ -15,11 +15,11 @@ import static com.rowclub.proto.controller.ProtocolController.DBconn;
 @Repository
 public class WarningDbRepository implements IWarningRepository {
     private ResultSet WarningQuery;
-    public static List<Warning> WarningList = new ArrayList<>();
+    private static List<Warning> WarningList;
 
     public WarningDbRepository() throws SQLException {
         //warnings bliver sorteret efter dato, så den nyeste warning bliver pladseret forest i listen
-        WarningList.clear(); //Sikrer os at vorse arrayliste er tom før vi fylder den
+        WarningList = new ArrayList<>();
         String WarningSql = "SELECT * FROM " + DatabaseController.DBprefix + "Warning ORDER BY DateStamp desc, TimeStamp desc";
         WarningQuery = DBconn.dbQuery(WarningSql);
         while (WarningQuery.next()) {

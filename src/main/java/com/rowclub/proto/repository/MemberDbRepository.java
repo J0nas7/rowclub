@@ -19,11 +19,11 @@ import static com.rowclub.proto.controller.ProtocolController.DBconn;
 @Repository
 public class MemberDbRepository implements IMemberRepository {
     private ResultSet MemberQuery;
-    public static List<Member> MemberList = new ArrayList<>();
+    private static List<Member> MemberList;
 
 
     public MemberDbRepository() throws SQLException {
-        MemberList.clear(); //Sikrer os at vorse arrayliste er tom før vi fylder den
+        MemberList = new ArrayList<>();
         String MemberSql = "SELECT * FROM " + DatabaseController.DBprefix + "Member";
         MemberQuery = DBconn.dbQuery(MemberSql);
         while (MemberQuery.next()) {
