@@ -2,7 +2,9 @@ package com.rowclub.proto.repository;
 
 import com.rowclub.proto.controller.DatabaseController;
 import com.rowclub.proto.model.BoatTrip;
+import com.rowclub.proto.model.BoatTripLink;
 import com.rowclub.proto.model.Member;
+import com.rowclub.proto.model.Warning;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -13,6 +15,8 @@ import java.util.List;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 import static com.rowclub.proto.repository.MemberDbRepository.MemberList;
+import static com.rowclub.proto.repository.WarningDbRepository.WarningList;
+import static com.rowclub.proto.repository.BoatTripLinkDbRepository.BoatTripLinkList;
 
 @Repository
 public class UtilitiesDbRepository implements IUtilitiesRepository {
@@ -138,7 +142,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
 
     }
 
-    public  int ghostBusterStringToInt (String boo) {
+    public int ghostBusterStringToInt (String boo) {
         int busted = Integer.parseInt(boo.replaceAll("[^\\d]",""));
         //Who you gonna call?
         //♫♪ ♪♪ ♪ ♫♫♪♪♪
@@ -146,12 +150,81 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         return busted;
     }
 
-    public  String ghostBusterStringToNum (String boo) {
+    public String ghostBusterStringToNum (String boo) {
         String busted = boo.replaceAll("[^\\d]","");
         //Who you gonna call?
         //♫♪ ♪♪ ♪ ♫♫♪♪♪
 
         return busted;
     }
+
+    public List<Warning> adminAccessWarnings (int memberId) throws SQLException {
+        //checks if a member is an administrator and, if they are, give them access to the warning list
+        int index = 0;
+        ResultSet rs;
+
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Member WHERE MemberID <" + memberId + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
+        }
+
+        Member member = MemberList.get(index);
+
+        if (member.isAdmin()) {
+            return WarningList;
+        }
+        return null;
+    }
+
+    //oprettelse af bådtur links
+    public List<Member> memberOnBoatList;
+
+    public void createMemberOnBoatList () {
+
+        memberOnBoatList = new ArrayList<>();
+        memberOnBoatList.clear();
+    }
+
+    public void addMemberOnBoatList (int memberId) throws SQLException {
+
+        int index = 0;
+        ResultSet rs;
+
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Member WHERE MemberID <" + memberId + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
+        }
+
+        Member member = MemberList.get(index);
+        memberOnBoatList.add(member);
+
+    }
+
+    public void deleteMemberOnBoatList (int memberId) throws SQLException {
+
+        int index = 0;
+        ResultSet rs;
+
+        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Member WHERE MemberID <" + memberId + ";");
+        if (rs.next()) {
+            index = (rs.getInt(1));
+        }
+
+        memberOnBoatList.remove(index);
+
+    }
+
+    public void assignBoatTripLinks (int boatTripID) throws SQLException {
+
+        for (int i = 0; i < memberOnBoatList.size(); i++) {
+
+            BoatTripLinkDbRepository temp = new BoatTripLinkDbRepository();
+
+            temp.createBoatTripLink(memberOnBoatList.get(i).getMemberID(), boatTripID);
+        }
+
+    }
+
+
 
 }

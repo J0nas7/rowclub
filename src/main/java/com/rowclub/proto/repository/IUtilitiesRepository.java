@@ -2,6 +2,7 @@ package com.rowclub.proto.repository;
 
 import com.rowclub.proto.model.BoatTrip;
 import com.rowclub.proto.model.Member;
+import com.rowclub.proto.model.Warning;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -30,4 +31,6 @@ public interface IUtilitiesRepository {
     public  int ghostBusterStringToInt (String boo);
 
     public  String ghostBusterStringToNum (String boo);
+
+    List<Warning> adminAccessWarnings (int memberId) throws SQLException;
 }

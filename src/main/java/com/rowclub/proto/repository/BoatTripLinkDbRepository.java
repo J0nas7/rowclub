@@ -15,7 +15,7 @@ import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
 @Repository
 public class BoatTripLinkDbRepository implements IBoatTripLinkRepository {
-        private List<BoatTripLink> BoatTripLinkList;
+        public static List<BoatTripLink> BoatTripLinkList;
         private ResultSet BoatTripLinkQuery;
 
         public BoatTripLinkDbRepository() throws SQLException {
