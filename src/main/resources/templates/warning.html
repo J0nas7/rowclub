@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/template :: Template">
+</head>
+<body>
+<div class="Header" th:replace="fragments/header :: Header (activeMenuItem=${'warning'})"></div>
+
+<div class="Container">
+    <div class="Content">
+        <h2 class="ContentTitle">Oversigt over advarsler</h2>
+        <table class="list" width="100%" cellspacing="0" cellpadding="0">
+            <thead>
+            <tr>
+                <th>Klokkeslæt</th>
+                <th>Dato</th>
+                <th>Information</th>
+                <th>Tur nummer</th>
+                <th>Detaljer</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="WarningList : ${warningList}">
+                <td th:text="${WarningList.TimeStampString}"></td>
+                <td th:text="${WarningList.DateStamp}"></td>
+                <td th:text="${WarningList.info}"></td>
+                <td th:text="${WarningList.boatTripId}"></td>
+                <td>
+                    <a th:href="${'/read_boattrip?tripID=' + WarningList.boatTripId}" class="btn blueBtn">Detaljer</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="clrBth"></div>
+    </div>
+</div>
+</body>
+</html>

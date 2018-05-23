@@ -1,5 +1,7 @@
 package com.rowclub.proto.model;
 
+import com.rowclub.proto.repository.UtilitiesDbRepository;
+
 import java.util.Date;
 
 public class Warning {
@@ -9,6 +11,7 @@ public class Warning {
     private int boatTripId;
     private Date DateStamp;
     private int TimeStamp;
+    private String TimeStampString;
 
     public Warning(int warningId, String info, int boatTripId, Date dateStamp, int timeStamp) {
         this.warningId = warningId;
@@ -56,5 +59,13 @@ public class Warning {
 
     public void setTimeStamp(int timeStamp) {
         TimeStamp = timeStamp;
+    }
+
+    public String getTimeStampString() {
+        return TimeStampString;
+    }
+
+    public void setTimeStampString(String timeStampString) {
+        TimeStampString = timeStampString;
     }
 }
