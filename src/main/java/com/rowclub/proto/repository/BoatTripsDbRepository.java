@@ -123,100 +123,51 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
     }
 
     @Override
-    public void updateBoatTrip(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException, ParseException {
-        // (int boatID, String distance, String estDuration, String location, String datestamp, int completionTime, long timestamp, String whattodo, String[] guests)
+    public void updateBoatTrip(int tripID, String datestamp, String distance, String estDuration, String location, int passengers) {
+        double Ddistance = Double.parseDouble(distance);
+        int IestDuration = Integer.parseInt(estDuration);
+        //int Itimestamp = Math.toIntExact(datestamp);
 
-        /*int index = 0;
-        ResultSet rs;
+        String updateBoatTripSql = "UPDATE "+DatabaseController.DBprefix+"BoatTrips SET ";
+        BoatTrip boattrip = BoatTripList.get(tripID-1);
 
-        int AdminAdd;
-        if (Admin) {AdminAdd = 1;} else {AdminAdd = 0;}
-        int MateyAdd;
-        if (Matey) {MateyAdd = 1;} else {MateyAdd = 0;}
+        datestamp = DBconn.res(datestamp);
+        distance = DBconn.res(distance);
+        estDuration = DBconn.res(estDuration);
+        location = DBconn.res(location);
 
-        rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Member WHERE MemberID <" + memberId + ";");
-        if (rs.next()) {
-            index = (rs.getInt(1));
+        if (datestamp != "") {
+            boattrip.setDatestamp(datestamp);
+            updateBoatTripSql += "BoatTrip_Datestamp='"+datestamp+"', ";
         }
 
-        String updateMember = "UPDATE " + DatabaseController.DBprefix + "Member SET ";
-        Member member = MemberList.get(index);
-
-        FirstName = DBconn.res(FirstName);
-        LastName = DBconn.res(LastName);
-        DoB = DBconn.res(DoB);
-        RegDate = DBconn.res(RegDate);
-        Phone = DBconn.res(Phone);
-        Type = DBconn.res(Type);
-        PhotoRef = DBconn.res(PhotoRef);
-
-        if(FirstName != ""){
-
-            member.setFirstName(FirstName);
-            updateMember = updateMember + "FirstName ='" +FirstName+ "',";
+        if (distance != "") {
+            boattrip.setDistance(Ddistance);
+            updateBoatTripSql += "BoatTrip_Distance='"+Ddistance+"',";
         }
 
-        if(LastName != ""){
-
-            member.setLastName(LastName);
-            updateMember = updateMember + "LastName ='" +LastName+ "',";
+        if (estDuration != "") {
+            boattrip.setEstDuration(IestDuration);
+            updateBoatTripSql += "BoatTrip_EstDuration='"+estDuration+"', ";
         }
 
-        if(DoB != ""){
-            Date dateDoB = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(DoB);
-            member.setDoB(dateDoB);
-            updateMember = updateMember + "DoB ='" +DoB+ "',";
-
-        }
-        if(RegDate != ""){
-            Date dateReg = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(RegDate);
-            member.setRegDate(dateReg);
-            updateMember = updateMember + "RegDate ='" +RegDate+ "',";
-
-        }
-        if(Phone != ""){
-
-            member.setPhone(Phone);
-            updateMember = updateMember + "Phone ='" +Phone+ "',";
-
+        if (location != "") {
+            boattrip.setLocation(location);
+            updateBoatTripSql += "BoatTrip_Location='"+location+"', ";
         }
 
-        if(Admin != null){
+        boattrip.setPassengers(passengers);
+        updateBoatTripSql += "BoatTrip_Passengers='"+passengers+"' ";
 
-            member.setAdmin(Admin);
-            updateMember = updateMember + "Admin ='" +AdminAdd+ "',";
+        updateBoatTripSql += "WHERE BoatTrip_ID='"+tripID+"'";
 
-        }
-        if(Matey != null){
-
-            member.setMate(Matey);
-            updateMember = updateMember + "Matey ='" +MateyAdd+ "',";
-
-        }
-        if(Type != ""){
-
-            member.setType(Type);
-            updateMember = updateMember + "Type ='" +Type+ "',";
-
-        }
-        if(PhotoRef != ""){
-
-            member.setPhotoRef(PhotoRef);
-            updateMember = updateMember + "PhotoRef ='" +PhotoRef+ "',";
-
-        }
-
-        updateMember = updateMember.substring(0,updateMember.length()-1);
-        updateMember = updateMember + " WHERE memberId = " + memberId;
-
-        DBconn.dbUpdate(updateMember);
-
-        MemberList.set(index, member);
-        */
+        DBconn.dbUpdate(updateBoatTripSql);
+        BoatTripList.set(tripID-1, boattrip);
     }
 
     @Override
     public void deleteBoatTrip(int tripID) {
         BoatTripList.remove(tripID);
     }
+
 }

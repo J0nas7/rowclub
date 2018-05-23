@@ -21,7 +21,9 @@ public interface IBoatTripRepository {
 
     void actionBoatTrip(int tripID, String action);
 
-    void updateBoatTrip(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException, ParseException;
+    void updateBoatTrip(int tripID, String datestamp, String distance, String estDuration, String location, int passengers);
 
     void deleteBoatTrip(int tripID);
+
+    static void addGuests(String[] guests, int theTripID) {}
 }

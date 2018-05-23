@@ -74,23 +74,21 @@ public class ProtocolController {
         ProtocolController.MainConfig();
         List<Member> passengersList = UtilitiesRepository.membersOnTrip(tripID);
         List<Member> tempList = new ArrayList<>();
+        String mate = null;
         for (Member matey: passengersList){
             if (!matey.isMate()) {
                 tempList.add(matey);
+            } else {
+                mate = matey.getFirstName()+" "+matey.getLastName()+" ("+matey.getMemberID()+")";
             }
         }
         model.addAttribute("BoatTrip", boatTripRepository.readBoatTrip(tripID));
         model.addAttribute("BoatTripLinks", tempList);
+        model.addAttribute("Matey", mate);
+        model.addAttribute("PreDetTrips", PreDetTripsRepository.readAllPreDetTripss());
         model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
 
         return "read_boattrip";
-    }
-
-    @PostMapping("/update_boattrip")
-    public String update_boattrip(@RequestParam("boatrip_id") int tripID) throws SQLException {
-        UtilitiesRepository.deleteMembersOnTrip(tripID);
-
-        return "redirect:/welcome";
     }
 
     @GetMapping("/boattrip_status")
@@ -111,6 +109,7 @@ public class ProtocolController {
                                 @RequestParam("boattrip_guests[]") String[] guests
     ) throws ParseException, SQLException {
         boatTripRepository.createBoatTrip(2, distance, estDuration, location, datestamp, NULL, Instant.now().getEpochSecond(), whattodo, guests);
+
         boatTripLinkRepository.createBoatTripLink(matey, boatTripRepository.getBoatTripListSize());
 
         for (int i = 0; i < guests.length; i++) {
@@ -137,7 +136,34 @@ public class ProtocolController {
     @PostMapping("/edit_boattrip")
     public String edit_boattrip(@RequestParam("boattrip_datestamp") String datestamp,
                                 @RequestParam("boattrip_guests[]") String[] guests,
-                                @RequestParam("boatrip_id") int tripID) {
+                                @RequestParam("boatrip_id") int tripID,
+                                @RequestParam("boattrip_distance") String distance,
+                                @RequestParam("boattrip_estduration") String estDuration,
+                                @RequestParam("boattrip_location") String location
+                                ) throws SQLException, ParseException {
+        UtilitiesRepository.deleteMembersOnTrip(tripID);
+
+        int Passengers = 1;
+        for (int i = 0; i < guests.length; i++) {
+            if (!guests[i].trim().isEmpty()) {
+                String GuestFirstName;
+                String GuestLastName;
+                if (guests[i].indexOf(' ') > 0) {
+                    String[] SURandLASTname = guests[i].split(" ");
+                    GuestFirstName = SURandLASTname[0];
+                    GuestLastName = SURandLASTname[1];
+                } else {
+                    GuestFirstName = guests[i];
+                    GuestLastName = " ";
+                }
+                Passengers++;
+
+                MemberRepository.createGuest(GuestFirstName, GuestLastName);
+                boatTripLinkRepository.createBoatTripLink(MemberRepository.getMemberListSize(), tripID);
+            }
+        }
+
+        boatTripRepository.updateBoatTrip(tripID, datestamp, distance, estDuration, location, Passengers);
 
         return "redirect:/welcome";
     }

@@ -14,6 +14,12 @@
             <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                     <td class="margintop15 dspB">
+                        <span class="dspB">Turens matros</span>
+                        <strong th:text="${Matey}"></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="margintop15 dspB">
                         <label for="boattrip_datestamp">Turens startdato</label>
                         <input type="date" name="boattrip_datestamp" id="boattrip_datestamp" th:value="${BoatTrip.Datestamp}" />
                     </td>
@@ -50,21 +56,31 @@
                 </tr>
                 <tr>
                     <td class="bgEEE margintop15 padding10tb dspB bordertop bordercolorAAA">
-                        <strong>Detaljer om turen</strong>
-                        <span class="dspB clrBth padding10t">Turens længde i meter</span>
-                        <strong th:text="${BoatTrip.Distance + ' meter'}"></strong>
+                        <strong>Detaljer om turen ...</strong>
+                        <label for="boattrip_distance" class="dspB clrBth padding10t">Turens længde i meter</label>
+                        <input type="text" name="boattrip_distance" id="boattrip_distance" th:value="${BoatTrip.Distance}" placeholder="Hvor lang er turen?" />
                     </td>
                 </tr>
                 <tr>
                     <td class="bgEEE padding10tb dspB">
-                        <span class="dspB">Cirka tidsforbrug i minutter</span>
-                        <strong th:text="${BoatTrip.EstDuration + ' min.'}"></strong>
+                        <label for="boattrip_estduration">Cirka tidsforbrug i minutter</label>
+                        <input type="text" name="boattrip_estduration" id="boattrip_estduration" th:value="${BoatTrip.EstDuration}" placeholder="Hvor længe varer turen?" />
                     </td>
                 </tr>
                 <tr>
                     <td class="bgEEE padding10tb dspB">
-                        <span class="dspB">Turens destination</span>
-                        <strong th:text="${BoatTrip.Location}"></strong>
+                        <label for="boattrip_location">Turens destination</label>
+                        <input type="text" name="boattrip_location" id="boattrip_location" th:value="${BoatTrip.Location}" placeholder="Hvor går turen hen?" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="bgEEE padding10tb dspB borderbottom bordercolorAAA">
+                        <label for="boattrip_predetermined"><strong>... eller vælg en allerede defineret tur</strong></label>
+                        <select size="1" name="boattrip_predetermined" id="boattrip_predetermined" class="dspB margintop15 boattrip_predetermined">
+                            <option>Forudbestemte ture</option>
+                            <option th:each="predet : ${PreDetTrips}" th:value="${predet.preID}" th:location="${predet.location}" th:distance="${predet.distance}" th:duration="${predet.preEstDuration}" th:text="${predet.location+ ': ca. ' + predet.distance + 'km (' + predet.preEstDuration + ')'}">
+                            </option>
+                        </select>
                     </td>
                 </tr>
                 <tr>
