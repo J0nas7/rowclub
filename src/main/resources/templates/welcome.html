@@ -12,7 +12,7 @@
             <span th:replace="fragments/subnavigation.html :: boattrip_subnav (boattripnavExt=${'no'})"></span>
             <span class="TextBar InformationBar fltLft w20 padding6">
                 Der er
-                <strong th:text="${boattripOut + (boattripOut > 1 ? ' både' : ' båd')}"></strong>
+                <strong th:text="${boattripOut + (boattripOut == 1 ? ' båd' : ' både')}"></strong>
                  på vandet lige nu
             </span>
             <table class="list" width="100%" cellspacing="0" cellpadding="0">
@@ -20,7 +20,7 @@
                     <tr>
                         <th>Tur nummer</th>
                         <th>Er båden på vandet?</th>
-                        <th>Antal pers. i båden</th>
+                        <th>Antal personer ombord</th>
                         <th>Destination</th>
                         <th>Turens længde</th>
                         <th>Estimeret varighed</th>
@@ -29,7 +29,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="BoatTrip : ${boattripList}"  th:class="${(BoatTrip.OnWater ? 'OnWater' : 'NotOnWater')}">
                     <tr th:each="BoatTrip : ${boattripList}" th:class="${(BoatTrip.OnWater ? 'OnWater' : (BoatTrip.CompletionTime == 0 ? 'NotOnWater' : 'dspN'))}">
                         <td th:text="${BoatTrip.BoatTripID}"></td>
                         <td th:text="${(BoatTrip.OnWater ? 'Ja' : 'Nej')}"></td>
