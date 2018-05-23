@@ -7,6 +7,7 @@ import com.rowclub.proto.model.Member;
 import com.rowclub.proto.model.Warning;
 import org.springframework.stereotype.Repository;
 
+import javax.xml.crypto.Data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -81,8 +82,8 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         ResultSet MemberQuery;
 
         MemberList = new ArrayList<>();
-        String MemberSql = "SELECT * FROM "+DatabaseController.DBprefix+"BoatTripLink" + " INNER JOIN Protocol_Member ON fkMemberID = MemberID" +
-                " INNER JOIN Protocol_BoatTrips ON fkBoatTripID = BoatTrip_ID" + " WHERE BoatTrip_ID = " + tripId;
+        String MemberSql = "SELECT * FROM "+DatabaseController.DBprefix+"BoatTripLink" + " INNER JOIN "+DatabaseController.DBprefix+"Member ON fkMemberID = MemberID" +
+                " INNER JOIN "+DatabaseController.DBprefix+"BoatTrips ON fkBoatTripID = BoatTrip_ID" + " WHERE "+DatabaseController.DBprefix+"BoatTrips.BoatTrip_ID = " + tripId;
         MemberQuery = DBconn.dbQuery(MemberSql);
         while (MemberQuery.next()) {
             MemberList.add(new Member(
@@ -100,6 +101,39 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
 
         }
         return MemberList;
+    }
+
+    public void deleteMembersOnTrip(int tripId) throws SQLException {
+
+        List<Member> MemberList;
+        ResultSet MemberQuery;
+
+        MemberList = new ArrayList<>();
+        String MemberSql = "SELECT * FROM " + DatabaseController.DBprefix + "BoatTripLink" + " INNER JOIN " + DatabaseController.DBprefix + "Member ON fkMemberID = MemberID" +
+                " INNER JOIN " + DatabaseController.DBprefix + "BoatTrips ON fkBoatTripID = BoatTrip_ID" + " WHERE " + DatabaseController.DBprefix + "BoatTrips.BoatTrip_ID = " + tripId;
+        MemberQuery = DBconn.dbQuery(MemberSql);
+        while (MemberQuery.next()) {
+            MemberList.add(new Member(
+                    MemberQuery.getInt("MemberID"),
+                    MemberQuery.getString("FirstName"),
+                    MemberQuery.getString("LastName"),
+                    MemberQuery.getDate("DoB"),
+                    MemberQuery.getDate("RegDate"),
+                    MemberQuery.getString("Phone"),
+                    MemberQuery.getBoolean("Admin"),
+                    MemberQuery.getBoolean("Matey"),
+                    MemberQuery.getString("Type"),
+                    MemberQuery.getString("PhotoRef")
+            ));
+
+        }
+
+        for (Member ontrip : MemberList) {
+            if (!ontrip.isMate()) {
+                String DeleteTripLink = "DELETE FROM " + DatabaseController.DBprefix + "BoatTripLink WHERE fkBoatTripID='" + tripId + "' AND fkMemberID='" + ontrip.getMemberID() + "' LIMIT 1";
+                DBconn.dbUpdate(DeleteTripLink);
+            }
+        }
     }
 
     public List<Integer> membersOnTripArray() throws SQLException {

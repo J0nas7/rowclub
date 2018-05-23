@@ -23,17 +23,23 @@
                         <th>Antal pers. i båden</th>
                         <th>Destination</th>
                         <th>Turens længde</th>
+                        <th>Estimeret varighed</th>
                         <th>Dato</th>
                         <th>Detaljer</th>
                     </tr>
                 </thead>
                 <tbody>
+<<<<<<< HEAD
                     <tr th:each="BoatTrip : ${boattripList}"  th:class="${(BoatTrip.OnWater ? 'OnWater' : 'NotOnWater')}">
+=======
+                    <tr th:each="BoatTrip : ${boattripList}" th:class="${(BoatTrip.OnWater ? 'OnWater' : (BoatTrip.CompletionTime == 0 ? 'NotOnWater' : 'dspN'))}">
+>>>>>>> fdf9b36acd4923374841b16b7052d90acbcd59b8
                         <td th:text="${BoatTrip.BoatTripID}"></td>
                         <td th:text="${(BoatTrip.OnWater ? 'Ja' : 'Nej')}"></td>
                         <td th:text="${BoatTrip.Passengers}"></td>
                         <td th:text="${BoatTrip.Location}"></td>
-                        <td th:text="${BoatTrip.Distance}"></td>
+                        <td th:text="${BoatTrip.Distance + ' meter'}"></td>
+                        <td th:text="${BoatTrip.EstDuration + ' min.'}"></td>
                         <td th:text="${BoatTrip.Datestamp}"></td>
                         <td>
                             <a th:href="${'/read_boattrip?tripID=' + BoatTrip.BoatTripID}" class="btn blueBtn">Detaljer</a>

@@ -23,7 +23,7 @@ small { font-size: 10px; }
 .dspN { display: none !important; }
 .dspB { display: block; }
 
-.color888 { color: #888; }
+.color888 { color: #888 !important; }
 .blueLink { color: #0747A6; }
 .blueLink:hover { text-decoration: underline; }
 

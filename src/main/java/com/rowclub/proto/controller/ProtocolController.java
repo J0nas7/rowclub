@@ -58,6 +58,7 @@ public class ProtocolController {
         model.addAttribute("boattripList", boatTripRepository.readAllBoatTrips());
         model.addAttribute("boattripOut", boatTripRepository.getBoatTripOnWaterCount());
         model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
+        System.out.println(MemberRepository.getMemberListSize());
         return "welcome";
     }
 
@@ -81,11 +82,35 @@ public class ProtocolController {
     }
 
     @GetMapping("/read_boattrip")
-    public String read_boattrip(Model model) {
+    public String read_boattrip(@RequestParam("tripID") int tripID, Model model) throws SQLException {
         ProtocolController.MainConfig();
+        List<Member> passengersList = UtilitiesRepository.membersOnTrip(tripID);
+        List<Member> tempList = new ArrayList<>();
+        for (Member matey: passengersList){
+            if (!matey.isMate()) {
+                tempList.add(matey);
+            }
+        }
+        model.addAttribute("BoatTrip", boatTripRepository.readBoatTrip(tripID));
+        model.addAttribute("BoatTripLinks", tempList);
         model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
 
         return "read_boattrip";
+    }
+
+    @PostMapping("/update_boattrip")
+    public String update_boattrip(@RequestParam("boatrip_id") int tripID) throws SQLException {
+        UtilitiesRepository.deleteMembersOnTrip(tripID);
+
+        return "redirect:/welcome";
+    }
+
+    @GetMapping("/boattrip_status")
+    public String boattrip_status(@RequestParam("tripID") int tripID,
+                                    Model model,
+                                    @RequestParam("action") String action) {
+        boatTripRepository.actionBoatTrip(tripID, action);
+        return "redirect:/read_boattrip?tripID="+tripID;
     }
 
     @PostMapping("/form_boattrip")
@@ -117,6 +142,14 @@ public class ProtocolController {
                 boatTripLinkRepository.createBoatTripLink(MemberRepository.getMemberListSize(), boatTripRepository.getBoatTripListSize());
             }
         }
+
+        return "redirect:/welcome";
+    }
+
+    @PostMapping("/edit_boattrip")
+    public String edit_boattrip(@RequestParam("boattrip_datestamp") String datestamp,
+                                @RequestParam("boattrip_guests[]") String[] guests,
+                                @RequestParam("boatrip_id") int tripID) {
 
         return "redirect:/welcome";
     }

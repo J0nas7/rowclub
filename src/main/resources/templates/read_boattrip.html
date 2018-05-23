@@ -7,25 +7,15 @@
 
 <div class="Container">
     <div class="Content">
-        <h2 class="ContentTitle">Oplysninger om ny bådtur</h2>
+        <h2 class="ContentTitle">Oplysninger om eksisterende bådtur</h2>
         <span th:replace="fragments/subnavigation.html :: boattrip_subnav (boattripnavExt=${'yes'})"></span>
-        <form action="/form_boattrip" method="POST" class="clrBth fltLft margintop15 w100 boattrip_form">
+        <a th:href="${(BoatTrip.CompletionTime > 0 ? '#' : (BoatTrip.OnWater ? '/boattrip_status?tripID='+BoatTrip.BoatTripID+'&action=co' : '/boattrip_status?tripID='+BoatTrip.BoatTripID+'&action=ci'))}" th:class="${(BoatTrip.CompletionTime > 0 ? 'greyBtn color888' : (BoatTrip.OnWater ? 'redBtn' : 'blueBtn')) + ' btn w20 fltLft'}" th:text="${(BoatTrip.CompletionTime > 0 ? 'Afsluttet' : (BoatTrip.OnWater ? 'Check ud' : 'Check ind'))}"></a>
+        <form action="/edit_boattrip" method="POST" class="clrBth fltLft margintop15 w100 boattrip_form">
             <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td>
-                        <label for="boattrip_matey">Vælg matros</label><br>
-                        <select size="1" id="boattrip_matey" name="boattrip_matey">
-                            <option value="">Matroser</option>
-                            <option th:each="matey : ${Mateys}" th:value="${matey.memberID}">
-                                <span th:text="${matey.firstName + ' ' + matey.lastName + ' (' + matey.memberID + ')'}"></span>
-                            </option>
-                        </select>
-                    </td>
-                </tr>
                 <tr>
                     <td class="margintop15 dspB">
                         <label for="boattrip_datestamp">Turens startdato</label>
-                        <input type="date" name="boattrip_datestamp" id="boattrip_datestamp" value="" />
+                        <input type="date" name="boattrip_datestamp" id="boattrip_datestamp" th:value="${BoatTrip.Datestamp}" />
                     </td>
                 </tr>
                 <tr>
@@ -36,7 +26,9 @@
                                 <input type="text" name="boattrip_guests[]" value="" placeholder="Indtast navn på en gæst mere..."  />
                             </span>
                         <div class="theGuests">
-                            <input type="text" name="boattrip_guests[]" id="boattrip_guests" value="" placeholder="Indtast navn på en gæst mere..."  />
+                            <span th:each="BoatTripLink : ${BoatTripLinks}">
+                                <input type="text" name="boattrip_guests[]" id="boattrip_guests" th:value="${BoatTripLink.FirstName + ' ' + BoatTripLink.LastName}" placeholder="Indtast navn på en gæst mere..."  />
+                            </span>
                         </div>
                         <style type="text/css">
                             .moreGuests input { display: none !important; }
@@ -58,40 +50,30 @@
                 </tr>
                 <tr>
                     <td class="bgEEE margintop15 padding10tb dspB bordertop bordercolorAAA">
-                        <strong>Detaljer om turen ...</strong>
-                        <label for="boattrip_distance" class="dspB clrBth padding10t">Turens længde i meter</label>
-                        <input type="text" name="boattrip_distance" id="boattrip_distance" value="" placeholder="Hvor lang er turen?" />
+                        <strong>Detaljer om turen</strong>
+                        <span class="dspB clrBth padding10t">Turens længde i meter</span>
+                        <strong th:text="${BoatTrip.Distance + ' meter'}"></strong>
                     </td>
                 </tr>
                 <tr>
                     <td class="bgEEE padding10tb dspB">
-                        <label for="boattrip_estduration">Cirka tidsforbrug i minutter</label>
-                        <input type="text" name="boattrip_estduration" id="boattrip_estduration" value="" placeholder="Hvor længe varer turen?" />
+                        <span class="dspB">Cirka tidsforbrug i minutter</span>
+                        <strong th:text="${BoatTrip.EstDuration + ' min.'}"></strong>
                     </td>
                 </tr>
                 <tr>
                     <td class="bgEEE padding10tb dspB">
-                        <label for="boattrip_location">Turens destination</label>
-                        <input type="text" name="boattrip_location" id="boattrip_location" value="" placeholder="Hvor går turen hen?" />
-                    </td>
-                </tr>
-                <tr>
-                    <td class="bgEEE padding10tb dspB borderbottom bordercolorAAA">
-                        <label for="boattrip_predetermined"><strong>... eller vælg en allerede defineret tur</strong></label>
-                        <select size="1" name="boattrip_predetermined" id="boattrip_predetermined" class="dspB margintop15 boattrip_predetermined">
-                            <option>Forudbestemte ture</option>
-                            <option th:each="predet : ${PreDetTrips}" th:value="${predet.preID}" th:location="${predet.location}" th:distance="${predet.distance}" th:duration="${predet.preEstDuration}" th:text="${predet.location+ ': ca. ' + predet.distance + 'km (' + predet.preEstDuration + ')'}">
-                            </option>
-                        </select>
+                        <span class="dspB">Turens destination</span>
+                        <strong th:text="${BoatTrip.Location}"></strong>
                     </td>
                 </tr>
                 <tr>
                     <td class="margintop15 dspB">
-                        <input type="submit" name="submit" class="btn w blueBtn fltLft" value="Opret tur og luk" />
-                        <input type="submit" name="submit" class="btn w greenBtn" value="Opret tur, check ind og luk" />
+                        <input type="submit" name="submit" class="btn w greenBtn fltLft" value="Gem ændringer og luk" />
                     </td>
                 </tr>
             </table>
+            <input type="hidden" name="boatrip_id" th:value="${BoatTrip.BoatTripID}" />
         </form>
         <div class="clrBth"></div>
     </div>
