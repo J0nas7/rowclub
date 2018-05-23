@@ -4,6 +4,7 @@ import com.rowclub.proto.controller.DatabaseController;
 import com.rowclub.proto.model.BoatTrip;
 import com.rowclub.proto.model.Member;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.PatternSyntaxException;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
@@ -22,7 +24,7 @@ public class MemberDbRepository implements IMemberRepository {
     public static List<Member> MemberList;
 
 
-    public MemberDbRepository() throws SQLException {
+    public MemberDbRepository() throws SQLException, ParseException {
         MemberList = new ArrayList<>();
         String MemberSql = "SELECT * FROM " + DatabaseController.DBprefix + "Member";
         MemberQuery = DBconn.dbQuery(MemberSql);
@@ -39,6 +41,35 @@ public class MemberDbRepository implements IMemberRepository {
                     MemberQuery.getString("Type"),
                     MemberQuery.getString("PhotoRef")
             ));
+        }
+        //reduceGuestName();
+    }
+
+    @Override
+    public void reduceGuestName() throws SQLException, ParseException {
+
+        for (int i = 0; i < MemberList.size(); i++) {
+
+            if (MemberList.get(i).getType().equalsIgnoreCase("guest")) {
+
+            int index = MemberList.get(i).getMemberID();
+
+            String firstName = MemberList.get(i).getFirstName().substring(0,1);
+
+            String lastName = MemberList.get(i).getLastName().substring(0,1);
+
+            updateMember(
+                    index,
+                    firstName,
+                    lastName,
+                    "",
+                    "",
+                    "-",
+                    false,
+                    false,
+                    "guest",
+                    "-");
+            }
         }
     }
 
@@ -120,7 +151,7 @@ public class MemberDbRepository implements IMemberRepository {
                         "''," +
                         "''," +
                         "''," +
-                        "'GUEST'," +
+                        "'guest'," +
                         "''" +
                         ")";
 
@@ -174,31 +205,31 @@ public class MemberDbRepository implements IMemberRepository {
         Type = DBconn.res(Type);
         PhotoRef = DBconn.res(PhotoRef);
 
-        if(FirstName != ""){
+        if(!FirstName.matches("")){
 
             member.setFirstName(FirstName);
             updateMember = updateMember + "FirstName ='" +FirstName+ "',";
         }
 
-        if(LastName != ""){
+        if(!LastName.matches("")){
 
             member.setLastName(LastName);
             updateMember = updateMember + "LastName ='" +LastName+ "',";
         }
 
-        if(DoB != ""){
+        if(!DoB.matches("")){
             Date dateDoB = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(DoB);
             member.setDoB(dateDoB);
             updateMember = updateMember + "DoB ='" +DoB+ "',";
 
         }
-        if(RegDate != ""){
+        if(!RegDate.matches("")){
             Date dateReg = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(RegDate);
             member.setRegDate(dateReg);
             updateMember = updateMember + "RegDate ='" +RegDate+ "',";
 
         }
-        if(Phone != ""){
+        if(!Phone.matches("")){
 
             member.setPhone(Phone);
             updateMember = updateMember + "Phone ='" +Phone+ "',";
@@ -217,13 +248,13 @@ public class MemberDbRepository implements IMemberRepository {
             updateMember = updateMember + "Matey ='" +MateyAdd+ "',";
 
         }
-        if(Type != ""){
+        if(!Type.matches("")){
 
            member.setType(Type);
            updateMember = updateMember + "Type ='" +Type+ "',";
 
         }
-        if(PhotoRef != ""){
+        if(!PhotoRef.matches("")){
 
             member.setPhotoRef(PhotoRef);
             updateMember = updateMember + "PhotoRef ='" +PhotoRef+ "',";
@@ -233,7 +264,9 @@ public class MemberDbRepository implements IMemberRepository {
         updateMember = updateMember.substring(0,updateMember.length()-1);
         updateMember = updateMember + " WHERE memberId = " + memberId;
 
-        DBconn.dbUpdate(updateMember);
+
+        System.out.println(updateMember);
+        //DBconn.dbUpdate(updateMember);
 
         MemberList.set(index, member);
     }

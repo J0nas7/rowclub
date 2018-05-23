@@ -14,6 +14,8 @@ public interface IMemberRepository {
     // CRUD methods + readAll
     List<Member> readAllMembers();
 
+    void reduceGuestName() throws SQLException, ParseException;
+
     int getMemberListSize();
 
     void createMember(String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException, ParseException;
