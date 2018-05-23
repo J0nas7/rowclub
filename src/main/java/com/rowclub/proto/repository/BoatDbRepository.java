@@ -40,6 +40,11 @@ public class BoatDbRepository implements IBoatRepository {
     public void createBoat(String name,String type,String status,int seats) throws SQLException {
         int id = 0;
         ResultSet rs;
+
+        name = DBconn.res(name);
+        type = DBconn.res(type);
+        status = DBconn.res(status);
+
         String statement = "default"+",'"+
                 name+"','"+
                 type+"','"+
@@ -69,6 +74,10 @@ public class BoatDbRepository implements IBoatRepository {
 
         int index = 0;
         ResultSet rs;
+
+        name = DBconn.res(name);
+        type = DBconn.res(type);
+        status = DBconn.res(status);
 
         rs = DBconn.dbQuery("SELECT COUNT(*) FROM " + DatabaseController.DBprefix + "Boat WHERE BoatID <" + boatID + ";");
         if (rs.next()) {

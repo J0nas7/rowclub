@@ -53,6 +53,10 @@ public class WarningDbRepository implements IWarningRepository {
         int id = 0;
         ResultSet rs;
         //constructs sql statement and injects it into the database
+
+        info = DBconn.res(info);
+        DateStamp = DBconn.res(DateStamp);
+
         String warningValues =
                 "default" + ",'"
                     +   info + "','"
@@ -95,8 +99,10 @@ public class WarningDbRepository implements IWarningRepository {
         }
 
         String statement = "UPDATE "+DatabaseController.DBprefix+"Warning SET ";
-
         Warning warning = WarningList.get(index);
+
+        info = DBconn.res(info);
+        DateStamp = DBconn.res(DateStamp);
 
         if (info != "") {
             warning.setInfo(info);

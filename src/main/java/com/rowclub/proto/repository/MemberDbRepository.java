@@ -67,6 +67,14 @@ public class MemberDbRepository implements IMemberRepository {
         int MateyAdd;
         if (Matey) {MateyAdd = 1;} else {MateyAdd = 0;}
 
+        FirstName = DBconn.res(FirstName);
+        LastName = DBconn.res(LastName);
+        DoB = DBconn.res(DoB);
+        RegDate = DBconn.res(RegDate);
+        Phone = DBconn.res(Phone);
+        Type = DBconn.res(Type);
+        PhotoRef = DBconn.res(PhotoRef);
+
         String memberValues =
                 "(default" + ",'"
                         + FirstName + "','"
@@ -120,8 +128,15 @@ public class MemberDbRepository implements IMemberRepository {
         }
 
         String updateMember = "UPDATE " + DatabaseController.DBprefix + "Member SET ";
-
         Member member = MemberList.get(index);
+
+        FirstName = DBconn.res(FirstName);
+        LastName = DBconn.res(LastName);
+        DoB = DBconn.res(DoB);
+        RegDate = DBconn.res(RegDate);
+        Phone = DBconn.res(Phone);
+        Type = DBconn.res(Type);
+        PhotoRef = DBconn.res(PhotoRef);
 
         if(FirstName != ""){
 

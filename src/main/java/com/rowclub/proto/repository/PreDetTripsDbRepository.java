@@ -41,6 +41,9 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
     public void createPreDetTrips(String location,Double distance,int preEstDuration) throws SQLException {
         int id = 0;
         ResultSet rs;
+
+        location = DBconn.res(location);
+
         String statement = "default"+",'"+
                 location+"',"+
                 distance+","+
@@ -76,8 +79,9 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
         }
 
         String statement = "UPDATE "+DatabaseController.DBprefix+"PredeterminedTrips SET ";
-
         PreDetTrips preDetTrips = PreDetTripsList.get(index);
+
+        location = DBconn.res(location);
 
         if(location != ""){
             preDetTrips.setLocation(location);

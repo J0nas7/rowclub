@@ -49,6 +49,8 @@ public class SeasonDbRepository implements ISeasonRepository {
         int id = 0;
         ResultSet rs;
 
+        startDate = DBconn.res(startDate);
+
         String seasonValues =
                 "(default" + ",'"
                     + startDate + "',"
@@ -86,8 +88,10 @@ public class SeasonDbRepository implements ISeasonRepository {
         }
 
         String updateSeason = "UPDATE " + DatabaseController.DBprefix + "Season SET ";
-
         Season season = SeasonList.get(index);
+
+        startDate = DBconn.res(startDate);
+        endDate = DBconn.res(endDate);
 
         if (startDate != "") {
             dateStart = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(startDate);
@@ -133,6 +137,8 @@ public class SeasonDbRepository implements ISeasonRepository {
             Date curDate = new Date();
             SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
             String DateToStr = format.format(curDate);
+
+            DateToStr = DBconn.res(DateToStr);
 
             DBconn.dbUpdate("UPDATE " + DatabaseController.DBprefix + "Season SET EndDate ='" + DateToStr + "' WHERE SeasonID =" + index);
         }
