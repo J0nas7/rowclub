@@ -65,12 +65,12 @@ public class DatabaseController {
     // Securing a string before using in sql string
     public String res(String content) {
         try {
-            content = content.replaceAll("\\", "\\\\")
-                    .replaceAll("\n","\\n")
+            content = content.replaceAll("\n","\\n")
                     .replaceAll("\r", "\\r")
                     .replaceAll("\t", "\\t")
                     .replaceAll("\00", "\\0")
                     .replaceAll("'", "\\'")
+            /* replaceAll("\", "\\\\") */
             /*.replaceAll("\\"", "\\\"")*/;
         } catch (Exception e) {
             e.printStackTrace();

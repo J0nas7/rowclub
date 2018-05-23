@@ -102,7 +102,7 @@ public class MemberDbRepository implements IMemberRepository {
     }
 
     @Override
-    public void createGuest(String FirstName, String LastName) throws SQLException {
+    public void createGuest(String FirstName, String LastName) throws SQLException, ParseException {
         Date date = new Date();
 
         int id = 0;
@@ -115,12 +115,12 @@ public class MemberDbRepository implements IMemberRepository {
                 "(default" + ",'"
                         + FirstName + "','"
                         + LastName + "'," +
+                        "'2000-01-01'," +
+                        "'2000-01-01'," +
                         "''," +
-                        "''," +
-                        "''," +
-                        "''," +
-                        "''," +
-                        "'GUEST'," +
+                        "'0'," +
+                        "'0'," +
+                        "'guest'," +
                         "''" +
                         ")";
 

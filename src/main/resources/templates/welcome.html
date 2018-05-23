@@ -24,7 +24,7 @@
                         <th>Destination</th>
                         <th>Turens længde</th>
                         <th>Dato</th>
-                        <!--<th>Handlinger</th>-->
+                        <th>Detaljer</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,11 +35,9 @@
                         <td th:text="${BoatTrip.Location}"></td>
                         <td th:text="${BoatTrip.Distance}"></td>
                         <td th:text="${BoatTrip.Datestamp}"></td>
-                        <!--<td>
-                            <a th:href="${'/read_student?studID=' + BoatTrip.BoatTripID}" class="btn blueBtn w20 fltLft">Details</a>
-                            <a th:href="${'/update_student?studID=' + BoatTrip.BoatTripID}" class="btn blackBtn w20 fltLft">Edit</a>
-                            <a th:href="${'/delete_student?studID=' + BoatTrip.BoatTripID}" class="btn redBtn w20 fltLft">Delete</a>
-                        </td>-->
+                        <td>
+                            <a th:href="${'/read_boattrip?tripID=' + BoatTrip.BoatTripID}" class="btn blueBtn">Detaljer</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

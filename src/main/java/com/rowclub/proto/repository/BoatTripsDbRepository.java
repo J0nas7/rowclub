@@ -30,7 +30,7 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
 
     public BoatTripsDbRepository () throws SQLException {
         BoatTripList = new ArrayList<>();
-        String BoatTripSql = "SELECT * FROM "+DatabaseController.DBprefix+"BoatTrips";
+        String BoatTripSql = "SELECT * FROM "+DatabaseController.DBprefix+"BoatTrips ORDER BY BoatTrip_ID ASC";
         BoatTripQuery = DBconn.dbQuery(BoatTripSql);
         while (BoatTripQuery.next()) {
 
@@ -62,7 +62,7 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
     public List<BoatTrip> readAllBoatTrips() { return BoatTripList; }
 
     @Override
-    public void createBoatTrip(int boatTripID, int boatID, String distance, String estDuration, String location, String datestamp, int completionTime, long timestamp, String whattodo, String[] guests) throws ParseException {
+    public void createBoatTrip(int boatID, String distance, String estDuration, String location, String datestamp, int completionTime, long timestamp, String whattodo, String[] guests) throws ParseException {
         Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(datestamp);
 
         double Ddistance = Double.parseDouble(distance);
