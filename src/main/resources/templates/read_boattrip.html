@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/template :: Template">
+</head>
+<body>
+    <div class="Header" th:replace="fragments/header :: Header (activeMenuItem=${'boattrips'})"></div>
+
+    <div class="Container">
+        <div class="Content">
+            <h2 class="ContentTitle">Oplysninger om ny bådtur</h2>
+            <span th:replace="fragments/subnavigation.html :: boattrip_subnav (boattripnavExt=${'yes'})"></span>
+            <div class="clrBth"></div>
+        </div>
+    </div>
+</body>
+</html>

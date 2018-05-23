@@ -2,9 +2,7 @@ package com.rowclub.proto.controller;
 
 import com.rowclub.proto.model.BoatTrip;
 import com.rowclub.proto.model.Member;
-import com.rowclub.proto.repository.IBoatTripRepository;
-import com.rowclub.proto.repository.IPreDetTripsRepository;
-import com.rowclub.proto.repository.IUtilitiesRepository;
+import com.rowclub.proto.repository.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -46,6 +45,10 @@ public class ProtocolController {
     private IUtilitiesRepository UtilitiesRepository;
     @Autowired
     private IPreDetTripsRepository PreDetTripsRepository;
+    @Autowired
+    private IMemberRepository MemberRepository;
+    @Autowired
+    private IBoatTripLinkRepository boatTripLinkRepository;
 
     @GetMapping("/welcome")
     public String welcome(Model model) {
@@ -59,21 +62,50 @@ public class ProtocolController {
     @GetMapping("/new_boattrip")
     public String new_boattrip(Model model) {
         ProtocolController.MainConfig();
-        model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
         model.addAttribute("Mateys", UtilitiesRepository.findAllMateys());
         model.addAttribute("PreDetTrips", PreDetTripsRepository.readAllPreDetTripss());
+        model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
         return "new_boattrip";
     }
 
+    @GetMapping("/read_boattrip")
+    public String read_boattrip(Model model) {
+        ProtocolController.MainConfig();
+        model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
+
+        return "read_boattrip";
+    }
+
     @PostMapping("/form_boattrip")
-    public String form_boattrip(@RequestParam("boattrip_distance") String distance,
+    public String form_boattrip(@RequestParam("boattrip_matey") int matey,
+                                @RequestParam("boattrip_distance") String distance,
                                 @RequestParam("boattrip_estduration") String estDuration,
                                 @RequestParam("boattrip_location") String location,
                                 @RequestParam("boattrip_datestamp") String datestamp,
                                 @RequestParam("submit") String whattodo,
                                 @RequestParam("boattrip_guests[]") String[] guests
-    ) throws ParseException {
-        boatTripRepository.createBoatTrip(boatTripRepository.getBoatTripListSize(), 1, distance, estDuration, location, datestamp, NULL, Instant.now().getEpochSecond(), whattodo, guests);
+    ) throws ParseException, SQLException {
+        boatTripRepository.createBoatTrip(2, distance, estDuration, location, datestamp, NULL, Instant.now().getEpochSecond(), whattodo, guests);
+        boatTripLinkRepository.createBoatTripLink(matey, boatTripRepository.getBoatTripListSize());
+
+        for (int i = 0; i < guests.length; i++) {
+            if (!guests[i].trim().isEmpty()) {
+                String GuestFirstName;
+                String GuestLastName;
+                if (guests[i].indexOf(' ') > 0) {
+                    String[] SURandLASTname = guests[i].split(" ");
+                    GuestFirstName = SURandLASTname[0];
+                    GuestLastName = SURandLASTname[1];
+                } else {
+                    GuestFirstName = guests[i];
+                    GuestLastName = " ";
+                }
+
+                MemberRepository.createGuest(GuestFirstName, GuestLastName);
+                boatTripLinkRepository.createBoatTripLink(MemberRepository.getMemberListSize(), boatTripRepository.getBoatTripListSize());
+            }
+        }
+
         return "redirect:/welcome";
     }
 }

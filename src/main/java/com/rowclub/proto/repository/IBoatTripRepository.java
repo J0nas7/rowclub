@@ -15,7 +15,7 @@ public interface IBoatTripRepository {
 
     int getBoatTripOnWaterCount();
 
-    void createBoatTrip(int boatTripID, int boatID, String distance, String estDuration, String location, String datestamp, int completionTime, long timestamp, String whattodo, String[] guests) throws ParseException;
+    void createBoatTrip(int boatID, String distance, String estDuration, String location, String datestamp, int completionTime, long timestamp, String whattodo, String[] guests) throws ParseException;
 
     BoatTrip readBoatTrip(int tripID);
 
