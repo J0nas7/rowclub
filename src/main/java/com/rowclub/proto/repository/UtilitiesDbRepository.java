@@ -101,6 +101,11 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         return MemberList;
     }
 
+    public int countMembersOnTrip(List<Member> tripList) {
+        //brug den retunerede liste fra membersontrip som parameter til denne her metode for at finde ud af hvor mange der er på en tur
+        return tripList.size();
+    }
+
     //Laver en int (Antal min) til en string (hh:mm)
     public String calTime(int time){
         int hour = time / 60;
@@ -159,7 +164,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
     }
 
     public List<Warning> adminAccessWarnings (int memberId) throws SQLException {
-        //checks if a member is an administrator and, if they are, give them access to the warning list
+        //checks if a member is an administrator and, if they are, return the warning list
         int index = 0;
         ResultSet rs;
 
@@ -224,6 +229,10 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         }
 
     }
+
+
+
+
 
 
 

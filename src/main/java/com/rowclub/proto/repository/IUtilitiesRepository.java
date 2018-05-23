@@ -12,25 +12,39 @@ public interface IUtilitiesRepository {
     // Interface == contract that other classes can sign and promise to fulfill
     // CRUD methods + readAll
 
-    public List<Member> findAllMateys();
+    List<Member> findAllMateys();
 
-    public  List<BoatTrip> seasonTrips(int memberId, int seasonId) throws SQLException;
+    List<BoatTrip> seasonTrips(int memberId, int seasonId) throws SQLException;
 
-    public  double seasonDistance(int memberId, int seasonId) throws SQLException;
+    double seasonDistance(int memberId, int seasonId) throws SQLException;
 
+    List<Member> membersOnTrip(int tripId) throws SQLException;
 
-    public  List<Member> membersOnTrip(int tripId) throws SQLException;
-
+    int countMembersOnTrip(List<Member> tripList);
 
     //Laver en int (Antal min) til en string (hh:mm)
-    public String calTime(int time);
+    String calTime(int time);
 
     //Laver en string om til et tlf nr. uden +45 først og uden chars der ikke er tal
-    public String tlfCheck(String tlf);
+    String tlfCheck(String tlf);
 
-    public  int ghostBusterStringToInt (String boo);
+    int ghostBusterStringToInt (String boo);
 
-    public  String ghostBusterStringToNum (String boo);
+    String ghostBusterStringToNum (String boo);
 
     List<Warning> adminAccessWarnings (int memberId) throws SQLException;
+
+    //oprettelse af bådtur links
+
+    void createMemberOnBoatList ();
+
+    void addMemberOnBoatList (int memberId) throws SQLException;
+
+    void deleteMemberOnBoatList (int memberId) throws SQLException;
+
+    void assignBoatTripLinks (int boatTripID) throws SQLException;
+
+
+
+
 }
