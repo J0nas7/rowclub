@@ -49,14 +49,26 @@ public class ProtocolController {
     private IMemberRepository MemberRepository;
     @Autowired
     private IBoatTripLinkRepository boatTripLinkRepository;
+    @Autowired
+    private IWarningRepository warningRepository;
 
     @GetMapping("/welcome")
-    public String welcome(Model model) {
+    public String welcome(Model model) throws SQLException {
         ProtocolController.MainConfig();
         model.addAttribute("boattripList", boatTripRepository.readAllBoatTrips());
         model.addAttribute("boattripOut", boatTripRepository.getBoatTripOnWaterCount());
         model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
         return "welcome";
+    }
+
+    @GetMapping("/warning")
+    public String warning(Model model) throws SQLException {
+        ProtocolController.MainConfig();
+        model.addAttribute("boattripList", boatTripRepository.readAllBoatTrips());
+        model.addAttribute("boattripOut", boatTripRepository.getBoatTripOnWaterCount());
+        model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
+        model.addAttribute("warningList", warningRepository.readAllWarnings());
+        return "warning";
     }
 
     @GetMapping("/new_boattrip")

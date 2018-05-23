@@ -22,6 +22,7 @@ public class WarningDbRepository implements IWarningRepository {
 
     public WarningDbRepository() throws SQLException {
         //warnings bliver sorteret efter dato, så den nyeste warning bliver pladseret forest i listen
+        UtilitiesDbRepository utildb = new UtilitiesDbRepository();
         WarningList = new ArrayList<>();
         String WarningSql = "SELECT * FROM " + DatabaseController.DBprefix + "Warning ORDER BY DateStamp desc, TimeStamp desc";
         WarningQuery = DBconn.dbQuery(WarningSql);
@@ -33,6 +34,7 @@ public class WarningDbRepository implements IWarningRepository {
                     WarningQuery.getDate("DateStamp"),
                     WarningQuery.getInt("TimeStamp")
             ));
+            WarningList.get(WarningList.size()-1).setTimeStampString(utildb.calTime(WarningQuery.getInt("TimeStamp")));
         }
     }
 

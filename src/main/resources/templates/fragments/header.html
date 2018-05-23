@@ -10,7 +10,7 @@
                 <a href="/welcome" th:class="${activeMenuItem == 'welcome' ? 'active' : ''} + ' fltLft item'">Oversigt</a>
                 <a href="/new_boattrip" th:class="${activeMenuItem == 'boattrips' ? 'active' : ''} + ' fltLft item'">Bådtur</a>
                 <a href="/boats" class="fltLft item">Bådtyper</a>
-                <a href="/admin" class="fltLft item">Administration</a>
+                <a href="/warning" th:class="${activeMenuItem == 'warning' ? 'active' : ''} + ' fltLft item'">Advarsels oversigt</a>
             </nav>
             <small class="fltRght item" th:text="${ProtocolPageDatestamp}"></small>
             <div style="clear: both;"></div>
