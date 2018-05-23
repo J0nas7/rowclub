@@ -10,9 +10,12 @@ import org.springframework.stereotype.Repository;
 import javax.xml.crypto.Data;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
@@ -31,8 +34,8 @@ public class MemberDbRepository implements IMemberRepository {
                     MemberQuery.getInt("MemberID"),
                     MemberQuery.getString("FirstName"),
                     MemberQuery.getString("LastName"),
-                    MemberQuery.getString("DoB"),
-                    MemberQuery.getString("RegDate"),
+                    MemberQuery.getDate("DoB"),
+                    MemberQuery.getDate("RegDate"),
                     MemberQuery.getString("Phone"),
                     MemberQuery.getBoolean("Admin"),
                     MemberQuery.getBoolean("Matey"),
@@ -52,7 +55,10 @@ public class MemberDbRepository implements IMemberRepository {
     }
 
     @Override
-    public void createMember(String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException {
+    public void createMember(String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException, ParseException {
+        Date dateDoB = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(DoB);
+        Date dateReg = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(RegDate);
+
         int id = 0;
         ResultSet rs;
 
@@ -85,7 +91,7 @@ public class MemberDbRepository implements IMemberRepository {
             id = (rs.getInt(1));
         }
 
-        Member member = new Member(id,FirstName,LastName,DoB,RegDate,Phone,Admin,Matey,Type,PhotoRef);
+        Member member = new Member(id,FirstName,LastName,dateDoB,dateReg,Phone,Admin,Matey,Type,PhotoRef);
         //System.out.println(MemberList.size());
         MemberList.add(member);
 
@@ -98,7 +104,7 @@ public class MemberDbRepository implements IMemberRepository {
     }
 
     @Override
-    public void updateMember(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException {
+    public void updateMember(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException, ParseException {
 
         int index = 0;
         ResultSet rs;
@@ -130,14 +136,14 @@ public class MemberDbRepository implements IMemberRepository {
         }
 
         if(DoB != ""){
-
-            member.setDoB(DoB);
+            Date dateDoB = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(DoB);
+            member.setDoB(dateDoB);
             updateMember = updateMember + "DoB ='" +DoB+ "',";
 
         }
         if(RegDate != ""){
-
-            member.setRegDate(RegDate);
+            Date dateReg = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(RegDate);
+            member.setRegDate(dateReg);
             updateMember = updateMember + "RegDate ='" +RegDate+ "',";
 
         }

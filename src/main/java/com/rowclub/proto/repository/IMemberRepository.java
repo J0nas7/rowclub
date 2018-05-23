@@ -5,6 +5,7 @@ import com.rowclub.proto.model.Member;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -15,11 +16,11 @@ public interface IMemberRepository {
 
     int getMemberListSize();
 
-    void createMember(String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException;
+    void createMember(String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException, ParseException;
 
     Member readMembers(int arrayId);
 
-    void updateMember(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone,Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException;
+    void updateMember(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone,Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException, ParseException;
 
     void deleteMember(int memberId) throws SQLException;
 }

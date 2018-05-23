@@ -6,9 +6,12 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
@@ -27,7 +30,7 @@ public class WarningDbRepository implements IWarningRepository {
                     WarningQuery.getInt("WarningID"),
                     WarningQuery.getString("Info"),
                     WarningQuery.getInt("fkBoatTripID"),
-                    WarningQuery.getString("DateStamp"),
+                    WarningQuery.getDate("DateStamp"),
                     WarningQuery.getInt("TimeStamp")
             ));
         }
@@ -44,7 +47,9 @@ public class WarningDbRepository implements IWarningRepository {
     }
 
     @Override
-    public void createWarning(String info, int fkBoatTripID, String DateStamp, int TimeStamp) throws SQLException {
+    public void createWarning(String info, int fkBoatTripID, String DateStamp, int TimeStamp) throws SQLException, ParseException {
+        Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(DateStamp);
+
         int id = 0;
         ResultSet rs;
         //constructs sql statement and injects it into the database
@@ -68,7 +73,7 @@ public class WarningDbRepository implements IWarningRepository {
         }
 
         //because the warnings are sorted by date (most recent first) we insert the new warning object at the front of the arraylist
-        Warning warning = new Warning(id,info,fkBoatTripID,DateStamp,TimeStamp);
+        Warning warning = new Warning(id,info,fkBoatTripID,date,TimeStamp);
         WarningList.add(0,warning);
     }
 
@@ -79,7 +84,7 @@ public class WarningDbRepository implements IWarningRepository {
     }
 
     @Override
-    public void updateWarning(int warningId, String info, int fkBoatTripID, String DateStamp, int TimeStamp) throws SQLException {
+    public void updateWarning(int warningId, String info, int fkBoatTripID, String DateStamp, int TimeStamp) throws SQLException, ParseException {
 
         int index = 0;
         ResultSet rs;
@@ -102,7 +107,8 @@ public class WarningDbRepository implements IWarningRepository {
             statement = statement + "fkBoatTripID = '"+fkBoatTripID+"',";
         }
         if (DateStamp != "") {
-            warning.setDateStamp(DateStamp);
+            Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(DateStamp);
+            warning.setDateStamp(date);
             statement = statement + "DateStamp = '"+DateStamp+"',";
         }
         if (TimeStamp != 0) {
