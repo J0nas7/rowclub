@@ -40,6 +40,7 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
                     BoatTripQuery.getDouble("BoatTrip_Distance"),
                     BoatTripQuery.getInt("BoatTrip_EstDuration"),
                     BoatTripQuery.getString("BoatTrip_Location"),
+                    BoatTripQuery.getString("BoatTrip_Datestamp"),
                     BoatTripQuery.getDate("BoatTrip_Datestamp"),
                     BoatTripQuery.getInt("BoatTrip_SeasonID"),
                     BoatTripQuery.getBoolean("BoatTrip_OnWater"),
@@ -85,7 +86,7 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
             }
         }
 
-        BoatTripList.add(new BoatTrip(this.getBoatTripListSize()+1, boatID, Ddistance, IestDuration, location, date, seasonID, OnWater, completionTime, Itimestamp, Passengers));
+        BoatTripList.add(new BoatTrip(this.getBoatTripListSize()+1, boatID, Ddistance, IestDuration, location,datestamp, date, seasonID, OnWater, completionTime, Itimestamp, Passengers));
         String createBoatTripSql =  "INSERT INTO "+DatabaseController.DBprefix+"BoatTrips (Boat_ID, BoatTrip_Distance, BoatTrip_EstDuration, BoatTrip_Location, BoatTrip_Datestamp, BoatTrip_SeasonID, BoatTrip_OnWater, BoatTrip_CompletionTime, BoatTrip_Timestamp, BoatTrip_Passengers) " +
                                     "VALUES ('"+boatID+"', '"+Ddistance+"', '"+IestDuration+"', '"+location+"', '"+datestamp+"', '"+seasonID+"', "+OnWater+", 0, '"+Itimestamp+"', '"+Passengers+"');";
         DBconn.dbUpdate(createBoatTripSql);
