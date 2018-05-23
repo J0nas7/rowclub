@@ -24,7 +24,7 @@ import static java.sql.Types.NULL;
 
 @Repository
 public class BoatTripsDbRepository implements IBoatTripRepository {
-    private List<BoatTrip> BoatTripList;
+    public List<BoatTrip> BoatTripList;
     private ResultSet BoatTripQuery;
     private int BoatTripOnWaterCount = 0;
 

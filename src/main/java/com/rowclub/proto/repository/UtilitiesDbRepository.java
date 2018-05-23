@@ -102,6 +102,20 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         return MemberList;
     }
 
+    public List<Integer> membersOnTripArray() throws SQLException {
+
+        List<Integer> amountList = new ArrayList<>();
+
+        BoatTripsDbRepository boattripdb = new BoatTripsDbRepository();
+
+        for (int i = 0; i < boattripdb.getBoatTripListSize(); i++) {
+
+            amountList.add(countMembersOnTrip(membersOnTrip(boattripdb.BoatTripList.get(i).getBoatTripID())));
+        }
+
+        return amountList;
+    }
+
     public int countMembersOnTrip(List<Member> tripList) {
         //brug den retunerede liste fra membersontrip som parameter til denne her metode for at finde ud af hvor mange der er på en tur
         return tripList.size();
