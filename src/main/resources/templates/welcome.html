@@ -29,11 +29,8 @@
                     </tr>
                 </thead>
                 <tbody>
-<<<<<<< HEAD
                     <tr th:each="BoatTrip : ${boattripList}"  th:class="${(BoatTrip.OnWater ? 'OnWater' : 'NotOnWater')}">
-=======
                     <tr th:each="BoatTrip : ${boattripList}" th:class="${(BoatTrip.OnWater ? 'OnWater' : (BoatTrip.CompletionTime == 0 ? 'NotOnWater' : 'dspN'))}">
->>>>>>> fdf9b36acd4923374841b16b7052d90acbcd59b8
                         <td th:text="${BoatTrip.BoatTripID}"></td>
                         <td th:text="${(BoatTrip.OnWater ? 'Ja' : 'Nej')}"></td>
                         <td th:text="${BoatTrip.Passengers}"></td>
