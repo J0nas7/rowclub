@@ -5,6 +5,7 @@ import com.rowclub.proto.model.Member;
 import com.rowclub.proto.model.Warning;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +22,8 @@ public interface IUtilitiesRepository {
     List<Member> membersOnTrip(int tripId) throws SQLException;
 
     void deleteMembersOnTrip(int tripId) throws SQLException
+
+    List<Integer> membersOnTripArray() throws SQLException;
 
     int countMembersOnTrip(List<Member> tripList);
 

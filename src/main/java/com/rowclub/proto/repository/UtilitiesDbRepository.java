@@ -109,8 +109,8 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         ResultSet MemberQuery;
 
         MemberList = new ArrayList<>();
-        String MemberSql = "SELECT * FROM "+DatabaseController.DBprefix+"BoatTripLink" + " INNER JOIN "+DatabaseController.DBprefix+"Member ON fkMemberID = MemberID" +
-                " INNER JOIN "+DatabaseController.DBprefix+"BoatTrips ON fkBoatTripID = BoatTrip_ID" + " WHERE "+DatabaseController.DBprefix+"BoatTrips.BoatTrip_ID = " + tripId;
+        String MemberSql = "SELECT * FROM " + DatabaseController.DBprefix + "BoatTripLink" + " INNER JOIN " + DatabaseController.DBprefix + "Member ON fkMemberID = MemberID" +
+                " INNER JOIN " + DatabaseController.DBprefix + "BoatTrips ON fkBoatTripID = BoatTrip_ID" + " WHERE " + DatabaseController.DBprefix + "BoatTrips.BoatTrip_ID = " + tripId;
         MemberQuery = DBconn.dbQuery(MemberSql);
         while (MemberQuery.next()) {
             MemberList.add(new Member(
@@ -128,13 +128,26 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
 
         }
 
-        for (Member ontrip: MemberList){
+        for (Member ontrip : MemberList) {
             if (!ontrip.isMate()) {
-                String DeleteTripLink = "DELETE FROM "+DatabaseController.DBprefix+"BoatTripLink WHERE fkBoatTripID='"+tripId+"' AND fkMemberID='"+ontrip.getMemberID()+"' LIMIT 1";
+                String DeleteTripLink = "DELETE FROM " + DatabaseController.DBprefix + "BoatTripLink WHERE fkBoatTripID='" + tripId + "' AND fkMemberID='" + ontrip.getMemberID() + "' LIMIT 1";
                 DBconn.dbUpdate(DeleteTripLink);
             }
         }
+    }
 
+    public List<Integer> membersOnTripArray() throws SQLException {
+
+        List<Integer> amountList = new ArrayList<>();
+
+        BoatTripsDbRepository boattripdb = new BoatTripsDbRepository();
+
+        for (int i = 0; i < boattripdb.getBoatTripListSize(); i++) {
+
+            amountList.add(countMembersOnTrip(membersOnTrip(boattripdb.BoatTripList.get(i).getBoatTripID())));
+        }
+
+        return amountList;
     }
 
     public int countMembersOnTrip(List<Member> tripList) {
