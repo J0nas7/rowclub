@@ -146,11 +146,11 @@ public class MemberDbRepository implements IMemberRepository {
                 "(default" + ",'"
                         + FirstName + "','"
                         + LastName + "'," +
+                        "'2000-01-01'," +
+                        "'2000-01-01'," +
                         "''," +
-                        "''," +
-                        "''," +
-                        "''," +
-                        "''," +
+                        "'0'," +
+                        "'0'," +
                         "'guest'," +
                         "''" +
                         ")";

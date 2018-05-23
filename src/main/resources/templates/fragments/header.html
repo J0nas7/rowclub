@@ -7,8 +7,8 @@
     <div class="Header" th:fragment="Header (activeMenuItem)">
         <div class="HeaderContent">
             <nav class="menu">
-                <a href="/welcome" th:class="${activeMenuItem == 'welcome' ? 'active' : ''} + ' fltLft item'">Start</a>
-                <a href="/boattrips" th:class="${activeMenuItem == 'boattrips' ? 'active' : ''} + ' fltLft item'">Bådtur</a>
+                <a href="/welcome" th:class="${activeMenuItem == 'welcome' ? 'active' : ''} + ' fltLft item'">Oversigt</a>
+                <a href="/new_boattrip" th:class="${activeMenuItem == 'boattrips' ? 'active' : ''} + ' fltLft item'">Bådtur</a>
                 <a href="/boats" class="fltLft item">Bådtyper</a>
                 <a href="/admin" class="fltLft item">Administration</a>
             </nav>

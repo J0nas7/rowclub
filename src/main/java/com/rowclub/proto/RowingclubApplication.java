@@ -14,16 +14,16 @@ public class RowingclubApplication {
 
     public static void main(String[] args) throws SQLException {
 
-        //SpringApplication.run(RowingclubApplication.class, args);
+        SpringApplication.run(RowingclubApplication.class, args);
 
         //Test kode til fremvisning hvor UI ikke kan vise funtionalitet (Alt efter denne kommentar skal slettes når UI er tilstrækkelig)
-        MemberDbRepository memberDbRepository = new MemberDbRepository();
+        /*MemberDbRepository memberDbRepository = new MemberDbRepository();
         BoatDbRepository boatDbRepository = new BoatDbRepository();
         BoatTripLinkDbRepository boatTripLinkDbRepository = new BoatTripLinkDbRepository();
         BoatTripsDbRepository boatTripsDbRepository = new BoatTripsDbRepository();
         PreDetTripsDbRepository preDetTripsDbRepository = new PreDetTripsDbRepository();
         SeasonDbRepository seasonDbRepository = new SeasonDbRepository();
-        WarningDbRepository warningDbRepository = new WarningDbRepository();
+        WarningDbRepository warningDbRepository = new WarningDbRepository();*/
 
         //Member (Create, Update, Delete)
         //memberDbRepository.createMember("Lars","Andersen","02/10/1985","05/11/1999","12345678",Boolean.FALSE,Boolean.FALSE,"Junior","No Image");
