@@ -12,10 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
@@ -102,7 +99,46 @@ public class MemberDbRepository implements IMemberRepository {
         Member member = new Member(id,FirstName,LastName,dateDoB,dateReg,Phone,Admin,Matey,Type,PhotoRef);
         //System.out.println(MemberList.size());
         MemberList.add(member);
+    }
 
+    @Override
+    public void createGuest(String FirstName, String LastName) throws SQLException {
+        Date date = new Date();
+
+        int id = 0;
+        ResultSet rs;
+
+        FirstName = DBconn.res(FirstName);
+        LastName = DBconn.res(LastName);
+
+        String memberValues =
+                "(default" + ",'"
+                        + FirstName + "','"
+                        + LastName + "'," +
+                        "''," +
+                        "''," +
+                        "''," +
+                        "''," +
+                        "''," +
+                        "'GUEST'," +
+                        "''" +
+                        ")";
+
+
+        String insertMember = "INSERT INTO " + DatabaseController.DBprefix + "Member" + " VALUES " + (memberValues);
+        DBconn.dbUpdate(insertMember);
+
+        System.out.println(insertMember);
+
+        rs = DBconn.dbQuery("SELECT Max(MemberID) FROM "+DatabaseController.DBprefix+"Member");
+
+        if (rs.next()){
+            id = (rs.getInt(1));
+        }
+
+        Member member = new Member(id,FirstName,LastName,date,date,"-",false,false,"guest","-");
+        //System.out.println(MemberList.size());
+        MemberList.add(member);
     }
 
     @Override
