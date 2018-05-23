@@ -205,31 +205,31 @@ public class MemberDbRepository implements IMemberRepository {
         Type = DBconn.res(Type);
         PhotoRef = DBconn.res(PhotoRef);
 
-        if(!FirstName.matches("")){
+        if(FirstName != ""){
 
             member.setFirstName(FirstName);
             updateMember = updateMember + "FirstName ='" +FirstName+ "',";
         }
 
-        if(!LastName.matches("")){
+        if(LastName != ""){
 
             member.setLastName(LastName);
             updateMember = updateMember + "LastName ='" +LastName+ "',";
         }
 
-        if(!DoB.matches("")){
+        if(DoB != ""){
             Date dateDoB = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(DoB);
             member.setDoB(dateDoB);
             updateMember = updateMember + "DoB ='" +DoB+ "',";
 
         }
-        if(!RegDate.matches("")){
+        if(RegDate != ""){
             Date dateReg = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(RegDate);
             member.setRegDate(dateReg);
             updateMember = updateMember + "RegDate ='" +RegDate+ "',";
 
         }
-        if(!Phone.matches("")){
+        if(Phone != ""){
 
             member.setPhone(Phone);
             updateMember = updateMember + "Phone ='" +Phone+ "',";
@@ -248,13 +248,13 @@ public class MemberDbRepository implements IMemberRepository {
             updateMember = updateMember + "Matey ='" +MateyAdd+ "',";
 
         }
-        if(!Type.matches("")){
+        if(Type != ""){
 
            member.setType(Type);
            updateMember = updateMember + "Type ='" +Type+ "',";
 
         }
-        if(!PhotoRef.matches("")){
+        if(PhotoRef != ""){
 
             member.setPhotoRef(PhotoRef);
             updateMember = updateMember + "PhotoRef ='" +PhotoRef+ "',";
@@ -264,9 +264,7 @@ public class MemberDbRepository implements IMemberRepository {
         updateMember = updateMember.substring(0,updateMember.length()-1);
         updateMember = updateMember + " WHERE memberId = " + memberId;
 
-
-        System.out.println(updateMember);
-        //DBconn.dbUpdate(updateMember);
+        DBconn.dbUpdate(updateMember);
 
         MemberList.set(index, member);
     }
