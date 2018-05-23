@@ -20,6 +20,8 @@ public interface IUtilitiesRepository {
 
     List<Member> membersOnTrip(int tripId) throws SQLException;
 
+    void deleteMembersOnTrip(int tripId) throws SQLException
+
     int countMembersOnTrip(List<Member> tripList);
 
     //Laver en int (Antal min) til en string (hh:mm)

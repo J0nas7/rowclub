@@ -19,7 +19,9 @@ public interface IBoatTripRepository {
 
     BoatTrip readBoatTrip(int tripID);
 
-    void updateBoatTrip(BoatTrip boattrip);
+    void actionBoatTrip(int tripID, String action);
+
+    void updateBoatTrip(int memberId, String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException, ParseException;
 
     void deleteBoatTrip(int tripID);
 }
