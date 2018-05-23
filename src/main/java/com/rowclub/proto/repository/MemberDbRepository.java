@@ -42,7 +42,7 @@ public class MemberDbRepository implements IMemberRepository {
                     MemberQuery.getString("PhotoRef")
             ));
         }
-        //reduceGuestName();
+        reduceGuestName();
     }
 
     @Override
