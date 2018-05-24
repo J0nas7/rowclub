@@ -9,6 +9,7 @@ public interface IBoatTripLinkRepository {
 
         // Interface == contract that other classes can sign and promise to fulfill
         // CRUD methods + readAll
+        //Casper
         List<BoatTripLink> readAllBoatTripLinks();
 
         int getBoatTripLinkListSize();

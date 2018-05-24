@@ -179,6 +179,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         return string;
     }
 
+    //Casper
     //Laver en string om til et tlf nr. uden +45 først og uden chars der ikke er tal
     public String tlfCheck(String tlf){
 
@@ -203,6 +204,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
 
     }
 
+    //Casper
     public int ghostBusterStringToInt (String boo) {
         int busted = Integer.parseInt(boo.replaceAll("[^\\d]",""));
         //Who you gonna call?
@@ -210,7 +212,8 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
 
         return busted;
     }
-
+    
+    //Casper
     public String ghostBusterStringToNum (String boo) {
         String busted = boo.replaceAll("[^\\d]","");
         //Who you gonna call?

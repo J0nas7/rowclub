@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 //Jacob har lavet små redigeringer
+//Casper
 public interface IBoatRepository {
     // Interface == contract that other classes can sign and promise to fulfill
     // CRUD methods + readAll

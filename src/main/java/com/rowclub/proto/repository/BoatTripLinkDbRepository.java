@@ -12,6 +12,7 @@ import java.util.List;
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
 
+//Casper
 @Repository
 public class BoatTripLinkDbRepository implements IBoatTripLinkRepository {
         public static List<BoatTripLink> BoatTripLinkList;
@@ -33,9 +34,11 @@ public class BoatTripLinkDbRepository implements IBoatTripLinkRepository {
 
         public int getBoatTripLinkListSize() { return BoatTripLinkList.size(); }
 
+    //Casper
         @Override
         public List<BoatTripLink> readAllBoatTripLinks() { return BoatTripLinkList; }
 
+    //Casper
         @Override
         public void createBoatTripLink(int fkMemberID,int fkBoatTripID) throws SQLException {
             int id = 0;
@@ -57,11 +60,13 @@ public class BoatTripLinkDbRepository implements IBoatTripLinkRepository {
             BoatTripLinkList.add(boat);
         }
 
+    //Casper
         @Override
         public BoatTripLink readBoatTripLink(int arrayID) {
             return BoatTripLinkList.get(arrayID-1);
         }
 
+    //Casper
         @Override
         public void updateBoatTripLink(int boatTripLinkID,int fkMemberID,int fkBoatTripID) throws SQLException {
 
@@ -97,6 +102,7 @@ public class BoatTripLinkDbRepository implements IBoatTripLinkRepository {
 
         }
 
+    //Casper
         @Override
         public void deleteBoatTripLink(int boatTripLinkID) throws SQLException {
             int index = 1;

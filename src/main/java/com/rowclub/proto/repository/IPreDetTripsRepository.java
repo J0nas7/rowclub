@@ -8,6 +8,7 @@ import java.util.List;
 public interface IPreDetTripsRepository {
         // Interface == contract that other classes can sign and promise to fulfill
         // CRUD methods + readAll
+        //Casper
 
         List<PreDetTrips> readAllPreDetTripss();
 

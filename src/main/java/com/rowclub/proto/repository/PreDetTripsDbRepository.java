@@ -12,6 +12,7 @@ import java.util.List;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
+//Casper
 @Repository
 public class PreDetTripsDbRepository implements IPreDetTripsRepository {
     public static List<PreDetTrips> PreDetTripsList = new ArrayList<>();
@@ -34,9 +35,11 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
 
     public int getPreDetTripsListSize() { return PreDetTripsList.size(); }
 
+    //Casper
     @Override
     public List<PreDetTrips> readAllPreDetTripss() { return PreDetTripsList; }
 
+    //Casper
     @Override
     public void createPreDetTrips(String location,Double distance,int preEstDuration) throws SQLException {
         int id = 0;
@@ -62,11 +65,13 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
         PreDetTripsList.add(preDetTrips);
     }
 
+    //Casper
     @Override
     public PreDetTrips readPreDetTrips(int preID) {
         return PreDetTripsList.get(preID-1);
     }
 
+    //Casper
     @Override
     public void updatePreDetTrips(int preID,String location,Double distance, int preEstDuration) throws SQLException {
 
@@ -104,6 +109,7 @@ public class PreDetTripsDbRepository implements IPreDetTripsRepository {
         PreDetTripsList.set(index,preDetTrips);
     }
 
+    //Casper
     @Override
     public void deletePreDetTrips(int preID) throws SQLException {
 
