@@ -22,6 +22,7 @@ public interface IUtilitiesRepository {
 
     List<Member> membersOnTrip(int tripId) throws SQLException;
 
+    // INTERFACE METHOD BY JONAS
     void deleteMembersOnTrip(int tripId) throws SQLException;
 
     List<Integer> membersOnTripArray() throws SQLException;

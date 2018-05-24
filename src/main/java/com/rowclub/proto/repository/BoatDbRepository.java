@@ -17,6 +17,7 @@ public class BoatDbRepository implements IBoatRepository {
     private List<Boat> BoatList;
     private ResultSet BoatQuery;
 
+    // METHOD BY JONAS
     public BoatDbRepository() throws SQLException {
         BoatList = new ArrayList<>();
         String BoatSql = "SELECT * FROM "+DatabaseController.DBprefix+"Boat";

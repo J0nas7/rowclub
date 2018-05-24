@@ -21,6 +21,7 @@ public interface IMemberRepository {
 
     void createMember(String FirstName, String LastName, String DoB, String RegDate, String Phone, Boolean Admin, Boolean Matey, String Type, String PhotoRef) throws SQLException, ParseException;
 
+    // INTERFACE METHOD BY JONAS
     void createGuest(String FirstName, String LastName) throws SQLException, ParseException;
 
     Member readMembers(int arrayId);

@@ -12,12 +12,12 @@ import java.util.List;
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
 
-
 @Repository
 public class BoatTripLinkDbRepository implements IBoatTripLinkRepository {
         public static List<BoatTripLink> BoatTripLinkList;
         private ResultSet BoatTripLinkQuery;
 
+        // METHOD BY JONAS
         public BoatTripLinkDbRepository() throws SQLException {
             BoatTripLinkList = new ArrayList<>();
             String BoatTripLinkSql = "SELECT * FROM "+DatabaseController.DBprefix+"BoatTripLink";

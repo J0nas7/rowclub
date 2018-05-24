@@ -107,6 +107,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         return MemberList;
     }
 
+    // METHOD BY JONAS
     public void deleteMembersOnTrip(int tripId) throws SQLException {
 
         List<Member> MemberList;

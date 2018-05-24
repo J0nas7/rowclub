@@ -30,6 +30,7 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
     private ResultSet BoatTripQuery;
     private int BoatTripOnWaterCount = 0;
 
+    // METHOD BY JONAS
     public BoatTripsDbRepository () throws SQLException {
         BoatTripList = new ArrayList<>();
         String BoatTripSql = "SELECT * FROM "+DatabaseController.DBprefix+"BoatTrips ORDER BY BoatTrip_ID ASC";
@@ -56,13 +57,17 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
         }
     }
 
+    // METHOD BY JONAS
     public int getBoatTripListSize() { return BoatTripList.size(); }
 
+    // METHOD BY JONAS
     public int getBoatTripOnWaterCount() { return BoatTripOnWaterCount; }
 
+    // METHOD BY JONAS
     @Override
     public List<BoatTrip> readAllBoatTrips() { return BoatTripList; }
 
+    // METHOD BY JONAS
     @Override
     public void createBoatTrip(int boatID, String distance, String estDuration, String location, String datestamp, int completionTime, long timestamp, String whattodo, String[] guests) throws ParseException {
         Date date = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).parse(datestamp);
@@ -98,11 +103,13 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
         DBconn.dbUpdate(createBoatTripSql);
     }
 
+    // METHOD BY JONAS
     @Override
     public BoatTrip readBoatTrip(int tripID) {
         return BoatTripList.get(tripID-1);
     }
 
+    // METHOD BY JONAS
     @Override
     public void actionBoatTrip(int tripID, String action) {
         ResultSet rs;
@@ -123,6 +130,7 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
         BoatTripList.set(tripID-1, boattrip);
     }
 
+    // METHOD BY JONAS
     @Override
     public void updateBoatTrip(int tripID, String datestamp, String distance, String estDuration, String location, int passengers) {
         double Ddistance = Double.parseDouble(distance);
@@ -166,6 +174,7 @@ public class BoatTripsDbRepository implements IBoatTripRepository {
         BoatTripList.set(tripID-1, boattrip);
     }
 
+    // METHOD BY JONAS
     @Override
     public void deleteBoatTrip(int tripID) {
         BoatTripList.remove(tripID);

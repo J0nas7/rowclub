@@ -6,7 +6,8 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
-//Jacob har lavet små redigeringer
+// Jacob har lavet små redigeringer
+// INTERFACE BY JONAS
 public interface IBoatTripRepository {
     // Interface == contract that other classes can sign and promise to fulfill
     // CRUD methods + readAll

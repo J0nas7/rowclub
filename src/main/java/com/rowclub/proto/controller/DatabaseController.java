@@ -3,6 +3,7 @@ package com.rowclub.proto.controller;
 import javax.xml.transform.Result;
 import java.sql.*;
 
+// ALL BY JONAS
 public class DatabaseController {
     private static Connection DBconnect;
     private static Statement statement;

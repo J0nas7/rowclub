@@ -24,7 +24,7 @@ public class MemberDbRepository implements IMemberRepository {
     private ResultSet MemberQuery;
     public static List<Member> MemberList;
 
-
+    // METHOD BY JONAS
     public MemberDbRepository() throws SQLException, ParseException {
         MemberList = new ArrayList<>();
         String MemberSql = "SELECT * FROM " + DatabaseController.DBprefix + "Member";
@@ -133,6 +133,7 @@ public class MemberDbRepository implements IMemberRepository {
         MemberList.add(member);
     }
 
+    // METHOD BY JONAS
     @Override
     public void createGuest(String FirstName, String LastName) throws SQLException {
         Date date = new Date();
