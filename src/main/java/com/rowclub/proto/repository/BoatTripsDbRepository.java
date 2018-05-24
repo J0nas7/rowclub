@@ -23,6 +23,7 @@ import java.util.Locale;
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 import static java.sql.Types.NULL;
 
+//Jacob har lavet redigeringer
 @Repository
 public class BoatTripsDbRepository implements IBoatTripRepository {
     public List<BoatTrip> BoatTripList;

@@ -4,6 +4,7 @@ import com.rowclub.proto.repository.UtilitiesDbRepository;
 
 import java.util.Date;
 
+//Jacob ALT
 public class Warning {
 
     private int warningId;

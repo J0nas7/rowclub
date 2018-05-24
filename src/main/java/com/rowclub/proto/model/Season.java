@@ -2,6 +2,7 @@ package com.rowclub.proto.model;
 
 import java.util.Date;
 
+//Jacob ALT
 public class Season {
 
     private int seasonID;

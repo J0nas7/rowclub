@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+//Jacob
 public interface IUtilitiesRepository {
     // Interface == contract that other classes can sign and promise to fulfill
     // CRUD methods + readAll

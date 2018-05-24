@@ -18,6 +18,7 @@ import java.util.regex.PatternSyntaxException;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
+//Jacob har lavet mange redigeringer
 @Repository
 public class MemberDbRepository implements IMemberRepository {
     private ResultSet MemberQuery;

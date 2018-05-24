@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
+//Jacob alt
 @Repository
 public class SeasonDbRepository implements ISeasonRepository {
     private ResultSet SeasonQuery;

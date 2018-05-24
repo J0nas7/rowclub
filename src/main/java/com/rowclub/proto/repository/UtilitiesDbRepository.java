@@ -19,6 +19,7 @@ import static com.rowclub.proto.repository.MemberDbRepository.MemberList;
 import static com.rowclub.proto.repository.WarningDbRepository.WarningList;
 import static com.rowclub.proto.repository.BoatTripLinkDbRepository.BoatTripLinkList;
 
+//Jacob
 @Repository
 public class UtilitiesDbRepository implements IUtilitiesRepository {
 
@@ -35,6 +36,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
 
     }
 
+    //Jacob
     public  List<BoatTrip> seasonTrips(int memberId, int seasonId) throws SQLException {
 
         List<BoatTrip> BoatTripList;
@@ -65,6 +67,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         return BoatTripList;
     }
 
+    //Jacob
     public  double seasonDistance(int memberId, int seasonId) throws SQLException {
 
         double distance = 0;
@@ -76,6 +79,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         return distance;
     }
 
+    //Jacob
     public List<Member> membersOnTrip(int tripId) throws SQLException {
 
         List<Member> MemberList;
@@ -136,6 +140,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         }
     }
 
+    //Jacob
     public List<Integer> membersOnTripArray() throws SQLException {
 
         List<Integer> amountList = new ArrayList<>();
@@ -150,6 +155,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         return amountList;
     }
 
+    //Jacob
     public int countMembersOnTrip(List<Member> tripList) {
         //brug den retunerede liste fra membersontrip som parameter til denne her metode for at finde ud af hvor mange der er på en tur
         return tripList.size();
@@ -212,6 +218,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
         return busted;
     }
 
+    //Jacob
     public List<Warning> adminAccessWarnings (int memberId) throws SQLException {
         //checks if a member is an administrator and, if they are, return the warning list
         int index = 0;
@@ -231,14 +238,17 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
     }
 
     //oprettelse af bådtur links
+    //Jacob
     public List<Member> memberOnBoatList;
 
+    //Jacob
     public void createMemberOnBoatList () {
 
         memberOnBoatList = new ArrayList<>();
         memberOnBoatList.clear();
     }
 
+    //Jacob
     public void addMemberOnBoatList (int memberId) throws SQLException {
 
         int index = 0;
@@ -254,6 +264,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
 
     }
 
+    //Jacob
     public void deleteMemberOnBoatList (int memberId) throws SQLException {
 
         int index = 0;
@@ -268,6 +279,7 @@ public class UtilitiesDbRepository implements IUtilitiesRepository {
 
     }
 
+    //Jacob
     public void assignBoatTripLinks (int boatTripID) throws SQLException {
 
         for (int i = 0; i < memberOnBoatList.size(); i++) {

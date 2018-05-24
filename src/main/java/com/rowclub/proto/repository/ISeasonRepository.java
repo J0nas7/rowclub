@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 
+//Jacob ALT
 public interface ISeasonRepository {
 
     int getSeasonListSize();

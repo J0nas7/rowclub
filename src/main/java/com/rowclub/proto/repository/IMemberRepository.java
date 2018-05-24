@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+//Jacob har lavet mange redigeringer
 public interface IMemberRepository {
     // Interface == contract that other classes can sign and promise to fulfill
     // CRUD methods + readAll

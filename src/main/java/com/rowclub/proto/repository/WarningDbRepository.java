@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
+//Jacob alt
 @Repository
 public class WarningDbRepository implements IWarningRepository {
     private ResultSet WarningQuery;

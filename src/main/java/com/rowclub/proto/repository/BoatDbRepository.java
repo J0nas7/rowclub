@@ -11,6 +11,7 @@ import java.util.List;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
+//Jacob har lavet små redigeringer
 @Repository
 public class BoatDbRepository implements IBoatRepository {
     private List<Boat> BoatList;

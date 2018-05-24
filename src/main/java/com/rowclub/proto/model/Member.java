@@ -3,6 +3,7 @@ package com.rowclub.proto.model;
 import java.time.LocalDate;
 import java.util.Date;
 
+//Jacob
 public class Member {
 
     private int memberID;
