@@ -18,7 +18,7 @@ import java.util.regex.PatternSyntaxException;
 
 import static com.rowclub.proto.controller.ProtocolController.DBconn;
 
-//Jack har sat metoder og variabler op
+//Jack har sat metoder og variabler op og lavede CRUD til Member
 //Jacob har lavet mange redigeringer
 @Repository
 public class MemberDbRepository implements IMemberRepository {
