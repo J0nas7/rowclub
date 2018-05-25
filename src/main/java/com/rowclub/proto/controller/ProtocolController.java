@@ -67,8 +67,6 @@ public class ProtocolController {
     @GetMapping("/warning")
     public String warning(Model model) throws SQLException {
         ProtocolController.MainConfig();
-        model.addAttribute("boattripList", boatTripRepository.readAllBoatTrips());
-        model.addAttribute("boattripOut", boatTripRepository.getBoatTripOnWaterCount());
         model.addAttribute("ProtocolPageDatestamp", ProtocolPageDatestamp);
         model.addAttribute("warningList", warningRepository.readAllWarnings());
         return "warning";
